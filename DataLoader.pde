@@ -52,8 +52,14 @@ class DataLoader
      distance = new  int[rawDataInArrayForm.size()];
      for(int i = 0; i < rawDataInArrayForm.size(); i++)
      {
+       try
+       {
         String[] splitLine = rawDataInArrayForm.get(i).split(",");
+        
         flightDate[i] = splitLine[0];
+        flightDate[i] = flightDate[i].substring(0, 10); //cut off string passed the point dd/mm/yyy
+        
+        
         airlineCode[i] = splitLine[1];
         flightNumber[i] = Integer.parseInt(splitLine[2]);
         origin[i] = splitLine[3];
@@ -73,6 +79,9 @@ class DataLoader
         cancelled[i] = Integer.parseInt(splitLine[17]);
         diverted[i] = Integer.parseInt(splitLine[18]);
         distance[i] = Integer.parseInt(splitLine[19]);
+        System.out.println("completed line"+i+"of data parsing");
+       }
+       catch (Exception e) {System.out.println("Error at method setDataArrays' while loop in DataLoader");}
      }
   }
   //note: function needs to clean up flightDate, deleting 00:00 to make data as easy to use
