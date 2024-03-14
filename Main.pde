@@ -1,10 +1,34 @@
 // main class
-
+   Flights test[];
 
 public void setup() {
   //flightsData = DataLoader.loadData("flights.csv");
-  DataLoader test = new DataLoader();
-  test.setDataArrays();
+  ArrayList<String> rawDataInArrayForm = new ArrayList<String>();  //need to clean up
+  try //reading data from file
+    {
+      BufferedReader flights = createReader("flights2k.csv");
+      String currentLine;
+      int i = 0;
+      while((currentLine = flights.readLine()) != null)
+      {
+        if(i != 0)
+        {
+          rawDataInArrayForm.add(currentLine);
+        }
+        i++;
+      }
+      flights.close();
+    }
+    catch(Exception e)
+    {
+      System.out.println("Error at DataLoader Class constructor");
+    }
+    test = new Flights[rawDataInArrayForm.size() - 1];
+   for(int i = 0; i < rawDataInArrayForm.size() - 1; i++)
+   {
+     test[i] = new Flights(rawDataInArrayForm.get(i)); //missing last line of data when initialising
+     System.out.println(test[i].getFlightDate());
+   }
   // Add other setup code when needed
 }
 
