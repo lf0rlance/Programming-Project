@@ -1,5 +1,9 @@
 // main class
 Flights allFlightData[];
+ArrayList<String> originData;
+IntList originDataCount;
+
+
 Screen currentScreen, screen1, screen2;
 PFont stdFont;
 final int EVENT_NULL = 0;
@@ -55,6 +59,40 @@ public void setup()
   screen2.add(widget3);
   screen2.add(widget4);
   currentScreen = screen1;
+  
+  
+  originData = new ArrayList<String>();            // create an arrayList of Origin Cities
+  for(int i = 0; i < allFlightData.length; i++)
+  {
+    boolean found = false;
+    String originCity = allFlightData[i].getOriginCityName();  
+    for(String temp: originData)
+    {
+      if(originCity.equals(temp)) found = true;  
+      
+    }
+    if(!found) originData.add(originCity);  // if hte arrayList already has the origin city, do not add it(avoids duplicates)
+  }
+ originDataCount = new IntList();          //  creates an arrayList of the frequency of flights from each origin city
+   for(int i = 0; i < originData.size();i++)
+   {
+     int count = 0;
+     String currentString = originData.get(i);
+     for(Flights currentFlight: allFlightData)
+     {
+       if(currentFlight.getOriginCityName().equals(currentString)) count+=1;
+     }
+     
+     originDataCount.append(count);
+   }
+  
+
+    
+    
+  
+  
+  
+  
 }
 
 public void draw() 
@@ -87,6 +125,41 @@ public void draw()
     temp = (Widget) currentScreen.getWidgets().get(1);
     temp.mouseNotOver();
   }
+  
+  /*
+  for(int i = 0; i < originData.size(); i++)
+  {
+    textSize(3);
+    String label = originData.get(i);
+    text( label, 10,  200 + (1/originData.size()) * (i+1) );
+    
+  }
+  */
+  
+  for(int i = 0; i < 5; i++)
+  {
+    //  in the future, make the size  and spacing of the text dependent on; 1.) the amount of datapoints  on the chart 2.) the size of the chart itself.(Scale the bar chart).
+    // also arrange the barchart in order of frequency, descending or ascending(or create a method to do so)
+    // for visibiility purposes, we may choose to show a certain number of bars per time, and let the user choose to see more data
+    String label = originData.get(i);
+    int count = originDataCount.get(i);
+    stroke(0);
+    fill(count,0,0);
+    rect(200, 280+ i*45, count,20);
+    fill(0);
+    text( label, 10, 300 + i* 45 );
+    text(count , 400, 300 + i* 45 );
+    
+    
+  }
+  
+  
+  
+
+  
+  
+  
+  
 }
 
 public void mousePressed() 

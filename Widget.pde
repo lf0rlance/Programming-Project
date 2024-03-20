@@ -12,6 +12,7 @@ class Widget
     this.label = label; this.event = event;
     this.widgetColor = widgetColor; this.widgetFont = widgetFont;
     labelColor = color(0); lineColor = color(0);
+    //textSize(30);// attempt to make sure the text size is local to each class
   }
   
   void draw()
