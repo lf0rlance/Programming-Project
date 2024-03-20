@@ -60,6 +60,33 @@ public void setup()
 public void draw() 
 {
   currentScreen.draw();
+  if(currentScreen.getEvent(mouseX, mouseY) == EVENT_BUTTON1) 
+  {
+    Widget temp = (Widget) currentScreen.getWidgets().get(0);
+    temp.mouseOver();
+  }
+  else if(currentScreen.getEvent(mouseX, mouseY) == EVENT_BUTTON2) 
+  {
+    Widget temp = (Widget) currentScreen.getWidgets().get(0);
+    temp.mouseOver();
+  }
+  else if(currentScreen.getEvent(mouseX, mouseY) == EVENT_FORWARD) 
+  {
+    Widget temp = (Widget) currentScreen.getWidgets().get(1);
+    temp.mouseOver();
+  }
+  else if(currentScreen.getEvent(mouseX, mouseY) == EVENT_BACKWARD) 
+  {
+    Widget temp = (Widget) currentScreen.getWidgets().get(1);
+    temp.mouseOver();
+  }
+  else 
+  {
+    Widget temp = (Widget) currentScreen.getWidgets().get(0);
+    temp.mouseNotOver();
+    temp = (Widget) currentScreen.getWidgets().get(1);
+    temp.mouseNotOver();
+  }
 }
 
 public void mousePressed() 
