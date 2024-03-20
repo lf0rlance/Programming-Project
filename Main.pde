@@ -1,6 +1,15 @@
 // main class
 Flights allFlightData[];
+Screen currentScreen, screen1, screen2;
+PFont stdFont;
+final int EVENT_NULL = 0;
+final int EVENT_BUTTON1 = 1; final int EVENT_FORWARD = 2;
+final int EVENT_BUTTON2 = 3; final int EVENT_BACKWARD = 4;
 
+void settings()
+{
+  size(500, 500); 
+}
 public void setup() 
 {
   //reading data from file and organising into object array for useage ************************
@@ -31,15 +40,45 @@ public void setup()
    }
   //*******************************************************************************************
   
+  //placeholder code for screen/widget
+  Widget widget1, widget2, widget3, widget4;
+  stdFont = loadFont("AgencyFB-Bold-30.vlw");
+  textFont(stdFont);
+  widget1 = new Widget(100, 100, 180, 40, "Button 1", color(200, 0, 0), stdFont, EVENT_BUTTON1);
+  widget2 = new Widget(100, 200, 180, 40, "Forward", color(0, 200, 0), stdFont, EVENT_FORWARD);
+  widget3 = new Widget(100, 100, 180, 40, "Button 2", color(0, 0, 200), stdFont, EVENT_BUTTON2);
+  widget4 = new Widget(100, 200, 180, 40, "Backward", color(0, 200, 200), stdFont, EVENT_BACKWARD);
+  screen1 = new Screen(color(255));
+  screen2 = new Screen(color(150));
+  screen1.add(widget1);
+  screen1.add(widget2);
+  screen2.add(widget3);
+  screen2.add(widget4);
+  currentScreen = screen1;
 }
 
-public void draw() {
-  background(255);
-  // Add code/functions to draw data on the screen
+public void draw() 
+{
+  currentScreen.draw();
 }
 
-public void keyPressed() {
-  // Handle mouse/keyboard inputs, update filters, etc.
+public void mousePressed() 
+{
+  switch(currentScreen.getEvent(mouseX, mouseY))
+  {
+    case EVENT_BUTTON1:
+      println("button 1!");
+      break;
+    case EVENT_BUTTON2:
+      println("button2!");
+      break;
+    case EVENT_FORWARD:
+      println("forward"); currentScreen = screen2;
+      break;
+    case EVENT_BACKWARD:
+      println("backward"); currentScreen = screen1;
+      break;
+  }
 }
 
 // Other parts of the program
