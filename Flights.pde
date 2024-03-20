@@ -1,105 +1,102 @@
-class Flights  //need to make more efficient (move split to  constructor)
+class Flights
 {
-  String singleFlightData;
+  String[] singleFlightData;
   
   public Flights(String singleFlightData)
   {
-    this.singleFlightData = singleFlightData;
+    this.singleFlightData = singleFlightData.split(",", 20);
+    this.singleFlightData[0] = this.singleFlightData[0].substring(0, 10);
+    this.singleFlightData[4] = this.singleFlightData[4].substring(1, 
+    (this.singleFlightData[4].length()));
+    this.singleFlightData[9] = this.singleFlightData[9].substring(1, 
+    (this.singleFlightData[9].length()));
   }
   
   public String getFlightDate()
   {
-    String[] temp = singleFlightData.split(",", 2);
-    return temp[0];
+    return singleFlightData[0];
   }
   
   public String getAirlineCode()
   {
-    String[] temp = singleFlightData.split(",", 3);
-    return temp[1];
+    return singleFlightData[1];
   }
   
   public int getFlightNumber()
   {
-    String[] temp = singleFlightData.split(",", 4);
-    return Integer.parseInt(temp[2]);
+    if(singleFlightData[2] == "") return 0;
+    else return Integer.parseInt(singleFlightData[2]);
   }
   
   public String getOrigin()
   {
-    String[] temp = singleFlightData.split(",", 5);
-    return temp[3];
+    return singleFlightData[3];
   }
   
   public String getOriginCityName()
   {
-    String[] temp = singleFlightData.split(",", 6);
-    return temp[4];
+    return singleFlightData[4];
   }
   
   public String getOriginState()
   {
-    String[] temp = singleFlightData.split(",", 8);
-    return temp[6];
+    return singleFlightData[6];
   }
   
   public int getOriginWac()
   {
-    String[] temp = singleFlightData.split(",", 9);
-    return Integer.parseInt(temp[7]);
+    if(singleFlightData[7] == "") return 0;
+    else return Integer.parseInt(singleFlightData[7]);
   }
   
   public String getDestination()
   {
-    String[] temp = singleFlightData.split(",", 10);
-    return temp[8];
+    return singleFlightData[8];
   }
   
   public String getDestCityName()
   {
-    String[] temp = singleFlightData.split(",", 11);
-    return temp[9];
+    return singleFlightData[9];
   }
   
   public String getDestState()
   {
-    String[] temp = singleFlightData.split(",", 13);
-    return temp[11];
+    return singleFlightData[11];
   }
   
   public int getDestWac()
   {
-    String[] temp = singleFlightData.split(",", 14);
-    return Integer.parseInt(temp[12]);
+    if(singleFlightData[12] == "") return 0;
+    else return Integer.parseInt(singleFlightData[12]);
   }
   
   public int getCrsDepTime()
   {
-    String[] temp = singleFlightData.split(",", 15);
-    return Integer.parseInt(temp[13]);
+    if(singleFlightData[13] == "") return 0;
+    else return Integer.parseInt(singleFlightData[13]);
   }
   
   public int getCrsArrTime()
   {
-    String[] temp = singleFlightData.split(",", 16);
-    return Integer.parseInt(temp[14]);
+    if(singleFlightData[14] == "") return 0;
+    else return Integer.parseInt(singleFlightData[14]);
   }
   
   public int getCancelled()
   {
-    String[] temp = singleFlightData.split(",", 17);
-    return Integer.parseInt(temp[15]);
+    if(singleFlightData[15] == "") return 0;
+    else return Integer.parseInt(singleFlightData[15]);
   }
   
   public int getDiverted()
   {
-    String[] temp = singleFlightData.split(",", 18);
-    return Integer.parseInt(temp[16]);
+    if(singleFlightData[16] == "") return 0;
+    else return Integer.parseInt(singleFlightData[16]);
   }
   
   public int getDistance()
   {
-    String[] temp = singleFlightData.split(",", 18);
-    return Integer.parseInt(temp[17]);
+    if(singleFlightData[17] == "") return 0;
+    else return Integer.parseInt(singleFlightData[17]);
   }
 }
