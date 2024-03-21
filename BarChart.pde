@@ -1,70 +1,79 @@
 
 class BarChart{
   
-  int event;
+  int dataType;
+  String title;
   
   int xpos;
   int ypos;
   
-  int FLIGHT_DATE = 1;
-  int AIRLINE_CODE = 2;
-
-  int FLIGHT_NUMBER = 3;
-  int ORIGIN = 4;
-  
-  
+  // the dataTypes used in constructor to show which values the bar chart is showin
+  final int FLIGHT_DATE = 1;
+  final int AIRLINE_CODE = 2;
+  final int FLIGHT_NUMBER = 3;
+  final int ORIGIN = 4;
+ 
   final int ORIGIN_CITY_NAME = 5;
-  
   
   final int ORIGIN_STATE =  6;
   final int ORIGIN_WAC = 7;
   final int DESTINATION = 8;
   
   int startingIndex;
-  int endingIndex = startingIndex + 5;
  
-  
-
+ 
+  //Flights flight;
   
   ArrayList<String> dataList;
   IntList frequency;
   
-  Flights flight;
   
   
-  BarChart(int xpos, int ypos, int event){
+  
+  BarChart(int xpos, int ypos, int dataType){
     startingIndex = 0;
     this.xpos = xpos;
     this.ypos = ypos;
     
-    this.event = event;
+    this.dataType = dataType;
     
-    dataList = new ArrayList<String>();            // create an arrayList of Origin Cities
+    /*  Creates an ArrayList of the data tyoe*/
+    dataList = new ArrayList<String>();            
     
     for(int i = 0; i < allFlightData.length; i++)
     {
       boolean found = false;
-      this.flight = allFlightData[i];
-      String data = getData();  
+      Flights currentFlight = allFlightData[i];
+      String data = getData(currentFlight);        // gets the required data for the flight(e.g origin city, destination)
+      
       for(String temp: dataList)
       {
-        if(data.equals(temp)) found = true;  
+        if(data.equals(temp)) found = true;  // if data is already in the dataList, found = true
         
       }
-      if(!found) dataList.add(data);  // if hte arrayList already has the origin city, do not add it(avoids duplicates)
+      if(!found) dataList.add(data);  // only adds data to the data list if the dataList does not have the data already.
+                                      // (e.g if t "Dublin" is added to dataList once, it will not be added again.)
     }
-   frequency = new IntList();          //  creates an arrayList of the frequency of flights from each origin city - maybe attempt to do the same thing in the previous for loop
-     for(int i = 0; i < dataList.size();i++)
+    
+    
+    /*  Creates an ArrayList of the frequency of each data type*/
+    
+   frequency = new IntList();         
+   for(int i = 0; i < dataList.size();i++)
+   {
+     int count = 0;
+     String currentString = dataList.get(i); 
+    
+
+     for(Flights currentFlight: allFlightData) // itterates through each flight in the allFlightData array
      {
-       int count = 0;
-       String currentString = dataList.get(i);
-       for(Flights currentFlight: allFlightData)
-       {
-         if(currentFlight.getOriginCityName().equals(currentString)) count+=1;
-       }
-       
-       frequency.append(count);
+       String data = getData(currentFlight);
+       if(data.equals(currentString)) count+=1; //  counts how many times the data in dataList appears in the allFlightData array
      }
+     frequency.append(count); // the total count is stored in the frequency arrayList
+   }
+   
+   
      
      //System.out.print(dataList.size());
   
@@ -74,23 +83,33 @@ class BarChart{
   
   public void draw()
   { 
-    int actualIndex = 0;
+    int actualIndex = 0;  // the positioning of each bar( 0 = first bar, 1 = second bar etc);
     for(int i = startingIndex; i < startingIndex + 5; i++)
     {
       
-      //  in the future, make the size  and spacing of the text dependent on; 1.) the amount of datapoints  on the chart 2.) the size of the chart itself.(Scale the bar chart).
+      //  in the future, make the size  and spacing of the text dependent on; 1.) the amount of datapoints  on the chart 2.) the size of the chart itself.(i.e.Scale the bar chart).
+      
       // we may also arrange the barchart in order of frequency, or alphabetical order (or create a method to do so)
+      
       // for visibiility purposes, we may choose to show a certain number of bars per time, and let the user choose to see more data
-      String label = dataList.get(i);
-      int count = frequency.get(i);
+      
+      String label = dataList.get(i);  
+      int count = frequency.get(i);      // get data and corresponding frequency
       stroke(0);
-      fill(count,0,0);
+      fill(count,0,0);// the "redness" depends on the frequency
       rect(xpos, ypos + actualIndex*45, count,20);
       fill(0);
+      text(title, 100, ypos-10);
       text( label, 10, 300 + actualIndex* 45 );
       text(count , 400, 300 + actualIndex* 45 );
       actualIndex+=1;
     }
+  }
+  
+  
+  public void scroll()
+  {
+    startingIndex += 5;
   }
   
 
@@ -104,12 +123,19 @@ class BarChart{
   
   
   
-  public String getData()
+  public String getData(Flights flight)
   {
-   switch(event)
+   switch(dataType)
   {
     case ORIGIN_CITY_NAME:
+       title = "Origin City Name";
        return flight.getOriginCityName();
+     case ORIGIN_STATE:
+       title = "Origin State";
+      return flight.getOriginState();
+     case DESTINATION:
+       title = "Destination";
+       return flight.getDestination();
        
     default:
       return "";
