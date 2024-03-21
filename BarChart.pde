@@ -33,7 +33,7 @@ class BarChart{
   
   
   BarChart(int xpos, int ypos, int event){
-    startingIndex = 4;
+    startingIndex = 0;
     this.xpos = xpos;
     this.ypos = ypos;
     
@@ -92,6 +92,8 @@ class BarChart{
       actualIndex+=1;
     }
   }
+  
+
   
   
   

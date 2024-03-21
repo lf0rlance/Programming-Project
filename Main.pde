@@ -52,7 +52,7 @@ public void setup()
   textFont(stdFont);
   widget1 = new Widget(100, 100, 180, 40, "Button 1", color(200, 0, 0), stdFont, EVENT_BUTTON1);
   widget2 = new Widget(100, 200, 180, 40, "Forward", color(0, 200, 0), stdFont, EVENT_FORWARD);
-  widget3 = new Widget(100, 100, 180, 40, "Button 2", color(0, 0, 200), stdFont, EVENT_BUTTON2);
+  widget3 = new Widget(100, 100, 180, 40, "scroll", color(0, 0, 200), stdFont, EVENT_BUTTON2);
   widget4 = new Widget(100, 200, 180, 40, "Backward", color(0, 200, 200), stdFont, EVENT_BACKWARD);
   screen1 = new Screen(color(255));
   screen2 = new Screen(color(150));
@@ -107,9 +107,7 @@ public void draw()
   
 
   if(currentScreen == screen2)
- 
   {
-    
     originBarChart.draw();
   }
     
@@ -129,8 +127,10 @@ public void mousePressed()
   {
     case EVENT_BUTTON1:
       println("button 1!");
+      
       break;
     case EVENT_BUTTON2:
+      originBarChart.scroll();
       println("button2!");
       break;
     case EVENT_FORWARD:
