@@ -14,13 +14,14 @@ class Widget
     labelColor = color(0); lineColor = color(0);
   }
   
-  void draw()
-  {
-    fill(widgetColor); stroke(lineColor);
-    rect(x, y, width, height);
-    fill(labelColor);
-    text(label, x + 10, y + height - 10);
-  }
+void draw() {
+  fill(widgetColor);
+  stroke(lineColor);
+  rect(x, y, width, height);
+  fill(labelColor);
+  textAlign(CENTER, CENTER); // Center the text horizontally and vertically
+  text(label, x + width/2, y + height/2); // Center the text within the rectangle
+}
   
   void mouseOver()
   {
