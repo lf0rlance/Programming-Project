@@ -75,7 +75,7 @@ public void setup() {
   graphsScreen.add(new Widget(width - 550, height - 525, 300, 40, "Graphs Screen", color(168,213,229), stdFont, EVENT_NULL));
   
   currentScreen = menuScreen;
-  originBarChart = new BarChart(200,280,5);
+  originBarChart = new BarChart(325,200,5);
 }
 
 public void draw() {
@@ -87,6 +87,7 @@ public void draw() {
     currentScreen.updateCloudPosition();
     image(cloudImage, currentScreen.getCloudX(), 0); // Draw the cloud at its current position
     image(cloudImage, currentScreen.getCloudX() - width, 0); // Draw another cloud to the left for wrapping
+    image(programName, 225, 140);
   }
   
   // Draw the widgets
@@ -112,8 +113,6 @@ public void draw() {
   if(currentScreen == graphsScreen) {
     originBarChart.draw();
   }
-  
-  image(programName, 225, 140);
 }
 
 public void mousePressed() {
