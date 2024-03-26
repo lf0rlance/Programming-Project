@@ -4,10 +4,10 @@ Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen;
 PFont stdFont;
 final int EVENT_NULL = 0;
-final int AIRPORT_LOCATOR_BUTTON = 1;
-final int DATE_BUTTON = 2;
-final int LATENESS_BUTTON = 3;
-final int GRAPHS_BUTTON = 4;
+final int AIRPORT_LOCATOR_BUTTON = -1;
+final int DATE_BUTTON = -2;
+final int LATENESS_BUTTON = -3;
+final int GRAPHS_BUTTON = -4;
 ArrayList<String> originData;
 IntList originDataCount;
 BarChart originBarChart;
@@ -16,6 +16,7 @@ PImage programName;
 SearchBar searchBar; // Declare the SearchBar object
 PImage microscopeIcon;
 DepartureBoard departureBoard; // Declare the DepartureBoard object
+Calender theCalender;
 
 void settings() {
   size(800, 550);
@@ -89,6 +90,7 @@ public void setup() {
   
   // Initialize the DepartureBoard object
   departureBoard = new DepartureBoard();
+  theCalender = new Calender(loadImage("january-2022-calendar.png"), dateScreen);
 }
 
 void draw() {
@@ -125,6 +127,11 @@ void draw() {
     // Display the departure board
     departureBoard.draw();
   }
+  
+  if(currentScreen == dateScreen)
+  {
+    theCalender.draw();
+  }
 }
 
 public void mousePressed() {
@@ -138,7 +145,7 @@ public void mousePressed() {
   }
   
   int event = currentScreen.getEvent(mouseX, mouseY);
-  if (event != EVENT_NULL) {
+  if (event != EVENT_NULL && event < 0) {
     println("Button clicked: " + event);
     // Here you can handle each button click event
     switch (event) {
@@ -162,6 +169,14 @@ void keyPressed() {
   if (currentScreen == airportScreen) {
     // Delegate to the SearchBar object
     searchBar.keyPressed();
+  }
+}
+
+public void mouseClicked()
+{
+  if(currentScreen == dateScreen)
+  {
+    theCalender.mouseClicked();
   }
 }
 
