@@ -15,6 +15,9 @@ PImage programName;
 String searchText = "";
 boolean typing = false;
 PImage microscopeIcon;
+boolean cursorVisible = false;
+int lastCursorToggle = 0;
+int cursorToggleInterval = 500; // Blinking interval in milliseconds
 
 void settings() {
   size(800, 550);
@@ -27,7 +30,7 @@ public void setup() {
   //reading data from file and organising into object array for usage ************************
   ArrayList<String> rawDataInArrayForm = new ArrayList<String>();
   try {
-    BufferedReader flights = createReader("flights_full.csv");
+    BufferedReader flights = createReader("flights2k.csv");
     String currentLine;
     int i = 0;
     while ((currentLine = flights.readLine()) != null) {
@@ -84,7 +87,6 @@ public void setup() {
 }
 
 public void draw() {
-  // Draw the background first
   background(currentScreen.screenColor);
   
   // Draw the cloud background only if the current screen is the menu screen (screen1)
@@ -96,8 +98,7 @@ public void draw() {
   }
   
   // Draw the widgets
-  for (int i = 0; i < currentScreen.getWidgets().size(); i++) {
-    Widget temp = (Widget) currentScreen.getWidgets().get(i);
+  for (Widget temp : currentScreen.getWidgets()) {
     temp.draw(); // Draw each widget
   }
   
@@ -108,21 +109,34 @@ public void draw() {
   }
   
   // Draw specific elements based on the current screen
-  if(currentScreen == graphsScreen) {
+  if (currentScreen == graphsScreen) {
     originBarChart.draw();
   }
   
   if (currentScreen == airportScreen) {
-       fill(240);
-  rect(250, 100, 300, 40, 10);
-  
-  // Draw the microscope icon
-  image(microscopeIcon, 255, 105, 35, 35);
-  
-  // Draw the text inside the search bar
-  fill(0);
-  textAlign(LEFT, CENTER);
-  text(searchText, 300, 120);
+    fill(240);
+    rect(250, 100, 300, 40, 10);
+    
+    // Draw the microscope icon
+    image(microscopeIcon, 255, 105, 35, 35);
+    
+    // Draw the text inside the search bar
+    fill(0);
+    textAlign(LEFT, CENTER);
+    text(searchText, 300, 120);
+    
+    // Toggle cursor visibility every cursorToggleInterval milliseconds
+    if (typing && millis() - lastCursorToggle > cursorToggleInterval) {
+      cursorVisible = !cursorVisible;
+      lastCursorToggle = millis();
+    }
+    
+    // Draw the cursor if it's visible
+    if (typing && cursorVisible) {
+      float cursorX = textWidth(searchText) + 300; // Calculate X position of the cursor
+      stroke(0); // Set color to black
+      line(cursorX, 105, cursorX, 135); // Draw the cursor line
+    }
   }
 }
 
@@ -159,33 +173,29 @@ public void mousePressed() {
 
 void keyPressed() {
   if (currentScreen == airportScreen) {
-    // Stop typing when the Enter key is pressed
-    if (keyCode == ENTER) {
-      typing = false;
-    }
+    // Start typing when any key is pressed
+    typing = true;
     
-  // Append characters to the search text when typing
-    if (typing && key != ENTER && key != BACKSPACE && key != DELETE && key != TAB && key != ESC) {
+    // Append characters to the search text when typing
+    if (key != ENTER && key != BACKSPACE && key != DELETE && key != TAB && key != ESC) {
       // Handle Caps Lock
       if (key >= 'A' && key <= 'Z' && !keyPressed) {
         // Convert uppercase to lowercase if Caps Lock is not active
         key = Character.toLowerCase(key);
       }
       searchText += key;
-    }
-    // Remove last character when backspace is pressed
-    else if (typing && key == BACKSPACE && searchText.length() > 0) {
+    } else if (typing && key == BACKSPACE && searchText.length() > 0) {
+      // Remove the last character when backspace is pressed
       searchText = searchText.substring(0, searchText.length() - 1);
     }
   }
 }
 
-void mouseMoved() {
-  if (currentScreen == airportScreen) {
-    // Stop typing when the mouse is moved outside the search bar
-    if (mouseX < 150 || mouseX > 450 || mouseY < 100 || mouseY > 130) {
-      typing = false;
-    }
+void keyReleased() {
+  if (currentScreen == airportScreen && key == ENTER) {
+    // Stop typing and hide cursor when Enter key is released
+    typing = false;
+    cursorVisible = false;
   }
 }
 
