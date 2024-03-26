@@ -136,3 +136,10 @@ public void mousePressed() {
     }
   }
 }
+
+void mouseWheel(MouseEvent event) {
+  int increment = -event.getCount();
+  if (currentScreen == graphsScreen) {
+    originBarChart.scroll(increment);
+  }
+}
