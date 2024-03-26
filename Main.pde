@@ -138,7 +138,7 @@ public void mousePressed() {
 }
 
 void mouseWheel(MouseEvent event) {
-  int increment = -event.getCount();
+  int increment = event.getCount();     // Fixed reverse scroll
   if (currentScreen == graphsScreen) {
     originBarChart.scroll(increment);
   }
