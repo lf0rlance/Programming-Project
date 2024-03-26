@@ -12,6 +12,9 @@ IntList originDataCount;
 BarChart originBarChart;
 PImage cloudImage;
 PImage programName;
+String searchText = "";
+boolean typing = false;
+PImage microscopeIcon;
 
 void settings() {
   size(800, 550);
@@ -76,6 +79,8 @@ public void setup() {
   
   currentScreen = menuScreen;
   originBarChart = new BarChart(325,200,5);
+  
+  microscopeIcon = loadImage("microscope.png");
 }
 
 public void draw() {
@@ -106,9 +111,31 @@ public void draw() {
   if(currentScreen == graphsScreen) {
     originBarChart.draw();
   }
+  
+  if (currentScreen == airportScreen) {
+       fill(240);
+  rect(250, 100, 300, 40, 10);
+  
+  // Draw the microscope icon
+  image(microscopeIcon, 255, 105, 35, 35);
+  
+  // Draw the text inside the search bar
+  fill(0);
+  textAlign(LEFT, CENTER);
+  text(searchText, 300, 120);
+  }
 }
 
 public void mousePressed() {
+  if (currentScreen == airportScreen) {
+      // Start typing when the mouse is clicked inside the search bar
+    if (mouseX > 150 && mouseX < 450 && mouseY > 100 && mouseY < 130) {
+      typing = true;
+    } else {
+      typing = false;
+    }
+  }
+  
   int event = currentScreen.getEvent(mouseX, mouseY);
   if (event != EVENT_NULL) {
     println("Button clicked: " + event);
@@ -126,6 +153,38 @@ public void mousePressed() {
       case GRAPHS_BUTTON:
         currentScreen = graphsScreen; // Navigate to Graphs screen
         break;
+    }
+  }
+}
+
+void keyPressed() {
+  if (currentScreen == airportScreen) {
+    // Stop typing when the Enter key is pressed
+    if (keyCode == ENTER) {
+      typing = false;
+    }
+    
+  // Append characters to the search text when typing
+    if (typing && key != ENTER && key != BACKSPACE && key != DELETE && key != TAB && key != ESC) {
+      // Handle Caps Lock
+      if (key >= 'A' && key <= 'Z' && !keyPressed) {
+        // Convert uppercase to lowercase if Caps Lock is not active
+        key = Character.toLowerCase(key);
+      }
+      searchText += key;
+    }
+    // Remove last character when backspace is pressed
+    else if (typing && key == BACKSPACE && searchText.length() > 0) {
+      searchText = searchText.substring(0, searchText.length() - 1);
+    }
+  }
+}
+
+void mouseMoved() {
+  if (currentScreen == airportScreen) {
+    // Stop typing when the mouse is moved outside the search bar
+    if (mouseX < 150 || mouseX > 450 || mouseY < 100 || mouseY > 130) {
+      typing = false;
     }
   }
 }
