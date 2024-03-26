@@ -82,9 +82,11 @@ class BarChart {
       
       // Drawing labels
       fill(0);
-      text(label, 225, 205 + actualIndex * BAR_HEIGHT);
-      text(count, 600, 210 + actualIndex * BAR_HEIGHT);
-      text(title, 225, ypos - 30);
+      textAlign(LEFT);
+      text(label, 10, 220 + actualIndex * BAR_HEIGHT);
+      text(title, 10, ypos - 30);
+      textAlign(RIGHT);
+      text(count, 790, 220 + actualIndex * BAR_HEIGHT);
       actualIndex += 1;
     }
   }
