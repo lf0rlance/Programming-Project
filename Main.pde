@@ -97,14 +97,7 @@ public void draw() {
   }
   
   // Check for mouse interaction and update widget appearance
-  for (int i = 0; i < currentScreen.getWidgets().size(); i++) {
-    Widget temp = (Widget) currentScreen.getWidgets().get(i);
-    if (temp.getEvent(mouseX, mouseY) != EVENT_NULL) {
-      temp.mouseOver();
-    } else {
-      temp.mouseNotOver();
-    }
-  }
+  currentScreen.overWidgetCheck(currentScreen);
   if (currentScreen != menuScreen) {
     currentScreen.drawBackButton(); // Draw the back button only if not on the menu screen
   }

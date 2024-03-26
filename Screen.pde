@@ -81,4 +81,19 @@ class Screen {
       currentScreen = menuScreen;
     }
   }
+  
+  public void overWidgetCheck(Screen theScreen)
+  {
+    ArrayList widgets = theScreen.getWidgets();
+    for(int i = 0; i < widgets.size(); i++)
+    {
+      Widget theWidget = (Widget) widgets.get(i);
+      if(theWidget.getEvent(mouseX, mouseY) != EVENT_NULL)
+      {
+        theWidget.mouseOver();
+      }
+      else theWidget.mouseNotOver();
+    }
+  }
+  
 }
