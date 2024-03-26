@@ -24,7 +24,7 @@ public void setup() {
   //reading data from file and organising into object array for usage ************************
   ArrayList<String> rawDataInArrayForm = new ArrayList<String>();
   try {
-    BufferedReader flights = createReader("flights2k.csv");
+    BufferedReader flights = createReader("flights_full.csv");
     String currentLine;
     int i = 0;
     while ((currentLine = flights.readLine()) != null) {
