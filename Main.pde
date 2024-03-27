@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen;
@@ -15,6 +14,7 @@ PImage cloudImage;
 PImage programName;
 SearchBar searchBar; // Declare the SearchBar object
 PImage microscopeIcon;
+PImage destinationTableImage;
 DepartureBoard departureBoard; // Declare the DepartureBoard object
 Calender theCalender;
 
@@ -71,7 +71,7 @@ public void setup() {
   menuScreen.add(widget4);
   
   // Create screens for each functionality
-  airportScreen = new Screen(color(255));
+  airportScreen = new Screen(color(37, 150, 190));
   airportScreen.add(new Widget(width - 550, height - 525, 300, 40, "Airport Locator Screen", color(168,213,229), stdFont, EVENT_NULL));
   
   dateScreen = new Screen(color(255));
@@ -87,10 +87,13 @@ public void setup() {
   originBarChart = new BarChart(325,200,5);
   
   microscopeIcon = loadImage("microscope.png");
+  destinationTableImage = loadImage("destinationTable.png");
+  theCalender = new Calender(dateScreen, stdFont);
   
   // Initialize the DepartureBoard object
   departureBoard = new DepartureBoard();
   theCalender = new Calender(dateScreen, stdFont);
+//<<<<<<< HEAD======= >>>>>>> fa5dd34e134e9129ca0059c8dc3e84db6a7088b0
 }
 
 void draw() {
@@ -145,7 +148,7 @@ public void mousePressed() {
   }
   
   int event = currentScreen.getEvent(mouseX, mouseY);
-  if (event != EVENT_NULL && event < 0) {
+  if (event != EVENT_NULL  && event < 0) {
     println("Button clicked: " + event);
     // Here you can handle each button click event
     switch (event) {
@@ -169,6 +172,12 @@ void keyPressed() {
   if (currentScreen == airportScreen) {
     // Delegate to the SearchBar object
     searchBar.keyPressed();
+    
+    // Check if Enter key is pressed and the search is completed
+    if (key == ENTER) {
+      // Call searchCompleted() with the obtained airport code from searchBar
+      searchCompleted(searchBar.getSearchText()); // Assuming getSearchText() returns the airport code
+    }
   }
 }
 
@@ -178,6 +187,12 @@ public void mouseClicked()
   {
     currentScreen = theCalender.mouseClicked(currentScreen, allFlightData);
   }
+}
+
+void searchCompleted(String airportCode) {
+  // Call updateDepartureBoard() with the airport code obtained from the search
+  println("search completed");
+  updateDepartureBoard(airportCode);
 }
 
 void keyReleased() {
@@ -197,11 +212,14 @@ void mouseWheel(MouseEvent event) {
 }
 
 void updateDepartureBoard(String airportCode) {
-  ArrayList<Flights> arrivals = new ArrayList<Flights>();
+  ArrayList<Flights> departures = new ArrayList<Flights>(); // Changed 'arrivals' to 'departures'
+  String lowercaseAirportCode = airportCode.toLowerCase(); // Convert the user input to lowercase
+  
   for (Flights flight : allFlightData) {
-    if (flight.getDestination().equalsIgnoreCase(airportCode)) {
-      arrivals.add(flight);
+    String origin = flight.getOrigin().toLowerCase(); // Changed 'destination' to 'origin'
+    if (origin.equals(lowercaseAirportCode)) { // Changed 'destination' to 'origin'
+      departures.add(flight); // Changed 'arrivals' to 'departures'
     }
   }
-  departureBoard.update(arrivals);
+  departureBoard.update(departures); // Changed 'arrivals' to 'departures'
 }
