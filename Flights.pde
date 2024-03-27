@@ -95,7 +95,7 @@ class Flights
   public int getCancelled()
   {
     if(singleFlightData[17] == "") return 0;
-    else return Integer.parseInt(singleFlightData[17]);
+    else return (int) Float.parseFloat(singleFlightData[17]);
   }
 
   public int getDiverted()
@@ -107,7 +107,7 @@ class Flights
   public int getDistance()
   {
     if(singleFlightData[19] == "") return 0;
-    else return Integer.parseInt(singleFlightData[19]);
+    else return (int) Float.parseFloat(singleFlightData[19]);
   }
   
     public void printFlightDetails() {
