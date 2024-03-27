@@ -101,7 +101,7 @@ class Flights
   public int getDiverted()
   {
     if(singleFlightData[18] == "") return 0;
-    else return Integer.parseInt(singleFlightData[18]);
+    else return (int) Float.parseFloat(singleFlightData[18]);
   }
   
   public int getDistance()
