@@ -30,7 +30,7 @@ public void setup() {
   // Initialize the SearchBar object
   searchBar = new SearchBar();
   
-  //reading data from file and organising into object array for usage ************************
+  //reading data from file and organising into object array for usage
   ArrayList<String> rawDataInArrayForm = new ArrayList<String>();
   try {
     BufferedReader flights = createReader("flights_full.csv");
@@ -50,7 +50,6 @@ public void setup() {
   for (int i = 0; i < rawDataInArrayForm.size(); i++) {
     allFlightData[i] = new Flights(rawDataInArrayForm.get(i));
   }
-  //*******************************************************************************************
 
   //placeholder code for screen/widget
   Widget widget1, widget2, widget3, widget4;
@@ -74,13 +73,13 @@ public void setup() {
   airportScreen = new Screen(color(37, 150, 190));
   airportScreen.add(new Widget(width - 550, height - 525, 300, 40, "Airport Locator Screen", color(168,213,229), stdFont, EVENT_NULL));
   
-  dateScreen = new Screen(color(255));
+  dateScreen = new Screen(color(37, 150, 190));
   dateScreen.add(new Widget(width - 550, height - 525, 300, 40, "Date Screen", color(168,213,229), stdFont, EVENT_NULL));
   
-  latenessScreen = new Screen(color(255));
+  latenessScreen = new Screen(color(37, 150, 190));
   latenessScreen.add(new Widget(width - 550, height - 525, 300, 40, "Lateness Screen", color(168,213,229), stdFont, EVENT_NULL));
   
-  graphsScreen = new Screen(color(255));
+  graphsScreen = new Screen(color(37, 150, 190));
   graphsScreen.add(new Widget(width - 550, height - 525, 300, 40, "Graphs Screen", color(168,213,229), stdFont, EVENT_NULL));
   
   currentScreen = menuScreen;
@@ -93,7 +92,7 @@ public void setup() {
   // Initialize the DepartureBoard object
   departureBoard = new DepartureBoard();
   theCalender = new Calender(dateScreen, stdFont);
-//<<<<<<< HEAD======= >>>>>>> fa5dd34e134e9129ca0059c8dc3e84db6a7088b0
+
 }
 
 void draw() {
@@ -147,23 +146,27 @@ public void mousePressed() {
     }
   }
   
-  int event = currentScreen.getEvent(mouseX, mouseY);
-  if (event != EVENT_NULL  && event < 0) {
-    println("Button clicked: " + event);
-    // Here you can handle each button click event
-    switch (event) {
-      case AIRPORT_LOCATOR_BUTTON:
-        currentScreen = airportScreen; // Navigate to Airport Locator screen
-        break;
-      case DATE_BUTTON:
-        currentScreen = dateScreen; // Navigate to Date screen
-        break;
-      case LATENESS_BUTTON:
-        currentScreen = latenessScreen; // Navigate to Lateness screen
-        break;
-      case GRAPHS_BUTTON:
-        currentScreen = graphsScreen; // Navigate to Graphs screen
-        break;
+  if (currentScreen == dateScreen) {
+    currentScreen = theCalender.mousePressed(currentScreen, allFlightData);
+  } else {
+    int event = currentScreen.getEvent(mouseX, mouseY);
+    if (event != EVENT_NULL && event < 0) {
+      println("Button clicked: " + event);
+      // Here you can handle each button click event
+      switch (event) {
+        case AIRPORT_LOCATOR_BUTTON:
+          currentScreen = airportScreen; // Navigate to Airport Locator screen
+          break;
+        case DATE_BUTTON:
+          currentScreen = dateScreen; // Navigate to Date screen
+          break;
+        case LATENESS_BUTTON:
+          currentScreen = latenessScreen; // Navigate to Lateness screen
+          break;
+        case GRAPHS_BUTTON:
+          currentScreen = graphsScreen; // Navigate to Graphs screen
+          break;
+      }
     }
   }
 }
@@ -178,14 +181,6 @@ void keyPressed() {
       // Call searchCompleted() with the obtained airport code from searchBar
       searchCompleted(searchBar.getSearchText()); // Assuming getSearchText() returns the airport code
     }
-  }
-}
-
-public void mouseClicked()
-{
-  if(currentScreen == dateScreen)
-  {
-    currentScreen = theCalender.mouseClicked(currentScreen, allFlightData);
   }
 }
 
