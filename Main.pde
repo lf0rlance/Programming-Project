@@ -172,12 +172,15 @@ void keyPressed() {
   }
 }
 
+<<<<<<< HEAD
 void searchCompleted(String airportCode) {
   // Call updateDepartureBoard() with the airport code obtained from the search
   println("search completed");
   updateDepartureBoard(airportCode);
 }
 
+=======
+>>>>>>> parent of cb904e3 (Started CAlender class, (Its VERY buggy + not done))
 void keyReleased() {
   if (currentScreen == airportScreen && key == ENTER) {
     // Delegate to the SearchBar object
