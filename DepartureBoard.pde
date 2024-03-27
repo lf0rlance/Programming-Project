@@ -73,7 +73,7 @@ void draw() {
     } else if (flight.getDiverted() == 1) {
       status = "Diverted";
       fill(255, 255, 0); // Yellow font for Diverted status
-    } else if (delay > 0) {
+    } else if (delay > 10) {     // only declaring delayed if the delay is above 10 mins
       status = "Delayed";
       fill(255, 165, 0); // Orange font for Delayed status
       // Check if mouse is over the "Status" column and the row of the delayed flight
