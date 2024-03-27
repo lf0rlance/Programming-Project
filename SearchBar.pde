@@ -52,6 +52,6 @@ class SearchBar {
   }
 
   String getSearchText() {
-    return searchText;
+    return searchText.toLowerCase();
   }
 }

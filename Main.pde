@@ -162,7 +162,19 @@ void keyPressed() {
   if (currentScreen == airportScreen) {
     // Delegate to the SearchBar object
     searchBar.keyPressed();
+    
+    // Check if Enter key is pressed and the search is completed
+    if (key == ENTER) {
+      // Call searchCompleted() with the obtained airport code from searchBar
+      searchCompleted(searchBar.getSearchText()); // Assuming getSearchText() returns the airport code
+    }
   }
+}
+
+void searchCompleted(String airportCode) {
+  // Call updateDepartureBoard() with the airport code obtained from the search
+  println("search completed");
+  updateDepartureBoard(airportCode);
 }
 
 void keyReleased() {
@@ -183,8 +195,11 @@ void mouseWheel(MouseEvent event) {
 
 void updateDepartureBoard(String airportCode) {
   ArrayList<Flights> arrivals = new ArrayList<Flights>();
+  String lowercaseAirportCode = airportCode.toLowerCase(); // Convert the user input to lowercase
+  
   for (Flights flight : allFlightData) {
-    if (flight.getDestination().equalsIgnoreCase(airportCode)) {
+    String destination = flight.getDestination().toLowerCase(); // Convert the airport code from the data to lowercase for comparison
+    if (destination.equals(lowercaseAirportCode)) {
       arrivals.add(flight);
     }
   }
