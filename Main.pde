@@ -3,10 +3,10 @@ Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen;
 PFont stdFont;
 final int EVENT_NULL = 0;
-final int AIRPORT_LOCATOR_BUTTON = 1;
-final int DATE_BUTTON = 2;
-final int LATENESS_BUTTON = 3;
-final int GRAPHS_BUTTON = 4;
+final int AIRPORT_LOCATOR_BUTTON = -1;
+final int DATE_BUTTON = -2;
+final int LATENESS_BUTTON = -3;
+final int GRAPHS_BUTTON = -4;
 ArrayList<String> originData;
 IntList originDataCount;
 BarChart originBarChart;
@@ -16,6 +16,7 @@ SearchBar searchBar; // Declare the SearchBar object
 PImage microscopeIcon;
 PImage destinationTableImage;
 DepartureBoard departureBoard; // Declare the DepartureBoard object
+Calender theCalender;
 
 void settings() {
   size(800, 550);
@@ -87,6 +88,7 @@ public void setup() {
   
   microscopeIcon = loadImage("microscope.png");
   destinationTableImage = loadImage("destinationTable.png");
+  theCalender = new Calender(loadImage("january-2022-calendar.png"), dateScreen);
   
   // Initialize the DepartureBoard object
   departureBoard = new DepartureBoard();
@@ -126,6 +128,11 @@ void draw() {
     // Display the departure board
     departureBoard.draw();
   }
+  
+  if(currentScreen == dateScreen)
+  {
+    theCalender.draw();
+  }
 }
 
 public void mousePressed() {
@@ -139,7 +146,7 @@ public void mousePressed() {
   }
   
   int event = currentScreen.getEvent(mouseX, mouseY);
-  if (event != EVENT_NULL) {
+  if (event != EVENT_NULL  && event < 0) {
     println("Button clicked: " + event);
     // Here you can handle each button click event
     switch (event) {
@@ -172,15 +179,20 @@ void keyPressed() {
   }
 }
 
-<<<<<<< HEAD
+public void mouseClicked()
+{
+  if(currentScreen == dateScreen)
+  {
+    theCalender.mouseClicked();
+  }
+}
+
 void searchCompleted(String airportCode) {
   // Call updateDepartureBoard() with the airport code obtained from the search
   println("search completed");
   updateDepartureBoard(airportCode);
 }
 
-=======
->>>>>>> parent of cb904e3 (Started CAlender class, (Its VERY buggy + not done))
 void keyReleased() {
   if (currentScreen == airportScreen && key == ENTER) {
     // Delegate to the SearchBar object
