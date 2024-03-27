@@ -33,7 +33,7 @@ public void setup() {
   //reading data from file and organising into object array for usage ************************
   ArrayList<String> rawDataInArrayForm = new ArrayList<String>();
   try {
-    BufferedReader flights = createReader("flights2k.csv");
+    BufferedReader flights = createReader("flights_full.csv");
     String currentLine;
     int i = 0;
     while ((currentLine = flights.readLine()) != null) {
@@ -88,10 +88,12 @@ public void setup() {
   
   microscopeIcon = loadImage("microscope.png");
   destinationTableImage = loadImage("destinationTable.png");
-  theCalender = new Calender(loadImage("january-2022-calendar.png"), dateScreen);
+  theCalender = new Calender(dateScreen, stdFont);
   
   // Initialize the DepartureBoard object
   departureBoard = new DepartureBoard();
+  theCalender = new Calender(dateScreen, stdFont);
+//<<<<<<< HEAD======= >>>>>>> fa5dd34e134e9129ca0059c8dc3e84db6a7088b0
 }
 
 void draw() {
@@ -183,7 +185,7 @@ public void mouseClicked()
 {
   if(currentScreen == dateScreen)
   {
-    theCalender.mouseClicked();
+    currentScreen = theCalender.mouseClicked(currentScreen, allFlightData);
   }
 }
 
