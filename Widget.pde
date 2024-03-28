@@ -14,6 +14,16 @@ class Widget
     labelColor = color(0); lineColor = color(0);
   }
   
+  void setX(int x)
+  {
+    this.x = x;
+  }
+  
+  void setY(int y)
+  {
+    this.y = y;
+  }
+  
 void draw() {
   fill(widgetColor);
   stroke(lineColor);

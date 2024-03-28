@@ -2,16 +2,25 @@ class BarChart {
   
   int dataType;
   String title;
+  int event;
   
   int xpos;
   int ypos;
   int startingIndex;
+  
   
   final int BAR_HEIGHT = 45; // Height of each bar
   final int MAX_DISPLAY = 5; // Maximum number of bars to display
   
   ArrayList<String> dataList;
   IntList frequency;
+  
+  color dropMenuColor = color(#f5a201);
+  color widgetColor = color(255);
+  Widget dropMenu;
+  Widget[] widgetList = new Widget[8];
+  
+  final int SELECT_GRAPH = -1;
   
   final int FLIGHT_DATE = 1;
   final int AIRLINE_CODE = 2;
@@ -21,41 +30,39 @@ class BarChart {
   final int ORIGIN_STATE =  6;
   final int ORIGIN_WAC = 7;
   final int DESTINATION = 8;
+  
+  boolean widgetClicked;
  
   BarChart(int xpos, int ypos, int dataType) {
     startingIndex = 0;
     this.xpos = xpos;
     this.ypos = ypos;
-    this.dataType = dataType;
     
-    /* Creates an ArrayList of the data type */
-    dataList = new ArrayList<String>();            
-    for (int i = 0; i < allFlightData.length; i++) {
-      boolean found = false;
-      Flights currentFlight = allFlightData[i];
-      String data = getData(currentFlight); // gets the required data for the flight(e.g origin city, destination)
-      
-      for (String temp: dataList) {
-        if (data.equals(temp)) found = true; // if data is already in the dataList, found = true
-      }
-      if (!found) dataList.add(data); // only adds data to the data list if the dataList does not have the data already.
-                                      // (e.g if t "Dublin" is added to dataList once, it will not be added again.)
-    }
+    setData(dataType);
+    widgetClicked = false;
+   
+
     
-    /* Creates an ArrayList of the frequency of each data type */
-    frequency = new IntList();         
-    for (int i = 0; i < dataList.size(); i++) {
-      int count = 0;
-      String currentString = dataList.get(i); 
-      for (Flights currentFlight: allFlightData) { // itterates through each flight in the allFlightData array
-        String data = getData(currentFlight);
-        if (data.equals(currentString)) count += 1; //  counts how many times the data in dataList appears in the allFlightData array
-      }
-      frequency.append(count); // the total count is stored in the frequency arrayList
-    }
+    
+    dropMenu = new Widget(width - 300, 150, 250, 40,title, dropMenuColor, stdFont,SELECT_GRAPH);
+    
+    widgetList[0] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Flight Date",color(255),stdFont,FLIGHT_DATE);
+    widgetList[1] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Airline Code",color(255),stdFont,AIRLINE_CODE);
+    widgetList[2] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Flight Number",color(255),stdFont,FLIGHT_NUMBER);
+    widgetList[3] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Origin",color(255),stdFont,ORIGIN);
+    widgetList[4] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Origin City Name",color(255),stdFont,ORIGIN_CITY_NAME);
+    widgetList[5] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Origin State",color(255),stdFont,ORIGIN_STATE);
+    widgetList[6] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Origin WAC",color(255),stdFont,ORIGIN_WAC);
+    widgetList[7] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Destination",color(255),stdFont,DESTINATION); 
   }
   
-  public void draw() {
+  
+  
+    public void draw() {
+    
+
+    
+    /* arrow */
     int displayCount = Math.min(MAX_DISPLAY, dataList.size() - startingIndex);
     int actualIndex = 0; // the positioning of each bar( 0 = first bar, 1 = second bar etc);
     for (int i = startingIndex; i < startingIndex + displayCount; i++) {
@@ -76,23 +83,132 @@ class BarChart {
       } else {
         fill(#ffba42);  // Light orange
       }
-      
       // Drawing the bar
       rect(xpos, ypos + actualIndex * BAR_HEIGHT, count, 20);
-      
       // Drawing labels
       fill(0);
-      text(label, 225, 205 + actualIndex * BAR_HEIGHT);
-      text(count, 600, 210 + actualIndex * BAR_HEIGHT);
-      text(title, 225, ypos - 30);
+      text(label, xpos - 100, 205 + actualIndex * BAR_HEIGHT);
+      text(count, xpos + 275, 210 + actualIndex * BAR_HEIGHT);
+      text(title, xpos - 100, ypos - 30);
       actualIndex += 1;
     }
+    drawWidgets();
   }
   
   public void scroll(int increment) {
     int maxIndex = Math.max(0, dataList.size() - MAX_DISPLAY); // Maximum starting index to prevent scrolling past the last data
     startingIndex = constrain(startingIndex + increment, 0, maxIndex);
   }
+  
+  public void drawWidgets()
+  {
+    
+    dropMenu.draw();
+    widgetEvent(dropMenu);
+    mousePressed();
+
+        
+     if(widgetClicked)
+     
+     {
+     line(dropMenu.x + dropMenu.width - 40, dropMenu.y+10,
+      dropMenu.x + dropMenu.width - 25, dropMenu.y+30);
+    line(dropMenu.x + dropMenu.width - 25, dropMenu.y+30,
+        dropMenu.x + dropMenu.width -10, dropMenu.y+10);
+       for(int i = 0; i < widgetList.length;i++)
+       {
+         Widget currentWidget = widgetList[i];
+         currentWidget.setY(dropMenu.y + (i+1)*dropMenu.height );
+         widgetEvent(currentWidget);
+         currentWidget.draw();
+       }  
+     }
+     else
+     {
+      line(dropMenu.x + dropMenu.width - 40, dropMenu.y+30,
+        dropMenu.x + dropMenu.width - 25, dropMenu.y+10);
+      line(dropMenu.x + dropMenu.width - 25, dropMenu.y+10,
+        dropMenu.x + dropMenu.width -10, dropMenu.y+30);
+     }
+  }
+  
+  public void widgetEvent(Widget widget)
+  {
+    if(mouseX > widget.x && mouseX < widget.x + widget.width && mouseY > widget.y && mouseY < widget.y +widget.height)
+    { 
+      widget.widgetColor = color(200);
+      if(mousePressed)
+      {
+        dataType = widget.event;
+        
+        switch(dataType) {
+        case SELECT_GRAPH:
+        if(!widgetClicked)  widgetClicked = true;
+
+         break;
+         
+        case FLIGHT_DATE:
+          title = "Flight Date";
+          dropMenu.label = title;
+          widgetClicked = false;
+          break;
+        case AIRLINE_CODE:
+          title = "Airline Code";
+          dropMenu.label = title;
+          widgetClicked = false;
+
+          break;
+        case FLIGHT_NUMBER:
+          title = "Flight Number";
+          dropMenu.label = title;
+          widgetClicked = false;
+           break;
+        case ORIGIN:
+          title = "Origin";
+          dropMenu.label = title;
+          widgetClicked = false;
+
+           break;
+        case ORIGIN_CITY_NAME:
+          title = "Origin City Name";
+          dropMenu.label = title;
+           break;
+        case ORIGIN_STATE:
+          title = "Origin State";
+          dropMenu.label = title;
+          widgetClicked = false;
+          break;
+        case ORIGIN_WAC:
+          title = "Origin WAC";
+          dropMenu.label = title;
+          widgetClicked = false;
+          break;
+        case DESTINATION:
+          title = "Destination";
+          dropMenu.label = title;
+          widgetClicked = false;
+          break;
+        
+        }
+        if(dataType != SELECT_GRAPH) setData(dataType);
+        
+      }
+    }
+
+    else widget.widgetColor = widgetColor;
+    if    (widget == dropMenu) widget.widgetColor = dropMenuColor;
+    
+
+    
+  }
+  
+  
+  
+
+  
+  
+  
+  
   
   public String getData(Flights flight) {
     switch(dataType) {
@@ -124,4 +240,39 @@ class BarChart {
         return "";
     }
   }
+  
+  public void setData(int dataType)
+  {
+     this.dataType = dataType;
+        /* Creates an ArrayList of the data type */
+    dataList = new ArrayList<String>();            
+    for (int i = 0; i < allFlightData.length; i++) {
+      boolean found = false;
+      Flights currentFlight = allFlightData[i];
+      String data = getData(currentFlight); // gets the required data for the flight(e.g origin city, destination)
+      
+      for (String temp: dataList) {
+        if (data.equals(temp)) found = true; // if data is already in the dataList, found = true
+      }
+      if (!found) dataList.add(data); // only adds data to the data list if the dataList does not have the data already.
+                                      // (e.g if t "Dublin" is added to dataList once, it will not be added again.)
+    }
+    
+    /* Creates an ArrayList of the frequency of each data type */
+    frequency = new IntList();         
+    for (int i = 0; i < dataList.size(); i++) {
+      int count = 0;
+      String currentString = dataList.get(i); 
+      for (Flights currentFlight: allFlightData) { // itterates through each flight in the allFlightData array
+        String data = getData(currentFlight);
+        if (data.equals(currentString)) count += 1; //  counts how many times the data in dataList appears in the allFlightData array
+      }
+      frequency.append(count); // the total count is stored in the frequency arrayList
+    }
+  }
+  
+  
+
+ 
+ 
 }

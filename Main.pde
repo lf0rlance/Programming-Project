@@ -7,9 +7,10 @@ final int AIRPORT_LOCATOR_BUTTON = 1;
 final int DATE_BUTTON = 2;
 final int LATENESS_BUTTON = 3;
 final int GRAPHS_BUTTON = 4;
+
 ArrayList<String> originData;
 IntList originDataCount;
-BarChart originBarChart;
+BarChart barChart;
 PImage cloudImage;
 PImage programName;
 
@@ -71,11 +72,13 @@ public void setup() {
   latenessScreen = new Screen(color(255));
   latenessScreen.add(new Widget(width - 550, height - 525, 300, 40, "Lateness Screen", color(168,213,229), stdFont, EVENT_NULL));
   
+  barChart = new BarChart(200,200,5);
   graphsScreen = new Screen(color(255));
   graphsScreen.add(new Widget(width - 550, height - 525, 300, 40, "Graphs Screen", color(168,213,229), stdFont, EVENT_NULL));
+
   
   currentScreen = menuScreen;
-  originBarChart = new BarChart(325,200,5);
+  
 }
 
 public void draw() {
@@ -111,7 +114,7 @@ public void draw() {
   
   // Draw specific elements based on the current screen
   if(currentScreen == graphsScreen) {
-    originBarChart.draw();
+    barChart.draw();
   }
 }
 
@@ -137,9 +140,11 @@ public void mousePressed() {
   }
 }
 
+
+
 void mouseWheel(MouseEvent event) {
   int increment = event.getCount();     // Fixed reverse scroll
   if (currentScreen == graphsScreen) {
-    originBarChart.scroll(increment);
+      barChart.scroll(increment);
   }
 }
