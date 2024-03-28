@@ -3,34 +3,37 @@ Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen;
 PFont stdFont;
 final int EVENT_NULL = 0;
-final int AIRPORT_LOCATOR_BUTTON = 1;
-final int DATE_BUTTON = 2;
-final int LATENESS_BUTTON = 3;
-final int GRAPHS_BUTTON = 4;
+final int AIRPORT_LOCATOR_BUTTON = -1;
+final int DATE_BUTTON = -2;
+final int LATENESS_BUTTON = -3;
+final int GRAPHS_BUTTON = -4;
 ArrayList<String> originData;
 IntList originDataCount;
 BarChart originBarChart;
 PImage cloudImage;
 PImage programName;
-String searchText = "";
-boolean typing = false;
+SearchBar searchBar; // Declare the SearchBar object
 PImage microscopeIcon;
-boolean cursorVisible = false;
-int lastCursorToggle = 0;
-int cursorToggleInterval = 500; // Blinking interval in milliseconds
-
+PImage destinationTableImage;
+DepartureBoard departureBoard; // Declare the DepartureBoard object
+Calender theCalender;
+//hi
 void settings() {
   size(800, 550);
 }
 
 public void setup() {
-    // Load the cloud image here
+  // Load the cloud image here
   cloudImage = loadImage("cloud.jpg");
   programName = loadImage("programName.png");
-  //reading data from file and organising into object array for usage ************************
+  
+  // Initialize the SearchBar object
+  searchBar = new SearchBar();
+  
+  //reading data from file and organising into object array for usage
   ArrayList<String> rawDataInArrayForm = new ArrayList<String>();
   try {
-    BufferedReader flights = createReader("flights2k.csv");
+    BufferedReader flights = createReader("flights_full.csv");
     String currentLine;
     int i = 0;
     while ((currentLine = flights.readLine()) != null) {
@@ -47,7 +50,6 @@ public void setup() {
   for (int i = 0; i < rawDataInArrayForm.size(); i++) {
     allFlightData[i] = new Flights(rawDataInArrayForm.get(i));
   }
-  //*******************************************************************************************
 
   //placeholder code for screen/widget
   Widget widget1, widget2, widget3, widget4;
@@ -68,25 +70,33 @@ public void setup() {
   menuScreen.add(widget4);
   
   // Create screens for each functionality
-  airportScreen = new Screen(color(255));
+  airportScreen = new Screen(color(37, 150, 190));
   airportScreen.add(new Widget(width - 550, height - 525, 300, 40, "Airport Locator Screen", color(168,213,229), stdFont, EVENT_NULL));
   
-  dateScreen = new Screen(color(255));
+  dateScreen = new Screen(color(37, 150, 190));
   dateScreen.add(new Widget(width - 550, height - 525, 300, 40, "Date Screen", color(168,213,229), stdFont, EVENT_NULL));
   
-  latenessScreen = new Screen(color(255));
+  latenessScreen = new Screen(color(37, 150, 190));
   latenessScreen.add(new Widget(width - 550, height - 525, 300, 40, "Lateness Screen", color(168,213,229), stdFont, EVENT_NULL));
   
-  graphsScreen = new Screen(color(255));
+  graphsScreen = new Screen(color(37, 150, 190));
   graphsScreen.add(new Widget(width - 550, height - 525, 300, 40, "Graphs Screen", color(168,213,229), stdFont, EVENT_NULL));
   
   currentScreen = menuScreen;
   originBarChart = new BarChart(325,200,5);
   
   microscopeIcon = loadImage("microscope.png");
+  destinationTableImage = loadImage("destinationTable.png");
+  theCalender = new Calender(dateScreen, stdFont);
+  
+  // Initialize the DepartureBoard object
+  departureBoard = new DepartureBoard();
+  theCalender = new Calender(dateScreen, stdFont);
+   originBarChart.sort(originBarChart.dataList, originBarChart.frequency);
+
 }
 
-public void draw() {
+void draw() {
   background(currentScreen.screenColor);
   
   // Draw the cloud background only if the current screen is the menu screen (screen1)
@@ -114,94 +124,98 @@ public void draw() {
   }
   
   if (currentScreen == airportScreen) {
-    fill(240);
-    rect(250, 100, 300, 40, 10);
+    // Draw the search bar using the SearchBar object
+    searchBar.draw();
     
-    // Draw the microscope icon
-    image(microscopeIcon, 255, 105, 35, 35);
-    
-    // Draw the text inside the search bar
-    fill(0);
-    textAlign(LEFT, CENTER);
-    text(searchText, 300, 120);
-    
-    // Toggle cursor visibility every cursorToggleInterval milliseconds
-    if (typing && millis() - lastCursorToggle > cursorToggleInterval) {
-      cursorVisible = !cursorVisible;
-      lastCursorToggle = millis();
-    }
-    
-    // Draw the cursor if it's visible
-    if (typing && cursorVisible) {
-      float cursorX = textWidth(searchText) + 300; // Calculate X position of the cursor
-      stroke(0); // Set color to black
-      line(cursorX, 105, cursorX, 135); // Draw the cursor line
-    }
+    // Display the departure board
+    departureBoard.draw();
+  }
+  
+  if(currentScreen == dateScreen)
+  {
+    theCalender.draw();
   }
 }
 
 public void mousePressed() {
   if (currentScreen == airportScreen) {
-      // Start typing when the mouse is clicked inside the search bar
+    // Start typing when the mouse is clicked inside the search bar
     if (mouseX > 150 && mouseX < 450 && mouseY > 100 && mouseY < 130) {
-      typing = true;
+      searchBar.startTyping(); // Delegate to the SearchBar object
     } else {
-      typing = false;
+      searchBar.stopTyping(); // Delegate to the SearchBar object
     }
   }
   
-  int event = currentScreen.getEvent(mouseX, mouseY);
-  if (event != EVENT_NULL) {
-    println("Button clicked: " + event);
-    // Here you can handle each button click event
-    switch (event) {
-      case AIRPORT_LOCATOR_BUTTON:
-        currentScreen = airportScreen; // Navigate to Airport Locator screen
-        break;
-      case DATE_BUTTON:
-        currentScreen = dateScreen; // Navigate to Date screen
-        break;
-      case LATENESS_BUTTON:
-        currentScreen = latenessScreen; // Navigate to Lateness screen
-        break;
-      case GRAPHS_BUTTON:
-        currentScreen = graphsScreen; // Navigate to Graphs screen
-        break;
+  if (currentScreen == dateScreen) {
+    currentScreen = theCalender.mousePressed(currentScreen, allFlightData);
+  } else {
+    int event = currentScreen.getEvent(mouseX, mouseY);
+    if (event != EVENT_NULL && event < 0) {
+      println("Button clicked: " + event);
+      // Here you can handle each button click event
+      switch (event) {
+        case AIRPORT_LOCATOR_BUTTON:
+          currentScreen = airportScreen; // Navigate to Airport Locator screen
+          break;
+        case DATE_BUTTON:
+          currentScreen = dateScreen; // Navigate to Date screen
+          break;
+        case LATENESS_BUTTON:
+          currentScreen = latenessScreen; // Navigate to Lateness screen
+          break;
+        case GRAPHS_BUTTON:
+          currentScreen = graphsScreen; // Navigate to Graphs screen
+          break;
+      }
     }
   }
 }
 
 void keyPressed() {
   if (currentScreen == airportScreen) {
-    // Start typing when any key is pressed
-    typing = true;
+    // Delegate to the SearchBar object
+    searchBar.keyPressed();
     
-    // Append characters to the search text when typing
-    if (key != ENTER && key != BACKSPACE && key != DELETE && key != TAB && key != ESC) {
-      // Handle Caps Lock
-      if (key >= 'A' && key <= 'Z' && !keyPressed) {
-        // Convert uppercase to lowercase if Caps Lock is not active
-        key = Character.toLowerCase(key);
-      }
-      searchText += key;
-    } else if (typing && key == BACKSPACE && searchText.length() > 0) {
-      // Remove the last character when backspace is pressed
-      searchText = searchText.substring(0, searchText.length() - 1);
+    // Check if Enter key is pressed and the search is completed
+    if (key == ENTER) {
+      // Call searchCompleted() with the obtained airport code from searchBar
+      searchCompleted(searchBar.getSearchText()); // Assuming getSearchText() returns the airport code
     }
   }
 }
 
+void searchCompleted(String airportCode) {
+  // Call updateDepartureBoard() with the airport code obtained from the search
+  println("search completed");
+  updateDepartureBoard(airportCode);
+}
+
 void keyReleased() {
   if (currentScreen == airportScreen && key == ENTER) {
-    // Stop typing and hide cursor when Enter key is released
-    typing = false;
-    cursorVisible = false;
+    // Delegate to the SearchBar object
+    searchBar.stopTyping();
   }
 }
 
 void mouseWheel(MouseEvent event) {
-  int increment = event.getCount();     // Fixed reverse scroll
+  int increment = event.getCount(); // Fixed reverse scroll
   if (currentScreen == graphsScreen) {
     originBarChart.scroll(increment);
+  } else if (currentScreen == airportScreen) {
+    departureBoard.scroll(increment);
   }
+}
+
+void updateDepartureBoard(String airportCode) {
+  ArrayList<Flights> departures = new ArrayList<Flights>(); // Changed 'arrivals' to 'departures'
+  String lowercaseAirportCode = airportCode.toLowerCase(); // Convert the user input to lowercase
+  
+  for (Flights flight : allFlightData) {
+    String origin = flight.getOrigin().toLowerCase(); // Changed 'destination' to 'origin'
+    if (origin.equals(lowercaseAirportCode)) { // Changed 'destination' to 'origin'
+      departures.add(flight); // Changed 'arrivals' to 'departures'
+    }
+  }
+  departureBoard.update(departures); // Changed 'arrivals' to 'departures'
 }

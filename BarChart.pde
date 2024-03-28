@@ -1,5 +1,4 @@
 class BarChart {
-  
   int dataType;
   String title;
   
@@ -35,7 +34,7 @@ class BarChart {
       Flights currentFlight = allFlightData[i];
       String data = getData(currentFlight); // gets the required data for the flight(e.g origin city, destination)
       
-      for (String temp: dataList) {
+      for (String temp: dataList) { //finding locations
         if (data.equals(temp)) found = true; // if data is already in the dataList, found = true
       }
       if (!found) dataList.add(data); // only adds data to the data list if the dataList does not have the data already.
@@ -54,35 +53,55 @@ class BarChart {
       frequency.append(count); // the total count is stored in the frequency arrayList
     }
   }
-  
+  //////work in progress
+public void sort(ArrayList<String> locations, IntList amountOfFlights) {
+    // Check if both lists have the same size
+   if (locations.size() != amountOfFlights.size()) {
+        throw new IllegalArgumentException("Lists must have the same size");
+    }
+
+    // Bubble sort algorithm to sort the locations based on the amount of flights in descending order
+    for (int currentLocationIndex = 0; currentLocationIndex < amountOfFlights.size() - 1; currentLocationIndex++) {
+        for (int nextLocationIndex = 0; nextLocationIndex < amountOfFlights.size() - currentLocationIndex - 1; nextLocationIndex++) {
+            if (amountOfFlights.get(nextLocationIndex) < amountOfFlights.get(nextLocationIndex + 1)) {
+                // Swap locations
+                String tempLocation = locations.get(nextLocationIndex);
+                locations.set(nextLocationIndex, locations.get(nextLocationIndex + 1));
+                locations.set(nextLocationIndex + 1, tempLocation);
+
+                // Swap amountOfFlights
+                int tempAmount = amountOfFlights.get(nextLocationIndex);
+                amountOfFlights.set(nextLocationIndex, amountOfFlights.get(nextLocationIndex + 1));
+                amountOfFlights.set(nextLocationIndex + 1, tempAmount);
+            }
+        }
+    }
+}
+
   public void draw() {
     int displayCount = Math.min(MAX_DISPLAY, dataList.size() - startingIndex);
     int actualIndex = 0; // the positioning of each bar( 0 = first bar, 1 = second bar etc);
     for (int i = startingIndex; i < startingIndex + displayCount; i++) {
-      
       // Extracting label and count data
       String label = dataList.get(i);  
-      int count = frequency.get(i);      // get data and corresponding frequency
+      int count = frequency.get(i); // get data and corresponding frequency
       
-      // Setting colors based on specified values
-      if (count <= 20) {
-        fill(#0b1e33);  // Dark blue
-      } else if (count <= 40) {
-        fill(#013c58);  // Dark green
-      } else if (count <= 60) {
-        fill(#00537a);  // Dark turquoise
-      } else if (count <= 80) {
-        fill(#f5a201);  // Dark yellow
-      } else {
-        fill(#ffba42);  // Light orange
-      }
+      
+float scale = (float) count / frequency.get(0); // calculate color/size scale
+int redComponent = (int) (scale * 225);
+int blueComponent = 225 - redComponent;
+fill(redComponent, 0, blueComponent);
+
       
       // Drawing the bar
-      rect(xpos, ypos + actualIndex * BAR_HEIGHT, count, 20);
+      rect(xpos, ypos + actualIndex * BAR_HEIGHT, scale*230, 20);
+      
       
       // Drawing labels
       fill(0);
-      text(label, 225, 205 + actualIndex * BAR_HEIGHT);
+      int characterOffset;
+      if (label.length() > 18) {characterOffset = (label.length() -18)*5+5;} else {characterOffset = 0;}
+      text(label, 225-characterOffset, 205 + actualIndex * BAR_HEIGHT);
       text(count, 600, 210 + actualIndex * BAR_HEIGHT);
       text(title, 225, ypos - 30);
       actualIndex += 1;
