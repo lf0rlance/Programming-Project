@@ -93,7 +93,6 @@ public void setup() {
   departureBoard = new DepartureBoard();
   theCalender = new Calender(dateScreen, stdFont);
    originBarChart.sort(originBarChart.dataList, originBarChart.frequency);
-
 }
 
 void draw() {

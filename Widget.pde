@@ -1,3 +1,4 @@
+
 class Widget
 {
   int x, y, width, height;
@@ -14,13 +15,20 @@ class Widget
     labelColor = color(0); lineColor = color(0);
   }
   
+  Widget(int x, int y, int width, int height, int event)
+  {
+    this.x = x; this.y = y; this.width = width; this.height = height;
+    this.event = event;
+    labelColor = color(0); lineColor = color(0);
+  }
+  
 void draw() {
   fill(widgetColor);
   stroke(lineColor);
   rect(x, y, width, height);
   fill(labelColor);
   textAlign(CENTER, CENTER); // Center the text horizontally and vertically
-  text(label, x + width/2, y + height/2); // Center the text within the rectangle
+  if(label != null) text(label, x + width/2, y + height/2); // Center the text within the rectangle
 }
   
   void mouseOver()
