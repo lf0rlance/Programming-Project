@@ -1,3 +1,4 @@
+
 class Widget
 {
   int x, y, width, height;

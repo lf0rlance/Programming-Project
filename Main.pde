@@ -9,7 +9,7 @@ final int LATENESS_BUTTON = -3;
 final int GRAPHS_BUTTON = -4;
 ArrayList<String> originData;
 IntList originDataCount;
-BarChart originBarChart;
+BarChart barChart;
 PImage cloudImage;
 PImage programName;
 SearchBar searchBar; // Declare the SearchBar object
@@ -83,7 +83,7 @@ public void setup() {
   graphsScreen.add(new Widget(width - 550, height - 525, 300, 40, "Graphs Screen", color(168,213,229), stdFont, EVENT_NULL));
   
   currentScreen = menuScreen;
-  originBarChart = new BarChart(325,200,5);
+  barChart = new BarChart(200,200,5);
   
   microscopeIcon = loadImage("microscope.png");
   destinationTableImage = loadImage("destinationTable.png");
@@ -92,7 +92,7 @@ public void setup() {
   // Initialize the DepartureBoard object
   departureBoard = new DepartureBoard();
   theCalender = new Calender(dateScreen, stdFont);
-   originBarChart.sort(originBarChart.dataList, originBarChart.frequency);
+  //barChart.sort(barChart.dataList, barChart.frequency);
 }
 
 void draw() {
@@ -119,7 +119,7 @@ void draw() {
   
   // Draw specific elements based on the current screen
   if (currentScreen == graphsScreen) {
-    originBarChart.draw();
+    barChart.draw();
   }
   
   if (currentScreen == airportScreen) {
@@ -200,7 +200,7 @@ void keyReleased() {
 void mouseWheel(MouseEvent event) {
   int increment = event.getCount(); // Fixed reverse scroll
   if (currentScreen == graphsScreen) {
-    originBarChart.scroll(increment);
+    barChart.scroll(increment);
   } else if (currentScreen == airportScreen) {
     departureBoard.scroll(increment);
   }
