@@ -46,7 +46,7 @@ class Calender
       temp.draw(); // Draw each widget
     }
   }
-  // fix josh
+  
   public Screen mousePressed(Screen currentScreen, Flights data[]) {
     int event = currentScreen.getEvent(mouseX, mouseY);
     if (event != EVENT_NULL) {
