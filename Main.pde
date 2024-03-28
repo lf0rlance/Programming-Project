@@ -83,7 +83,7 @@ public void setup() {
   graphsScreen.add(new Widget(width - 550, height - 525, 300, 40, "Graphs Screen", color(168,213,229), stdFont, EVENT_NULL));
   
   currentScreen = menuScreen;
-  originBarChart = new BarChart(325,200,5);
+  originBarChart = new BarChart(200,200,5);
   
   microscopeIcon = loadImage("microscope.png");
   destinationTableImage = loadImage("destinationTable.png");
@@ -92,7 +92,7 @@ public void setup() {
   // Initialize the DepartureBoard object
   departureBoard = new DepartureBoard();
   theCalender = new Calender(dateScreen, stdFont);
-   originBarChart.sort(originBarChart.dataList, originBarChart.frequency);
+  //originBarChart.sort(originBarChart.dataList, originBarChart.frequency);
 }
 
 void draw() {
