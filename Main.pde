@@ -24,7 +24,7 @@ void settings() {
 
 public void setup() {
   // Load the cloud image here
-  cloudImage = loadImage("cloud.jpg");
+  cloudImage = loadImage("cloud.png");
   programName = loadImage("programName.png");
   
   // Initialize the SearchBar object
