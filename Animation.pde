@@ -1,3 +1,4 @@
+// Reference: https://processing.org/examples/animatedsprite.html
 class Animation {
   PImage[] frames; // Array to store individual frames of the animation
   int frameCount; // Total number of frames in the animation

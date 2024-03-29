@@ -9,15 +9,18 @@ final int LATENESS_BUTTON = -3;
 final int GRAPHS_BUTTON = -4;
 ArrayList<String> originData;
 IntList originDataCount;
-BarChart barChart;
 PImage cloudImage;
 PImage programName;
-SearchBar searchBar; // Declare the SearchBar object
 PImage microscopeIcon;
 PImage destinationTableImage;
+PImage arrivalBoardImage;
 PImage airportScreenGIF;
+Boolean showArrivals = false;
+BarChart barChart;
+SearchBar searchBar; // Declare the SearchBar object
 Animation airportScreenBackground;
 DepartureBoard departureBoard; // Declare the DepartureBoard object
+ArrivalsBoard arrivalBoard;
 Calender theCalender;
 //hi
 void settings() {
@@ -88,11 +91,13 @@ public void setup() {
   barChart = new BarChart(200,200,5);
   
   microscopeIcon = loadImage("microscope.png");
-  destinationTableImage = loadImage("destinationTable.png");
+  destinationTableImage = loadImage("departuresBoard.png");
+  arrivalBoardImage = loadImage("arrivalsBoard.png");
   theCalender = new Calender(dateScreen, stdFont);
   
   // Initialize the DepartureBoard object
   departureBoard = new DepartureBoard();
+  arrivalBoard = new ArrivalsBoard();
   theCalender = new Calender(dateScreen, stdFont);
   airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
 }
@@ -124,7 +129,11 @@ void draw() {
 
     // Draw other elements specific to the airport screen
     searchBar.draw();
-    departureBoard.draw();
+    if (showArrivals) {
+        arrivalBoard.draw(); // Draw the arrivals board only when showArrivals is true
+    } else {
+        departureBoard.draw(); // Draw the departure board when showArrivals is false
+    }
   }
   
   if(currentScreen == dateScreen)
@@ -151,6 +160,13 @@ public void mousePressed() {
       searchBar.startTyping(); // Delegate to the SearchBar object
     } else {
       searchBar.stopTyping(); // Delegate to the SearchBar object
+    }
+    
+    // Check if the mouse is clicked within the bounds of the buttons to switch between departures and arrivals
+    if (mouseX > 225 && mouseX < 313 && mouseY > 193 && mouseY < 214 && showArrivals == false) {
+      showArrivals = true; // Switch to arrivals board only if currently on departures board
+    } else if (mouseX > 132 && mouseX < 225 && mouseY > 193 && mouseY < 214 && showArrivals == true) {
+      showArrivals = false; // Switch to departures board only if currently on arrivals board
     }
   }
   
@@ -192,12 +208,6 @@ void keyPressed() {
   }
 }
 
-void searchCompleted(String airportCode) {
-  // Call updateDepartureBoard() with the airport code obtained from the search
-  println("search completed");
-  updateDepartureBoard(airportCode);
-}
-
 void keyReleased() {
   if (currentScreen == airportScreen && key == ENTER) {
     // Delegate to the SearchBar object
@@ -214,8 +224,15 @@ void mouseWheel(MouseEvent event) {
   }
 }
 
-void updateDepartureBoard(String airportCode) {
-  ArrayList<Flights> departures = new ArrayList<Flights>(); // Changed 'arrivals' to 'departures'
+void searchCompleted(String airportCode) {
+  // Call updateDepartureBoard() with the airport code obtained from the search
+  println("search completed");
+  updateDepartureAndArrivalBoard(airportCode);
+}
+
+void updateDepartureAndArrivalBoard(String airportCode) {
+  ArrayList<Flights> departures = new ArrayList<Flights>();
+  ArrayList<Flights> arrivals = new ArrayList<Flights>(); // Add ArrayList for arrivals
   String lowercaseAirportCode = airportCode.toLowerCase(); // Convert the user input to lowercase
   
   for (Flights flight : allFlightData) {
@@ -223,6 +240,13 @@ void updateDepartureBoard(String airportCode) {
     if (origin.equals(lowercaseAirportCode)) { // Changed 'destination' to 'origin'
       departures.add(flight); // Changed 'arrivals' to 'departures'
     }
+    
+    String destination = flight.getDestination().toLowerCase(); // Add condition for arrivals
+    if (destination.equals(lowercaseAirportCode)) { // Add condition for arrivals
+      arrivals.add(flight); // Add flight to arrivals list
+    }
   }
-  departureBoard.update(departures); // Changed 'arrivals' to 'departures'
+  
+  departureBoard.update(departures); 
+  arrivalBoard.update(arrivals);
 }

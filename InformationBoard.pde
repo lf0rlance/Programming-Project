@@ -24,12 +24,12 @@ void draw() {
   int columnWidth = (tableWidth - 250) / 6; // Width of each column reduced by 20 pixels
   int rowHeight = 30;
   int xOffset = (width - tableWidth) / 2 + 150; // Center the table horizontally and shift by 150 pixels
-  int yOffset = 200;
+  int yOffset = 220;
 
   // Draw table headers only if departure board has been updated
   if (departureBoardUpdated) {
     // Draw the "destinationTable" image
-    image(destinationTableImage, xOffset - 20, yOffset - 7); // Draw the image at the position of the date header
+    image(destinationTableImage, xOffset - 20, yOffset - 28); // Draw the image at the position of the date header
     // Draw table headers including "Date" column
     fill(0);
     text("Date", xOffset - 10, yOffset); // Adjust x position for the entire table by -10 pixels

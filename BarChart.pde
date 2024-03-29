@@ -1,26 +1,12 @@
 class BarChart {
-  int dataType;
   String title;
-  
+  int dataType;
   int xpos;
   int ypos;
-  int startingIndex;
-  
+  int startingIndex;  
   final int BAR_HEIGHT = 45; // Height of each bar
-  final int MAX_DISPLAY = 5; // Maximum number of bars to display
-  
-  ArrayList<String> dataList;
-  IntList frequency;
-  
-  
-  color dropMenuColor = color(#f5a201);
-  color widgetColor = color(255);
-  Widget dropMenu;
-  Widget[] widgetList = new Widget[8];
-  boolean widgetClicked;
-  
+  final int MAX_DISPLAY = 5; // Maximum number of bars to display 
   final int SELECT_GRAPH = -1;
-  
   final int FLIGHT_DATE = 1;
   final int AIRLINE_CODE = 2;
   final int FLIGHT_NUMBER = 3;
@@ -29,6 +15,14 @@ class BarChart {
   final int ORIGIN_STATE =  6;
   final int ORIGIN_WAC = 7;
   final int DESTINATION = 8;
+  boolean widgetClicked;
+  ArrayList<String> dataList;
+  IntList frequency; 
+  color dropMenuColor = color(#f5a201);
+  color widgetColor = color(255);
+  
+  Widget dropMenu;
+  Widget[] widgetList = new Widget[8];
  
   BarChart(int xpos, int ypos, int dataType) {
     startingIndex = 0;
@@ -44,14 +38,7 @@ class BarChart {
     widgetList[4] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Origin City Name",color(255),stdFont,ORIGIN_CITY_NAME);
     widgetList[5] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Origin State",color(255),stdFont,ORIGIN_STATE);
     widgetList[6] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Origin WAC",color(255),stdFont,ORIGIN_WAC);
-    widgetList[7] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Destination",color(255),stdFont,DESTINATION); 
-
-    
-
-    
-    
-    
-    
+    widgetList[7] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Destination",color(255),stdFont,DESTINATION);   
   }
   
   
@@ -60,15 +47,12 @@ class BarChart {
     dropMenu.draw();
     widgetEvent(dropMenu);
     mousePressed();
-
-        
-     if(widgetClicked)
-     
+     if(widgetClicked)   
      {
-     line(dropMenu.x + dropMenu.width - 40, dropMenu.y+10,
-      dropMenu.x + dropMenu.width - 25, dropMenu.y+30);
-    line(dropMenu.x + dropMenu.width - 25, dropMenu.y+30,
-        dropMenu.x + dropMenu.width -10, dropMenu.y+10);
+       line(dropMenu.x + dropMenu.width - 40, dropMenu.y+10,
+       dropMenu.x + dropMenu.width - 25, dropMenu.y+30);
+       line(dropMenu.x + dropMenu.width - 25, dropMenu.y+30,
+       dropMenu.x + dropMenu.width -10, dropMenu.y+10);
        for(int i = 0; i < widgetList.length;i++)
        {
          Widget currentWidget = widgetList[i];
@@ -76,19 +60,14 @@ class BarChart {
          widgetEvent(currentWidget);
          currentWidget.draw();
        }  
-     }
-     else
-     {
+     } else {
       line(dropMenu.x + dropMenu.width - 40, dropMenu.y+30,
-        dropMenu.x + dropMenu.width - 25, dropMenu.y+10);
+      dropMenu.x + dropMenu.width - 25, dropMenu.y+10);
       line(dropMenu.x + dropMenu.width - 25, dropMenu.y+10,
-        dropMenu.x + dropMenu.width -10, dropMenu.y+30);
+      dropMenu.x + dropMenu.width -10, dropMenu.y+30);
      }
   }
-  
-  
-  
-  
+
   //////work in progress
 public void sort(ArrayList<String> locations, IntList amountOfFlights) {
     // Check if both lists have the same size
@@ -122,16 +101,13 @@ public void sort(ArrayList<String> locations, IntList amountOfFlights) {
       String label = dataList.get(i);  
       int count = frequency.get(i); // get data and corresponding frequency
       
-      
-float scale = (float) count / frequency.get(0); // calculate color/size scale
-int redComponent = (int) (scale * 225);
-int blueComponent = 225 - redComponent;
-fill(redComponent, 0, blueComponent);
+      float scale = (float) count / frequency.get(0); // calculate color/size scale
+      int redComponent = (int) (scale * 225);
+      int blueComponent = 225 - redComponent;
+      fill(redComponent, 0, blueComponent);
 
-      
       // Drawing the bar
       rect(xpos, ypos + actualIndex * BAR_HEIGHT, scale*230, 20);
-      
       
       // Drawing labels
       fill(0);
@@ -141,8 +117,7 @@ fill(redComponent, 0, blueComponent);
       text(count, xpos+275, 210 + actualIndex * BAR_HEIGHT);
       text(title, xpos-100, ypos - 30);
       actualIndex += 1;
-    }
-    
+    } 
     // Drawing Widgets
     drawWidgets();
   }
@@ -183,7 +158,6 @@ fill(redComponent, 0, blueComponent);
     }
   }
   
-  
   public void setData(int dataType)
   {
     this.dataType = dataType;
@@ -198,8 +172,7 @@ fill(redComponent, 0, blueComponent);
         if (data.equals(temp)) found = true; // if data is already in the dataList, found = true
       }
       if (!found) dataList.add(data); // only adds data to the data list if the dataList does not have the data already.
-                                      // (e.g if t "Dublin" is added to dataList once, it will not be added again.)
-    }
+    }                                 // (e.g if t "Dublin" is added to dataList once, it will not be added again.)
     
     /* Creates an ArrayList of the frequency of each data type */
     frequency = new IntList();         
@@ -216,8 +189,6 @@ fill(redComponent, 0, blueComponent);
     sort(dataList, frequency);
   }
   
-  
-  
   public void widgetEvent(Widget widget)
   {
     if(mouseX > widget.x && mouseX < widget.x + widget.width && mouseY > widget.y && mouseY < widget.y +widget.height)
@@ -228,63 +199,55 @@ fill(redComponent, 0, blueComponent);
         dataType = widget.event;
         
         switch(dataType) {
-        case SELECT_GRAPH:
-        if(!widgetClicked)  widgetClicked = true;
-
-         break;
-         
-        case FLIGHT_DATE:
-          title = "Flight Date";
-          dropMenu.label = title;
-          widgetClicked = false;
-          break;
-        case AIRLINE_CODE:
-          title = "Airline Code";
-          dropMenu.label = title;
-          widgetClicked = false;
-
-          break;
-        case FLIGHT_NUMBER:
-          title = "Flight Number";
-          dropMenu.label = title;
-          widgetClicked = false;
-           break;
-        case ORIGIN:
-          title = "Origin";
-          dropMenu.label = title;
-          widgetClicked = false;
-
-           break;
-        case ORIGIN_CITY_NAME:
-          title = "Origin City Name";
-          dropMenu.label = title;
-           break;
-        case ORIGIN_STATE:
-          title = "Origin State";
-          dropMenu.label = title;
-          widgetClicked = false;
-          break;
-        case ORIGIN_WAC:
-          title = "Origin WAC";
-          dropMenu.label = title;
-          widgetClicked = false;
-          break;
-        case DESTINATION:
-          title = "Destination";
-          dropMenu.label = title;
-          widgetClicked = false;
-          break;
-        
+          case SELECT_GRAPH:
+          if(!widgetClicked)  widgetClicked = true;
+            break;   
+          case FLIGHT_DATE:
+            title = "Flight Date";
+            dropMenu.label = title;
+            widgetClicked = false;
+            break;
+          case AIRLINE_CODE:
+            title = "Airline Code";
+            dropMenu.label = title;
+            widgetClicked = false;
+  
+            break;
+          case FLIGHT_NUMBER:
+            title = "Flight Number";
+            dropMenu.label = title;
+            widgetClicked = false;
+             break;
+          case ORIGIN:
+            title = "Origin";
+            dropMenu.label = title;
+            widgetClicked = false;
+  
+             break;
+          case ORIGIN_CITY_NAME:
+            title = "Origin City Name";
+            dropMenu.label = title;
+             break;
+          case ORIGIN_STATE:
+            title = "Origin State";
+            dropMenu.label = title;
+            widgetClicked = false;
+            break;
+          case ORIGIN_WAC:
+            title = "Origin WAC";
+            dropMenu.label = title;
+            widgetClicked = false;
+            break;
+          case DESTINATION:
+            title = "Destination";
+            dropMenu.label = title;
+            widgetClicked = false;
+            break;     
         }
-        if(dataType != SELECT_GRAPH) setData(dataType);
-        
+        if(dataType != SELECT_GRAPH) setData(dataType);       
       }
     }
-
     else widget.widgetColor = widgetColor;
-    if    (widget == dropMenu) widget.widgetColor = dropMenuColor;
-    
-
-    
+    if    (widget == dropMenu) widget.widgetColor = dropMenuColor;   
   }
 }
