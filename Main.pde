@@ -15,6 +15,8 @@ PImage programName;
 SearchBar searchBar; // Declare the SearchBar object
 PImage microscopeIcon;
 PImage destinationTableImage;
+PImage airportScreenGIF;
+Animation airportScreenBackground;
 DepartureBoard departureBoard; // Declare the DepartureBoard object
 Calender theCalender;
 //hi
@@ -92,7 +94,7 @@ public void setup() {
   // Initialize the DepartureBoard object
   departureBoard = new DepartureBoard();
   theCalender = new Calender(dateScreen, stdFont);
-  //barChart.sort(barChart.dataList, barChart.frequency);
+  airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
 }
 
 void draw() {
@@ -106,33 +108,39 @@ void draw() {
     image(programName, 225, 140);
   }
   
-  // Draw the widgets
-  for (Widget temp : currentScreen.getWidgets()) {
-    temp.draw(); // Draw each widget
-  }
-  
-  // Check for mouse interaction and update widget appearance
-  currentScreen.overWidgetCheck(currentScreen);
-  if (currentScreen != menuScreen) {
-    currentScreen.drawBackButton(); // Draw the back button only if not on the menu screen
-  }
-  
   // Draw specific elements based on the current screen
   if (currentScreen == graphsScreen) {
     barChart.draw();
   }
   
   if (currentScreen == airportScreen) {
-    // Draw the search bar using the SearchBar object
+    background(airportScreen.screenColor); // Draw the background color of the airport screen
+
+    // Draw the GIF animation at the center of the screen
+    airportScreenBackground.display(0, 0); // Assuming 'animation1' is an instance of the Animation class
+
+    // Update the animation to display the next frame
+    airportScreenBackground.update();
+
+    // Draw other elements specific to the airport screen
     searchBar.draw();
-    
-    // Display the departure board
     departureBoard.draw();
   }
   
   if(currentScreen == dateScreen)
   {
     theCalender.draw();
+  }
+  
+    // Check for mouse interaction and update widget appearance
+  currentScreen.overWidgetCheck(currentScreen);
+  if (currentScreen != menuScreen) {
+    currentScreen.drawBackButton(); // Draw the back button only if not on the menu screen
+  }
+  
+    // Draw the widgets
+  for (Widget temp : currentScreen.getWidgets()) {
+    temp.draw(); // Draw each widget
   }
 }
 
