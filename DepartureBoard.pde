@@ -116,11 +116,31 @@ void draw() {
   
   // Method to format date as MM/DD/YY
   String formatDate(String flightDate) {
-    String[] parts = flightDate.split("/");
-    String month = parts[0];
-    String day = parts[1];
+    // Split the flightDate by space to separate date and time
+    String[] dateAndTime = flightDate.split(" ");
+    
+    // Extract the date part from the split
+    String datePart = dateAndTime[0];
+    
+    // Split the date part by "/"
+    String[] parts = datePart.split("/");
+    
+    // Extract month, day, and year
+    String month = addLeadingZero(parts[0]);
+    String day = addLeadingZero(parts[1]);
     String year = parts[2].substring(2); // Extract last two digits of the year
+    
     return month + "/" + day + "/" + year;
+  }
+  
+  // Method to add leading zero to single digit numbers
+  String addLeadingZero(String input) {
+    // Convert the input to integer
+    int number = Integer.parseInt(input);
+    
+    // Check if the number is less than 10
+    // If yes, add leading zero, else return the number as string
+    return (number < 10) ? "0" + number : String.valueOf(number);
   }
   
   // Method to format time as HH:MM
