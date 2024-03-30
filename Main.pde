@@ -220,7 +220,11 @@ void mouseWheel(MouseEvent event) {
   if (currentScreen == graphsScreen) {
     barChart.scroll(increment);
   } else if (currentScreen == airportScreen) {
-    departureBoard.scroll(increment);
+    if (showArrivals) {
+      arrivalBoard.scroll(increment); // Scroll the arrivals board
+    } else {
+      departureBoard.scroll(increment); // Scroll the departures board
+    }
   }
 }
 
