@@ -12,12 +12,13 @@ class HeatMap
     stateLabel = "";
    stateWidgets = new StateWidget[51];
    setStateWidgets(); // made it its own method to make the constructor look more tidy
+   flightInfo = new Widget(600, 200, 150, 300, "State:\n"+stateLabel + "\n  Avg Lateness:", color(255), stdFont, EVENT_NULL); // should display info on the state being highlighted but its not finished/
+
   }
   
   public void draw()
   {
-    
-   flightInfo = new Widget(600, 200, 150, 300, "State:\n"+stateLabel + "\n  Avg Latenes:", color(255), stdFont, EVENT_NULL); // should display info on the state being highlighted but its not finished/
+   flightInfo.label = "State:\n"+stateLabel + "\n  Avg Lateness:";
    flightInfo.draw();
    for(StateWidget state: stateWidgets)
    {    

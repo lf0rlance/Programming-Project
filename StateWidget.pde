@@ -5,7 +5,7 @@ class StateWidget
   color heatColor;
   String stateCode;
   ArrayList<Flights> flightList;
-  int totalDelay;
+  int averageLateness;
   
   
   StateWidget(int x,int y,PImage image, String stateCode)
@@ -30,17 +30,25 @@ class StateWidget
   
   public void heat() // chaging the 'heat' depending on the lateness. Maybe adjust so it uses average lateness? Color changing needs to be improved.
   {
+    int totalLateness = 0;
+
     int redness = 0;
-    int blueness = 50;
+    //int blueness = 255;
     for(Flights flight:flightList)
     {
-      totalDelay += flight.getDepTime() - flight.getCrsDepTime();
-      redness += totalDelay*20;
-      blueness -= totalDelay*20;
-      
-      
+      if(flight.getArrTime() >= flight.getCrsArrTime()) totalLateness += (flight.getArrTime() - flight.getCrsArrTime()); //<>//
+      else totalLateness -= (flight.getArrTime() - flight.getCrsArrTime());
     }
-    heatColor = color(redness,0,blueness);
+    if(flightList.size() >0)
+    {
+    averageLateness = totalLateness/ flightList.size();
+    System.out.println("Average Lateness: "+ averageLateness);
+    //
+    redness += averageLateness;
+    //blueness -= averageLateness;
+    }
+    heatColor = color(redness,0,0);
+    
   }
   
   public void draw()
@@ -48,7 +56,7 @@ class StateWidget
     if(mouseOver()) tint(#FFFFFF); // highlights the state if the mouse is over(unfinshed: highlights multiple states at a time)
     else tint(heatColor);
     image(image,x,y+20);
-    noTint();
+    noTint(); //prevents other images from being affected by tint()
   }
   
   public boolean mouseOver(){

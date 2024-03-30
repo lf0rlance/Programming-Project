@@ -202,6 +202,8 @@ public void mousePressed() {
   }
 }
 
+
+
 void keyPressed() {
   if (currentScreen == airportScreen) {
     // Delegate to the SearchBar object
@@ -233,6 +235,11 @@ void mouseWheel(MouseEvent event) {
       departureBoard.scroll(increment); // Scroll the departures board
     }
   }
+}
+
+void mouseClicked()
+{
+  
 }
 
 void searchCompleted(String airportCode) {

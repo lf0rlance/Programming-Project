@@ -1,6 +1,6 @@
 class BarChart {
-  String title;
-  int dataType;
+  String title;    // title of the bar chart
+  int dataType;    // data being displayed on the barchart
   int xpos;
   int ypos;
   int startingIndex;  
@@ -30,7 +30,7 @@ class BarChart {
     this.ypos = ypos;
     setData(dataType);
     widgetClicked = false;
-    dropMenu = new Widget(550, 150, 250, 40,title, dropMenuColor, stdFont,SELECT_GRAPH);
+    dropMenu = new Widget(550, 150, 250, 40,title, dropMenuColor, stdFont,SELECT_GRAPH);     // the event of each button is the same as the dataType
     widgetList[0] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Flight Date",color(255),stdFont,FLIGHT_DATE);
     widgetList[1] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Airline Code",color(255),stdFont,AIRLINE_CODE);
     widgetList[2] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Flight Number",color(255),stdFont,FLIGHT_NUMBER);
@@ -49,18 +49,21 @@ class BarChart {
     mousePressed();
      if(widgetClicked)   
      {
+       /* Draws an down arrow if the Drop Menu is activated*/
        line(dropMenu.x + dropMenu.width - 40, dropMenu.y+10,
        dropMenu.x + dropMenu.width - 25, dropMenu.y+30);
        line(dropMenu.x + dropMenu.width - 25, dropMenu.y+30,
        dropMenu.x + dropMenu.width -10, dropMenu.y+10);
        for(int i = 0; i < widgetList.length;i++)
        {
+         // draws each of the widgets in the downmenu
          Widget currentWidget = widgetList[i];
          currentWidget.y=(dropMenu.y + (i+1)*dropMenu.height );
          widgetEvent(currentWidget);
          currentWidget.draw();
        }  
      } else {
+       /* draws a up arrow if drop menu is not activated*/
       line(dropMenu.x + dropMenu.width - 40, dropMenu.y+30,
       dropMenu.x + dropMenu.width - 25, dropMenu.y+10);
       line(dropMenu.x + dropMenu.width - 25, dropMenu.y+10,
@@ -193,11 +196,12 @@ public void sort(ArrayList<String> locations, IntList amountOfFlights) {
   {
     if(mouseX > widget.x && mouseX < widget.x + widget.width && mouseY > widget.y && mouseY < widget.y +widget.height)
     { 
+     // if mouse hovers over the widget, the widget turns grey
       widget.widgetColor = color(200);
       if(mousePressed)
       {
-        dataType = widget.event;
-        
+        dataType = widget.event; //
+  
         switch(dataType) {
           case SELECT_GRAPH:
           if(!widgetClicked)  widgetClicked = true;
@@ -211,7 +215,6 @@ public void sort(ArrayList<String> locations, IntList amountOfFlights) {
             title = "Airline Code";
             dropMenu.label = title;
             widgetClicked = false;
-  
             break;
           case FLIGHT_NUMBER:
             title = "Flight Number";
@@ -222,7 +225,6 @@ public void sort(ArrayList<String> locations, IntList amountOfFlights) {
             title = "Origin";
             dropMenu.label = title;
             widgetClicked = false;
-  
              break;
           case ORIGIN_CITY_NAME:
             title = "Origin City Name";
