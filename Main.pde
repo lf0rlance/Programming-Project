@@ -17,7 +17,7 @@ PImage microscopeIcon;
 PImage destinationTableImage;
 DepartureBoard departureBoard; // Declare the DepartureBoard object
 Calender theCalender;
-//hi
+HeatMap heatmap;
 void settings() {
   size(800, 550);
 }
@@ -93,6 +93,7 @@ public void setup() {
   departureBoard = new DepartureBoard();
   theCalender = new Calender(dateScreen, stdFont);
   //barChart.sort(barChart.dataList, barChart.frequency);
+  heatmap = new HeatMap();
 }
 
 void draw() {
@@ -130,10 +131,17 @@ void draw() {
     departureBoard.draw();
   }
   
+  if(currentScreen == latenessScreen)
+  {
+    heatmap.draw();
+  }
+  
+  
   if(currentScreen == dateScreen)
   {
     theCalender.draw();
   }
+  
 }
 
 public void mousePressed() {
