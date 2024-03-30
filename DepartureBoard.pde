@@ -24,12 +24,12 @@ void draw() {
   int columnWidth = (tableWidth - 250) / 6; // Width of each column reduced by 20 pixels
   int rowHeight = 30;
   int xOffset = (width - tableWidth) / 2 + 150; // Center the table horizontally and shift by 150 pixels
-  int yOffset = 200;
+  int yOffset = 220;
 
   // Draw table headers only if departure board has been updated
   if (departureBoardUpdated) {
     // Draw the "destinationTable" image
-    image(destinationTableImage, xOffset - 20, yOffset - 7); // Draw the image at the position of the date header
+    image(destinationTableImage, xOffset - 20, yOffset - 28); // Draw the image at the position of the date header
     // Draw table headers including "Date" column
     fill(0);
     text("Date", xOffset - 10, yOffset); // Adjust x position for the entire table by -10 pixels
@@ -116,11 +116,31 @@ void draw() {
   
   // Method to format date as MM/DD/YY
   String formatDate(String flightDate) {
-    String[] parts = flightDate.split("/");
-    String month = parts[0];
-    String day = parts[1];
+    // Split the flightDate by space to separate date and time
+    String[] dateAndTime = flightDate.split(" ");
+    
+    // Extract the date part from the split
+    String datePart = dateAndTime[0];
+    
+    // Split the date part by "/"
+    String[] parts = datePart.split("/");
+    
+    // Extract month, day, and year
+    String month = addLeadingZero(parts[0]);
+    String day = addLeadingZero(parts[1]);
     String year = parts[2].substring(2); // Extract last two digits of the year
+    
     return month + "/" + day + "/" + year;
+  }
+  
+  // Method to add leading zero to single digit numbers
+  String addLeadingZero(String input) {
+    // Convert the input to integer
+    int number = Integer.parseInt(input);
+    
+    // Check if the number is less than 10
+    // If yes, add leading zero, else return the number as string
+    return (number < 10) ? "0" + number : String.valueOf(number);
   }
   
   // Method to format time as HH:MM
