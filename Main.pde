@@ -22,7 +22,7 @@ Animation airportScreenBackground;
 DepartureBoard departureBoard; // Declare the DepartureBoard object
 ArrivalsBoard arrivalBoard;
 Calender theCalender;
-//hi
+HeatMap heatmap;
 void settings() {
   size(800, 550);
 }
@@ -100,6 +100,8 @@ public void setup() {
   arrivalBoard = new ArrivalsBoard();
   theCalender = new Calender(dateScreen, stdFont);
   airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
+  
+  heatmap = new HeatMap();
 }
 
 void draw() {
@@ -139,6 +141,11 @@ void draw() {
   if(currentScreen == dateScreen)
   {
     theCalender.draw();
+  }
+  
+  if(currentScreen == latenessScreen)
+  {
+    heatmap.draw();
   }
   
     // Check for mouse interaction and update widget appearance
