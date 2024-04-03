@@ -1,3 +1,5 @@
+//code to establish a national average lateness
+
 class StateWidget
 {
   int x,y;
@@ -28,26 +30,33 @@ class StateWidget
   }
   
   
-  public void heat() // chaging the 'heat' depending on the lateness. Maybe adjust so it uses average lateness? Color changing needs to be improved.
+  public void heat()
   {
+    
     int totalLateness = 0;
 
-    int redness = 0;
-    //int blueness = 255;
+    //int redness = 0;
+
     for(Flights flight:flightList)
     {
-      if(flight.getArrTime() >= flight.getCrsArrTime()) totalLateness += (flight.getArrTime() - flight.getCrsArrTime()); //<>//
-      else totalLateness -= (flight.getArrTime() - flight.getCrsArrTime());
+      if(flight.getArrTime() >= flight.getCrsArrTime()) //<>//
+      {
+        totalLateness += (flight.getArrTime() - flight.getCrsArrTime());
+      }
+      else {totalLateness -= (flight.getArrTime() - flight.getCrsArrTime());}
     }
     if(flightList.size() >0)
     {
     averageLateness = totalLateness/ flightList.size();
     System.out.println("Average Lateness: "+ averageLateness);
     //
-    redness += averageLateness;
-    //blueness -= averageLateness;
+    //redness += averageLateness;
+
     }
-    heatColor = color(redness,0,0);
+    //heatColor = color(redness,0,0);
+    int stateShadeNumberScaled = (averageLateness-76)*255/343-76;
+    //3 step if/elif/else statement to establish colour of state whether state is above average (red), average, below (below)
+    //implemet in draw after
     
   }
   
