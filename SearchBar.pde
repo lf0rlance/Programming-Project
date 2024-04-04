@@ -51,7 +51,6 @@ class SearchBar {
       if (key >= 'A' && key <= 'Z' && !keyPressed) {
         key = Character.toLowerCase(key);
       }
-      // Calculate the width of the text including the new character
       float newTextWidth = textWidth(searchText + key);
       // Check if the new text width exceeds the search bar width
       if (newTextWidth <= searchBarWidth - 75) {
@@ -59,11 +58,8 @@ class SearchBar {
       } else {
         // Save the current search text to previousSearchTexts
         previousSearchTexts.add(searchText);
-        // Calculate the remaining space in the search bar
         float remainingSpace = searchBarWidth - 75 - textWidth(searchText);
-        // Calculate how many characters can fit in the remaining space
         int charactersToFit = (int)(remainingSpace / textWidth(String.valueOf(key)));
-        // Ensure charactersToFit is within bounds
         charactersToFit = Math.min(charactersToFit, searchText.length());
         // Shift the characters to the left and add the new character
         searchText = searchText.substring(searchText.length() - charactersToFit) + key;

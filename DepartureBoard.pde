@@ -1,62 +1,57 @@
 class DepartureBoard {
-  ArrayList<Flights> departures; // Updated variable name to 'departures'
+  ArrayList<Flights> departures; 
   int startIndex; // Index of the first element to display
   int displayCount; // Number of elements to display
-  boolean departureBoardUpdated; // Flag indicating whether departure board has been updated
-  int hoveredFlightIndex = -1; // Index of the flight being hovered over
+  boolean departureBoardUpdated;
+  int hoveredFlightIndex = -1; 
 
   DepartureBoard() {
-    departures = new ArrayList<Flights>(); // Updated variable name to 'departures'
+    departures = new ArrayList<Flights>(); 
     startIndex = 0;
     displayCount = 8;              // amount of lines we want before scroll is needed
-    departureBoardUpdated = false; // Initialize to false
+    departureBoardUpdated = false; 
   }
 
-  void update(ArrayList<Flights> departures) { // Updated variable name to 'departures'
-    this.departures = departures; // Updated variable name to 'departures'
-    departureBoardUpdated = true; // Set the flag to true when updated
+  void update(ArrayList<Flights> departures) {
+    this.departures = departures; 
+    departureBoardUpdated = true; 
   }
 
 void draw() {
   textAlign(LEFT, TOP);
   textSize(20);
   int tableWidth = 800; // Width of the table
-  int columnWidth = (tableWidth - 250) / 6; // Width of each column reduced by 20 pixels
+  int columnWidth = (tableWidth - 250) / 6; // Width of each column
   int rowHeight = 30;
-  int xOffset = (width - tableWidth) / 2 + 150; // Center the table horizontally and shift by 150 pixels
+  int xOffset = (width - tableWidth) / 2 + 150; 
   int yOffset = 220;
 
-  // Draw table headers only if departure board has been updated
   if (departureBoardUpdated) {
-    // Draw the "destinationTable" image
-    image(destinationTableImage, xOffset - 20, yOffset - 28); // Draw the image at the position of the date header
-    // Draw table headers including "Date" column
+    image(destinationTableImage, xOffset - 20, yOffset - 28); 
     fill(0);
-    text("Date", xOffset - 10, yOffset); // Adjust x position for the entire table by -10 pixels
+    text("Date", xOffset - 10, yOffset); 
     text("Time", xOffset + columnWidth, yOffset);
-    // Adjust xOffset specifically for the "Destination" header
-    int destinationXOffset = xOffset + 2 * columnWidth - 5; // Shift "Destination" header to the left by 5 pixels
-    text("Destination", destinationXOffset, yOffset); // Draw "Destination" header
+    int destinationXOffset = xOffset + 2 * columnWidth - 5;
+    text("Destination", destinationXOffset, yOffset); 
     text("Flight No.", xOffset + 3 * columnWidth, yOffset);
     text("Airline", xOffset + 4 * columnWidth, yOffset);
     text("Status", xOffset + 5 * columnWidth, yOffset);
   }
 
   // Draw table rows
-  yOffset += rowHeight; // Move down one row for the first data row
-  boolean mouseOverDelayedFlight = false; // Flag to track if the mouse is over any delayed flight
+  yOffset += rowHeight; 
+  boolean mouseOverDelayedFlight = false; 
   for (int i = startIndex; i < min(startIndex + displayCount, departures.size()); i++) {
-    Flights flight = departures.get(i); // Updated variable name to 'departures'
-    fill(0); // Reset fill color to black for other columns
+    Flights flight = departures.get(i);
+    fill(0);
     String flightDate = formatDate(flight.getFlightDate()); // Format the flight date
-    text(flightDate, xOffset - 10, yOffset); // Date, adjust x position for the entire table by -10 pixels
+    text(flightDate, xOffset - 10, yOffset);
     
     // Format the time
     String depTime = formatTime(flight.getDepTime());
     text(depTime, xOffset + columnWidth, yOffset); // Departure Time
     
-    // Adjust xOffset specifically for the "Destination" column
-    int destinationXOffset = xOffset + 2 * columnWidth - 5; // Shift "Destination" column to the left by 5 pixels
+    int destinationXOffset = xOffset + 2 * columnWidth - 5;
     text(flight.getDestination(), destinationXOffset, yOffset); // Destination
     
     text(flight.getFlightNumber(), xOffset + 3 * columnWidth, yOffset); // Flight Number
@@ -69,43 +64,40 @@ void draw() {
     String status;
     if ((flight.getCancelled() == 1) || ((flight.getDiverted() == 1) && flight.getCancelled() == 1)) {
       status = "Cancelled";
-      fill(255, 0, 0); // Red font for Cancelled status
+      fill(255, 0, 0); // Red font for cancelled status
     } else if (flight.getDiverted() == 1) {
       status = "Diverted";
-      fill(255, 255, 0); // Yellow font for Diverted status
-    } else if (delay > 10) {     // only declaring delayed if the delay is above 10 mins
+      fill(255, 255, 0); // Yellow font for diverted status
+    } else if (delay > 10) { // only declaring delayed if the delay is above 10 mins
       status = "Delayed";
       fill(255, 165, 0); // Orange font for Delayed status
-      // Check if mouse is over the "Status" column and the row of the delayed flight
       if (mouseX >= xOffset + 5 * columnWidth && mouseX <= xOffset + 6 * columnWidth &&
           mouseY >= yOffset && mouseY <= yOffset + rowHeight) {
-        hoveredFlightIndex = i; // Update hovered flight index
-        mouseOverDelayedFlight = true; // Set flag to true
+        hoveredFlightIndex = i; 
+        mouseOverDelayedFlight = true;
       }
     } else {
-      status = "On Time"; // Default status
+      status = "On Time";
       fill(0, 255, 0); // Green font for On Time status
     }
-    // Adjust xOffset specifically for the data values under the "Status" column
-    int statusXOffset = xOffset + 5 * columnWidth - 7; // Move the data values to the left by 7 pixels
-    text(status, statusXOffset, yOffset); // Status
+    int statusXOffset = xOffset + 5 * columnWidth - 7; 
+    text(status, statusXOffset, yOffset); 
     yOffset += rowHeight; // Move down to the next row
   }
 
-  // Reset hoveredFlightIndex if mouse is not over any delayed flight
   if (!mouseOverDelayedFlight) {
     hoveredFlightIndex = -1;
   }
 
-  // Display delay box if hovering over a delayed flight
+  // Display delay box
   if (hoveredFlightIndex != -1) {
     Flights hoveredFlight = departures.get(hoveredFlightIndex);
     int delay = hoveredFlight.getDepTime() - hoveredFlight.getCrsDepTime();
     if (delay > 0) {
-      fill(255); // White fill color for the box
-      rect(mouseX + 15, mouseY + 15, 120, 30, 5); // Display a box at mouse position with additional 15 pixels
-      fill(0); // Black fill color for text
-      text("Delay: " + delay + " mins", mouseX + 20, mouseY + 20, 120, 30); // Display delay time in the box with additional 15 pixels
+      fill(255);
+      rect(mouseX + 15, mouseY + 15, 120, 30, 5); 
+      fill(0); 
+      text("Delay: " + delay + " mins", mouseX + 20, mouseY + 20, 120, 30); 
     }
   }
 
@@ -116,16 +108,12 @@ void draw() {
   
   // Method to format date as MM/DD/YY
   String formatDate(String flightDate) {
-    // Split the flightDate by space to separate date and time
     String[] dateAndTime = flightDate.split(" ");
-    
-    // Extract the date part from the split
     String datePart = dateAndTime[0];
     
     // Split the date part by "/"
     String[] parts = datePart.split("/");
     
-    // Extract month, day, and year
     String month = addLeadingZero(parts[0]);
     String day = addLeadingZero(parts[1]);
     String year = parts[2].substring(2); // Extract last two digits of the year
@@ -133,24 +121,18 @@ void draw() {
     return month + "/" + day + "/" + year;
   }
   
-  // Method to add leading zero to single digit numbers
+  // Method to add zeros
   String addLeadingZero(String input) {
-    // Convert the input to integer
     int number = Integer.parseInt(input);
     
-    // Check if the number is less than 10
-    // If yes, add leading zero, else return the number as string
     return (number < 10) ? "0" + number : String.valueOf(number);
   }
   
-  // Method to format time as HH:MM
   String formatTime(int time) {
     String timeStr = String.valueOf(time);
-    // Add leading zero if time has only three digits
     if (timeStr.length() == 3) {
       timeStr = "0" + timeStr;
     }
-    // Replace single-digit number with "-"
     if (timeStr.length() == 1) {
       timeStr = "-";
     }

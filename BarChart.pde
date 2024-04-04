@@ -71,7 +71,6 @@ class BarChart {
      }
   }
 
-  //////work in progress
 public void sort(ArrayList<String> locations, IntList amountOfFlights) {
     // Check if both lists have the same size
    if (locations.size() != amountOfFlights.size()) {

@@ -1,0 +1,10 @@
+REFERENCES:
+Scroll Tool Tip:
+https://processing.org/reference/millis_.html
+
+Animation:
+https://processing.org/examples/animatedsprite.html
+
+General Sources:
+https://youtu.be/4JzDttgdILQ?si=nIpWFxSfYZdbMwHM
+PROCESSING by Casey Reas | 24 February 2015	

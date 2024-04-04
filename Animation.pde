@@ -14,11 +14,15 @@ class Animation {
 
     // Load all frames of the animation from the specified folder
     for (int i = 0; i < frameCount; i++) {
-      String filename = folderName + "/" + imagePrefix + "(" + (i + 1) + ").jpg"; // Assuming the image filenames are in the format "Layer (1).jpg", "Layer (2).jpg", etc.
-      frames[i] = loadImage(filename);
+      if (folderName == "airportAnimation") {
+        String filename = folderName + "/" + imagePrefix + "(" + (i + 1) + ").jpg"; // Assuming jpg
+        frames[i] = loadImage(filename);
+      } else {
+        String filename = folderName + "/" + imagePrefix + "(" + (i + 1) + ").png"; // Assuming png
+        frames[i] = loadImage(filename);
+      }
     }
-
-    currentFrameIndex = 0; // Initialize the current frame index
+    currentFrameIndex = 0;
   }
 
   void display(float x, float y) {
@@ -27,16 +31,22 @@ class Animation {
   }
 
   void update() {
-    // Increment the frame counter
-    frameCounter++;
+    // Decrement the frame counter
+    frameCounter--;
 
     // Check if it's time to update the frame
-    if (frameCounter >= frameDelay) {
-      // Reset the frame counter
-      frameCounter = 0;
-      
-      // Increment the frame index to display the next frame
-      currentFrameIndex = (currentFrameIndex + 1) % frameCount;
-    }
+    if (frameCounter <= 0) {
+        // Reset the frame counter
+        frameCounter = frameDelay;
+
+        // Decrement the frame index to display the previous frame
+        currentFrameIndex--;
+        
+        // Ensure the frame index stays within bounds
+        if (currentFrameIndex < 0) {
+            currentFrameIndex = frameCount - 1;
+        }
+    }  
   }
 }
+  
