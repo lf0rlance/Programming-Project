@@ -7,7 +7,6 @@ final int AIRPORT_LOCATOR_BUTTON = -1;
 final int DATE_BUTTON = -2;
 final int LATENESS_BUTTON = -3;
 final int GRAPHS_BUTTON = -4;
-int numAirplanes = 30; 
 ArrayList<String> originData;
 IntList originDataCount;
 PImage cloudImage;
@@ -16,8 +15,6 @@ PImage microscopeIcon;
 PImage destinationTableImage;
 PImage arrivalBoardImage;
 PImage airportScreenGIF;
-PImage airplaneImage;
-ArrayList<Airplane> airplanes;
 Boolean showArrivals = false;
 BarChart barChart;
 SearchBar searchBar; // Declare the SearchBar object
@@ -105,14 +102,6 @@ public void setup() {
   airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
   
   heatmap = new HeatMap();
-  airplanes = new ArrayList<Airplane>(); // Initialize airplanes ArrayList
-  airplaneImage = loadImage("Airplane.png");
-  
-  for (int i = 0; i < numAirplanes; i++) {
-    PVector start = heatmap.getRandomStatePosition();
-    PVector target = heatmap.getRandomStatePosition();
-    airplanes.add(new Airplane(start.x, start.y, target.x, target.y));
-  }
 }
 
 void draw() {
@@ -157,29 +146,6 @@ void draw() {
   if(currentScreen == latenessScreen)
   {
     heatmap.draw();
-    for (int i = airplanes.size() - 1; i >= 0; i--) {
-    Airplane airplane = airplanes.get(i);
-    airplane.update();
-    airplane.draw();
-    // If airplane reaches its target, remove it from the ArrayList
-    if (airplane.reachedTarget()) {
-      airplanes.remove(i);
-      PVector start = heatmap.getRandomStatePosition();
-      PVector target = heatmap.getRandomStatePosition();
-      airplanes.add(new Airplane(start.x, start.y, target.x, target.y));
-    }
-  }
-  
-  if (airplanes.size() < numAirplanes) {
-    // Add new airplanes until there are 10
-    for (int i = airplanes.size(); i < numAirplanes; i++) {
-      float startX = random(width);
-      float startY = random(height);
-      float targetX = random(width);
-      float targetY = random(height);
-      airplanes.add(new Airplane(startX, startY, targetX, targetY));
-    }
-  }
   }
   
     // Check for mouse interaction and update widget appearance
