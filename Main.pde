@@ -162,6 +162,7 @@ void draw() {
 
 public void mousePressed() {
   if (currentScreen == airportScreen) {
+    searchBar.mousePressed();
     // Start typing when the mouse is clicked inside the search bar
     if (mouseX > 150 && mouseX < 450 && mouseY > 100 && mouseY < 130) {
       searchBar.startTyping(); // Delegate to the SearchBar object
