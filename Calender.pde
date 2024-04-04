@@ -6,21 +6,21 @@ class Calender
   {
     this.theFont = theFont;
     this.currentScreen = currentScreen;
-    for(int a = 120; a < 680; a += 80)  //index is used to get coorordinates
+    for(int a = 120; a < 687; a += 81)  //index is used to get coorordinates
     {
       String weekDay = "";
       if(a == 120) weekDay = "Sun";
-      else if(a == 200) weekDay = "Mon";
-      else if(a == 280) weekDay = "Tue";
-      else if(a == 360) weekDay = "Wed";
-      else if(a == 440) weekDay = "Thu";
-      else if(a == 520) weekDay = "Fri";
-      else if(a == 600) weekDay = "Sat";
+      else if(a == 201) weekDay = "Mon";
+      else if(a == 282) weekDay = "Tue";
+      else if(a == 363) weekDay = "Wed";
+      else if(a == 444) weekDay = "Thu";
+      else if(a == 525) weekDay = "Fri";
+      else if(a == 606) weekDay = "Sat";
       this.currentScreen.add(new Widget(a, 90, 80, 35, weekDay, color(168,213,229), theFont, EVENT_NULL));
     }
-    for(int i = 125; i < 425; i += 50)  //y coorordinate index
+    for(int i = 126; i < 432; i += 51)  //y coorordinate index
     {
-      for(int j = 120; j < 680; j+= 80)  //x coorordinate index
+      for(int j = 120; j < 687; j+= 81)  //x coorordinate index
       {
         String date = "";
         if((((((i - 125) / 50) * 7) + ((j - 120) / 80)) - 5) <= 0 || (((((i - 125) / 50) * 7) + ((j - 120) / 80)) - 5) > 31) //ignores empty slots in calender
@@ -32,7 +32,7 @@ class Calender
         else 
         {
           date += (((((i - 125) / 50) * 7) + ((j - 120) / 80)) - 5); //converts y and x indexs to the calender date
-          Widget tempWidget = new Widget(j, i, 80, 50, date, color(255), theFont,  (((((i - 125) / 50) * 7) + ((j - 120) / 80)) - 5));
+          Widget tempWidget = new Widget(j, i, 80, 50, date, color(255), theFont,  (((((i - 125) / 50) * 7) + ((j - 120) / 80)) - 5), color(168, 213, 229), true);
           this.currentScreen.add(tempWidget);
         }
       }
@@ -60,7 +60,7 @@ class Calender
         int averageFlightDistance = 0;
         int i = 0;
         boolean quickDataExtract = true;
-        while(quickDataExtract) //retriving data (made it faster but its still slow at bigger dates)
+        while(quickDataExtract && i != 563737) //retriving data
         {
           int numTempDate;
           char tempDate = data[i].getFlightDate().charAt(2);
