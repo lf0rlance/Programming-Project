@@ -232,7 +232,7 @@ void mouseWheel(MouseEvent event) {
   if (currentScreen == graphsScreen) {
     barChart.scroll(increment);
   } else if (currentScreen == airportScreen) {
-    scrolledWithin10Seconds = true; // Update scrolledWithin10Seconds whenever scrolling occurs
+    scrolledWithinSeconds = true; // Update scrolledWithin10Seconds whenever scrolling occurs
     if (showArrivals) {
       arrivalBoard.scroll(increment); // Scroll the arrivals board
     } else {
