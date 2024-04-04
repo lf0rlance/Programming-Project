@@ -87,10 +87,7 @@ class SearchBar {
   }
 
   void keyPressed() {
-    if (key != ENTER && key != BACKSPACE && key != DELETE && key != TAB && key != ESC) {
-      if (key >= 'A' && key <= 'Z' && !keyPressed) {
-        key = Character.toLowerCase(key);
-      }
+    if (key != ENTER && key != BACKSPACE && key != DELETE && key != TAB && key != ESC && keyCode != 16 && keyCode != 20) { // keyCode 16 and 20 is shift and caps lock key
       // Calculate the width of the text including the new character
       float newTextWidth = textWidth(searchText + key);
       // Check if the new text width exceeds the search bar width
