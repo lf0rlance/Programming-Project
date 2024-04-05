@@ -1,4 +1,4 @@
-import processing.sound.*;
+//import processing.sound.*;
 
 // main class
 Flights allFlightData[];
@@ -113,7 +113,7 @@ public void setup() {
   theCalender = new Calender(dateScreen, stdFont);
   airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
   scrollAnimation = new Animation("scrollAnimation", "Layer ", 65, 2);
-  heatmap = new HeatMap();
+  heatmap = new HeatMap(100,70);
   
 }
 
@@ -237,7 +237,7 @@ void keyPressed() {
     // Check if Enter key is pressed and the search is completed
     if (key == ENTER) {
       searchCompleted(searchBar.getSearchText()); // Assuming getSearchText() returns the airport code
-      audio3.play();
+     audio3.play();
       typing = false;
     }
   }
@@ -267,6 +267,11 @@ void mouseWheel(MouseEvent event) {
 
 void mouseClicked()
 {
+  if(currentScreen == graphsScreen)
+  {
+    barChart.activateWidgets();
+    barChart.displayWidgets();
+  }
   
 }
 
