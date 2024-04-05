@@ -128,6 +128,7 @@ class SearchBar {
     // Placeholder for the action associated with pressing Enter
     println("Entered suggestion: " + searchText);
     // Add your desired action here, such as submitting the search or performing any other task associated with pressing Enter
+    
   }
   
   

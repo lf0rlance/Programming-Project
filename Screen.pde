@@ -2,7 +2,7 @@ class Screen {
   ArrayList<Widget> screenWidgets;
   color screenColor;
   int cloudX = 0; // Initial x-coordinate of the cloud
-  
+ 
   Screen(color screenColor) {
     screenWidgets = new ArrayList<>();
     this.screenColor = screenColor;
@@ -74,9 +74,12 @@ class Screen {
     float arrowX3 = backButtonX + backButtonSize / 2 - arrowSize / 2 + arrowOffset;
     float arrowY3 = backButtonY + backButtonSize / 2;
     triangle(arrowX1 - 3, arrowY1, arrowX2 - 3, arrowY2, arrowX3 - 3, arrowY3);
+    
   
     // Check if the mouse clicks on the back button
     if (mouseOverBackButton && mousePressed) {
+      audio1.play();
+      audio2.play();
       // Switch to the main screen
       currentScreen = menuScreen;
     }
