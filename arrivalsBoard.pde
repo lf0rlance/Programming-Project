@@ -73,7 +73,7 @@ class ArrivalsBoard {
       status = "Delayed";
       fill(255, 165, 0); // Orange font for Delayed status
       // Check if mouse is over the "Status" column and the row of the delayed flight
-      if (mouseX >= xOffset + 5 * columnWidth && mouseX <= xOffset + 6 * columnWidth &&
+      if (mouseX >= (xOffset + 5 * columnWidth) - 20 && mouseX <= (xOffset + 6 * columnWidth) - 20 &&
           mouseY >= yOffset && mouseY <= yOffset + rowHeight) {
         hoveredFlightIndex = i; 
         mouseOverDelayedFlight = true;

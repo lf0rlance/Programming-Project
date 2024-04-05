@@ -71,7 +71,7 @@ void draw() {
     } else if (delay > 10) { // only declaring delayed if the delay is above 10 mins
       status = "Delayed";
       fill(255, 165, 0); // Orange font for Delayed status
-      if (mouseX >= xOffset + 5 * columnWidth && mouseX <= xOffset + 6 * columnWidth &&
+      if (mouseX >= (xOffset + 5 * columnWidth) + 20 && mouseX <= (xOffset + 6 * columnWidth) - 20 &&
           mouseY >= yOffset && mouseY <= yOffset + rowHeight) {
         hoveredFlightIndex = i; 
         mouseOverDelayedFlight = true;
