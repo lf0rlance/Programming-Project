@@ -18,6 +18,7 @@ PImage airportScreenGIF;
 boolean scrolledWithinSeconds = true; // Variable to track scrolling within our specified seconds
 int searchCompletionTime = 0; // Time when the search is completed
 Boolean showArrivals = false;
+Boolean typing = false;
 BarChart barChart;
 SearchBar searchBar; // Declare the SearchBar object
 Animation airportScreenBackground;
@@ -132,6 +133,7 @@ void draw() {
 
     // Draw other elements only airport screen
     searchBar.draw();
+
     if (showArrivals) {
         arrivalBoard.draw(); 
     } else {
@@ -143,6 +145,18 @@ void draw() {
         scrollAnimation.update();
       }
     }
+
+   
+     if (showArrivals) {
+        arrivalBoard.draw(); // Draw the arrivals board only when showArrivals is true
+      } else {
+        departureBoard.draw(); // Draw the departure board when showArrivals is false
+      }
+     
+     if(typing){
+       searchBar.draw();
+     }
+
   }
   
   if(currentScreen == dateScreen)
@@ -212,10 +226,12 @@ public void mousePressed() {
 void keyPressed() {
   if (currentScreen == airportScreen) {
     searchBar.keyPressed();
+    typing = true;
     
     // Check if Enter key is pressed and the search is completed
     if (key == ENTER) {
       searchCompleted(searchBar.getSearchText()); // Assuming getSearchText() returns the airport code
+      typing = false;
     }
   }
 }
@@ -223,6 +239,7 @@ void keyPressed() {
 void keyReleased() {
   if (currentScreen == airportScreen && key == ENTER) {
     searchBar.stopTyping();
+    typing = false;
   }
 }
 
