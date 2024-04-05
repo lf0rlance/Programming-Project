@@ -1,7 +1,10 @@
+import processing.sound.*;
+
 // main class
 Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen;
 PFont stdFont;
+SoundFile audio1, audio2, audio3;
 final int EVENT_NULL = 0;
 final int AIRPORT_LOCATOR_BUTTON = -1;
 final int DATE_BUTTON = -2;
@@ -18,6 +21,7 @@ PImage airportScreenGIF;
 boolean scrolledWithinSeconds = true; // Variable to track scrolling within our specified seconds
 int searchCompletionTime = 0; // Time when the search is completed
 Boolean showArrivals = false;
+Boolean typing = false;
 BarChart barChart;
 SearchBar searchBar; // Declare the SearchBar object
 Animation airportScreenBackground;
@@ -26,9 +30,14 @@ DepartureBoard departureBoard; // Declare the DepartureBoard object
 ArrivalsBoard arrivalBoard;
 Calender theCalender;
 HeatMap heatmap;
-void settings() {
+
+ void settings() {
   size(800, 550);
-}
+  audio1 = new SoundFile(this, "backButtonClicked.mp3");
+  audio2 = new SoundFile(this, "menuScreenBackgroundMusic.mp3");
+  audio3 = new SoundFile(this, "searchCompleted.mp3");
+  audio2.play();
+ }
 
 public void setup() { 
   
@@ -103,6 +112,7 @@ public void setup() {
   airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
   scrollAnimation = new Animation("scrollAnimation", "Layer ", 65, 2);
   heatmap = new HeatMap();
+  
 }
 
 void draw() {
@@ -114,6 +124,7 @@ void draw() {
     image(cloudImage, currentScreen.getCloudX(), 0);
     image(cloudImage, currentScreen.getCloudX() - width, 0); 
     image(programName, 225, 140);
+    
   }
   
   // Draws a specific elements based on the current screen
@@ -132,6 +143,7 @@ void draw() {
 
     // Draw other elements only airport screen
     searchBar.draw();
+
     if (showArrivals) {
         arrivalBoard.draw(); 
     } else {
@@ -143,6 +155,11 @@ void draw() {
         scrollAnimation.update();
       }
     }
+     
+     if(typing){
+       searchBar.draw();
+     }
+
   }
   
   if(currentScreen == dateScreen)
@@ -185,6 +202,7 @@ public void mousePressed() {
     }
   }
   
+  
   if (currentScreen == dateScreen) {
     currentScreen = theCalender.mousePressed(currentScreen, allFlightData);
   } else {
@@ -207,15 +225,22 @@ public void mousePressed() {
       }
     }
   }
+  
+  if (currentScreen != menuScreen){
+    audio2.pause();
+  }
 }
 
 void keyPressed() {
   if (currentScreen == airportScreen) {
     searchBar.keyPressed();
+    typing = true;
     
     // Check if Enter key is pressed and the search is completed
     if (key == ENTER) {
       searchCompleted(searchBar.getSearchText()); // Assuming getSearchText() returns the airport code
+      audio3.play();
+      typing = false;
     }
   }
 }
@@ -223,6 +248,7 @@ void keyPressed() {
 void keyReleased() {
   if (currentScreen == airportScreen && key == ENTER) {
     searchBar.stopTyping();
+    typing = false;
   }
 }
 
