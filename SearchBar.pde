@@ -45,34 +45,31 @@ class SearchBar {
   }
 
  void mousePressed() {
-   for(int i = 0; i < widgetDropdown.size(); i++)
-     {
-       Widget temp = widgetDropdown.get(i);
-       if(temp.getEventString(mouseX, mouseY) != null)
-       {
-         searchText = temp.getEventString(mouseX, mouseY);
-       }
-     }
-    if (typing) {
-      // Check if the mouse is over the suggestion list
-      if (mouseOverSuggestionList()) {
-        // Determine the index of the clicked suggestion
-        int index = (mouseY - (searchBarY + 40)) / 32; // Height of each suggestion item is 32
-        // Check if the index is valid
-        if (index >= 0 && index < suggestionList.size()) {
-          // Set the searchText to the selected suggestion
-          searchText = suggestionList.get(index);
-          // Stop typing
-          stopTyping();
-          // Perform the action associated with pressing Enter
-          performEnterAction();
+    for (int i = 0; i < widgetDropdown.size(); i++) {
+        Widget temp = widgetDropdown.get(i);
+        if (temp.getEventString(mouseX, mouseY) != null) {
+            searchText = temp.getEventString(mouseX, mouseY);
+            stopTyping();
+            return; // Exit the method after setting searchText
         }
-      } else if (searchText.isEmpty()) {
-        // Clear suggestion list only if search text is empty and clicked outside the search bar
-        stopTyping();
-      }
-   }
- }
+    }
+    if (typing) {
+        // Check if the mouse is over the suggestion list
+        if (mouseOverSuggestionList()) {
+            // Determine the index of the clicked suggestion
+            int index = (mouseY - (searchBarY + 40)) / 32; // Height of each suggestion item is 32
+            // Check if the index is valid
+            if (index >= 0 && index < suggestionList.size()) {
+                // Set the searchText to the selected suggestion
+                searchText = suggestionList.get(index);
+                // Perform the action associated with pressing Enter
+                performEnterAction();
+            }
+        } else if (searchText.isEmpty()) {
+            stopTyping();
+        }
+    }
+}
  
  boolean mouseOverSuggestionList() {
         float suggestionX = searchBarX;
@@ -102,7 +99,7 @@ class SearchBar {
       // Check if the new text width exceeds the search bar width
       if (newTextWidth <= searchBarWidth - 75) {
         searchText += key;
-        updateSuggestion();
+        updateSuggestion(); // Update suggestion list when search text changes
       } else {
         // Save the current search text to previousSearchTexts
         previousSearchTexts.add(searchText);
@@ -115,11 +112,11 @@ class SearchBar {
     } else if (typing && key == BACKSPACE) {
       if (searchText.length() > 0) {
         searchText = searchText.substring(0, searchText.length() - 1);
-        updateSuggestion();
+        updateSuggestion(); // Update suggestion list when search text changes
       } else if (!previousSearchTexts.isEmpty()) {
         // If searchText is empty, restore the previous search text
         searchText = previousSearchTexts.remove(previousSearchTexts.size() - 1);
-        updateSuggestion();
+        updateSuggestion(); // Update suggestion list when search text changes
       }
     }
   }
@@ -127,15 +124,12 @@ class SearchBar {
   void performEnterAction() {
     // Placeholder for the action associated with pressing Enter
     println("Entered suggestion: " + searchText);
-    // Add your desired action here, such as submitting the search or performing any other task associated with pressing Enter
   }
   
-  
- void updateSuggestion() {
+  void updateSuggestion() {
     suggestionList.clear();
+    widgetDropdown.clear(); // Clear the widgetDropdown list before adding new suggestions
     ArrayList<String> addedSuggestions = new ArrayList<>(); // List to keep track of added suggestions
-
-    // Fetch suggestions based on the current searchText
     int count = 0; // Counter to track the number of suggestions added
     for (Flights flight : allFlightData) {
         // Check if the destination starts with the searchText and is not already in the addedSuggestions list
@@ -143,16 +137,17 @@ class SearchBar {
             // Add matching destinations to the suggestion list
             suggestionList.add(flight.getDestination());
             addedSuggestions.add(flight.getDestination()); // Add the suggestion to the addedSuggestions list
-            widgetDropdown.add(new Widget(searchBarX, searchBarY + 40, searchBarWidth, (int) suggestionList.size() * 32, "", color(0), 
+            widgetDropdown.add(new Widget(searchBarX, searchBarY + 40 + count * 32, searchBarWidth, 32, "", color(0), 
             loadFont("AgencyFB-Bold-30.vlw"), suggestionList.get(count).toString())); 
-            count++; // Increment the counter
-            // Break the loop if three suggestions have been added
+            count++;
+            // Break the loop if five suggestions have been added
             if (count == 5) {
                 break;
             }
         }
-    }
-}
+     }
+  }
+
     void displaySuggestions() {
         // Placeholder for displaying suggestion list
         // Draw the suggestion list below the search bar
