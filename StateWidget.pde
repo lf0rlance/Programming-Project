@@ -1,13 +1,11 @@
-//code to establish a national average lateness
-
-class StateWidget
+class StateWidget //<>//
 {
   int x,y;
   PImage image;
   color heatColor;
   String stateCode;
   ArrayList<Flights> flightList;
-  int averageLateness;
+    int averageLateness;
   
   
   StateWidget(int x,int y,PImage image, String stateCode)
@@ -30,33 +28,26 @@ class StateWidget
   }
   
   
-  public void heat()
+  public void heat() // chaging the 'heat' depending on the lateness. Maybe adjust so it uses average lateness? Color changing needs to be improved.
   {
-    
     int totalLateness = 0;
 
-    //int redness = 0;
-
+    float redness = 0;
+    //int blueness = 255;
     for(Flights flight:flightList)
     {
-      if(flight.getArrTime() >= flight.getCrsArrTime()) //<>//
-      {
-        totalLateness += (flight.getArrTime() - flight.getCrsArrTime());
-      }
-      else {totalLateness -= (flight.getArrTime() - flight.getCrsArrTime());}
+      if(flight.getArrTime() >= flight.getCrsArrTime()) totalLateness += (flight.getArrTime() - flight.getCrsArrTime()); //<>//
+      else totalLateness -= (flight.getArrTime() - flight.getCrsArrTime());
     }
-    if(flightList.size() >0)
+        if(flightList.size() >0)
     {
     averageLateness = totalLateness/ flightList.size();
     System.out.println("Average Lateness: "+ averageLateness);
     //
-    //redness += averageLateness;
-
+    redness += averageLateness;
+    redness = redness/320.0;
     }
-    //heatColor = color(redness,0,0);
-    int stateShadeNumberScaled = (averageLateness-76)*255/343-76;
-    //3 step if/elif/else statement to establish colour of state whether state is above average (red), average, below (below)
-    //implemet in draw after
+    heatColor = color(redness*225,0,260-(redness*225));
     
   }
   
@@ -65,7 +56,7 @@ class StateWidget
     if(mouseOver()) tint(#FFFFFF); // highlights the state if the mouse is over(unfinshed: highlights multiple states at a time)
     else tint(heatColor);
     image(image,x,y+20);
-    noTint(); //prevents other images from being affected by tint()
+        noTint(); //prevents other images from being affected by tint()
   }
   
   public boolean mouseOver(){
