@@ -1,10 +1,10 @@
-import processing.sound.*;
-//jhvvubvu
+//import processing.sound.*;
+
 // main class
 Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen;
 PFont stdFont;
-SoundFile audio1, audio2, audio3;
+SoundFile audio1, audio2, audio3, audio4;
 final int EVENT_NULL = 0;
 final int AIRPORT_LOCATOR_BUTTON = -1;
 final int DATE_BUTTON = -2;
@@ -36,7 +36,9 @@ HeatMap heatmap;
   audio1 = new SoundFile(this, "backButtonClicked.mp3");
   audio2 = new SoundFile(this, "menuScreenBackgroundMusic.mp3");
   audio3 = new SoundFile(this, "searchCompleted.mp3");
+  audio4 = new SoundFile(this, "huh cat.mp3");
   audio2.play();
+  audio2.amp(0.3);
  }
 
 public void setup() { 
@@ -111,7 +113,7 @@ public void setup() {
   theCalender = new Calender(dateScreen, stdFont);
   airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
   scrollAnimation = new Animation("scrollAnimation", "Layer ", 65, 2);
-  heatmap = new HeatMap();
+  heatmap = new HeatMap(100,70);
   
 }
 
@@ -225,10 +227,6 @@ public void mousePressed() {
       }
     }
   }
-  
-  if (currentScreen != menuScreen){
-    audio2.pause();
-  }
 }
 
 void keyPressed() {
@@ -239,7 +237,7 @@ void keyPressed() {
     // Check if Enter key is pressed and the search is completed
     if (key == ENTER) {
       searchCompleted(searchBar.getSearchText()); // Assuming getSearchText() returns the airport code
-      audio3.play();
+     audio3.play();
       typing = false;
     }
   }
@@ -269,6 +267,11 @@ void mouseWheel(MouseEvent event) {
 
 void mouseClicked()
 {
+  if(currentScreen == graphsScreen)
+  {
+    barChart.activateWidgets();
+    barChart.displayWidgets();
+  }
   
 }
 
@@ -278,6 +281,7 @@ void searchCompleted(String airportCode) {
   updateDepartureAndArrivalBoard(airportCode);
   searchCompletionTime = millis(); // Record the time when search is completed
   scrolledWithinSeconds = false; // Reset the scrolled flag
+  
 }
 
 void updateDepartureAndArrivalBoard(String airportCode) {
@@ -290,13 +294,17 @@ void updateDepartureAndArrivalBoard(String airportCode) {
     if (origin.equals(lowercaseAirportCode)) { 
       departures.add(flight); 
     }
-    
+
     String destination = flight.getDestination().toLowerCase(); // Add condition for arrivals
     if (destination.equals(lowercaseAirportCode)) { 
       arrivals.add(flight); 
     }
   }
+  if (departures.isEmpty() && arrivals.isEmpty()) {
+    audio4.play();
+  }
   
   departureBoard.update(departures); 
   arrivalBoard.update(arrivals);
+  
 }

@@ -28,45 +28,61 @@ class StateWidget //<>//
   }
   
   
+  
   public void heat() // chaging the 'heat' depending on the lateness. Maybe adjust so it uses average lateness? Color changing needs to be improved.
   {
     int totalLateness = 0;
 
-    float redness = 0;
+    int redness = 0;
     //int blueness = 255;
     for(Flights flight:flightList)
-    {
-      if(flight.getArrTime() >= flight.getCrsArrTime()) totalLateness += (flight.getArrTime() - flight.getCrsArrTime()); //<>//
+    { 
+      //New improved way of calculating lateness
+      //int arrival = (flight.getArrTime()/100) + (flight.getArrTime()%100);
+      //int actualArrival = (flight.getCrsArrTime()/100) + (flight.getCrsArrTime()%100);
+      
+      // if(arrival >= actualArrival) totalLateness += (arrival - actualArrival);
+      //else totalLateness -= (arrival - actualArrival);
+      
+      if(flight.getArrTime() >= flight.getCrsArrTime()) totalLateness += (flight.getArrTime() - flight.getCrsArrTime());
       else totalLateness -= (flight.getArrTime() - flight.getCrsArrTime());
     }
-        if(flightList.size() >0)
+    if(flightList.size() >0)
     {
     averageLateness = totalLateness/ flightList.size();
     System.out.println("Average Lateness: "+ averageLateness);
     //
     redness += averageLateness;
-    redness = redness/320.0;
+    //blueness -= averageLateness;
     }
-    heatColor = color(redness*225,0,260-(redness*225));
+    heatColor = color(redness,0,0);
     
-  }
+  } //<>//
   
   public void draw()
   {
-    if(mouseOver()) tint(#FFFFFF); // highlights the state if the mouse is over(unfinshed: highlights multiple states at a time)
-    else tint(heatColor);
-    image(image,x,y+20);
-        noTint(); //prevents other images from being affected by tint()
+    if(mouseOver())
+    {
+      tint(#FFFFFF); // highlights the state if the mouse is over(unfinshed: highlights multiple states at a time)
+    }
+    else 
+    {
+      tint(heatColor);
+    }
+    image(image,x,y);
+    noTint(); //prevents other images from being affected by tint()
   }
   
   public boolean mouseOver(){
     
-    if(mouseX > x  && mouseX < x+image.width && mouseY> y && mouseY<y+image.height) return true;
-    else return false;
-   
-    
+    if(mouseX > x  && mouseX < x+ image.width && mouseY> y  && mouseY<y+image.height   ) //&& (get(mouseX,mouseY) == heatColor || get(mouseX,mouseY) ==  #FFFFFF )
+    {
+       
+     // if(get(mouseX,mouseY) == heatColor ||  get(mouseX,mouseY) == (#FFFFFF)) 
+      return true;
+    }
+     return false;
   }
-  
   
   
 }
