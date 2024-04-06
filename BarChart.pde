@@ -15,10 +15,8 @@ class BarChart {
   final int ORIGIN_STATE =  6;
   final int ORIGIN_WAC = 7;
   final int DESTINATION = 8;
-  boolean displayDropMenu;
+  boolean widgetClicked;
   ArrayList<String> dataList;
-  
-  
   IntList frequency; 
   color dropMenuColor = color(#f5a201);
   color widgetColor = color(255);
@@ -31,10 +29,8 @@ class BarChart {
     this.xpos = xpos;
     this.ypos = ypos;
     setData(dataType);
-    displayDropMenu = false;
-    dropMenu = new Widget(545, 150, 250, 40,title, dropMenuColor, stdFont,SELECT_GRAPH);     // the event of each button is the same as the dataType
-    
-    //widgetList[0] = dropMenu;
+    widgetClicked = false;
+    dropMenu = new Widget(550, 150, 250, 40,title, dropMenuColor, stdFont,SELECT_GRAPH);     // the event of each button is the same as the dataType
     widgetList[0] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Flight Date",color(255),stdFont,FLIGHT_DATE);
     widgetList[1] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Airline Code",color(255),stdFont,AIRLINE_CODE);
     widgetList[2] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Flight Number",color(255),stdFont,FLIGHT_NUMBER);
@@ -44,31 +40,26 @@ class BarChart {
     widgetList[6] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Origin WAC",color(255),stdFont,ORIGIN_WAC);
     widgetList[7] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Destination",color(255),stdFont,DESTINATION);   
   }
-
+  
+  
   public void drawWidgets()
   {
-     dropMenu.draw();
-     if(displayDropMenu)   
+    dropMenu.draw();
+    widgetEvent(dropMenu);
+    mousePressed();
+     if(widgetClicked)   
      {
-       /* Draws an down arrow if the Drop Menu is activated*/ //later move to its own function to clean up code
+       /* Draws an down arrow if the Drop Menu is activated*/
        line(dropMenu.x + dropMenu.width - 40, dropMenu.y+10,
        dropMenu.x + dropMenu.width - 25, dropMenu.y+30);
        line(dropMenu.x + dropMenu.width - 25, dropMenu.y+30,
        dropMenu.x + dropMenu.width -10, dropMenu.y+10);
-       
        for(int i = 0; i < widgetList.length;i++)
        {
-        Widget currentWidget = widgetList[i];
-        if(mouseX > currentWidget.x && mouseX < currentWidget.x + currentWidget.width && mouseY > currentWidget.y && mouseY < currentWidget.y +currentWidget.height) 
-        { 
-        currentWidget.widgetColor = color(200); // if mouse hovers over the widget, the widget turns grey
-        }
-        else
-        {
-           currentWidget.widgetColor = widgetColor;
-        }
-         // draws each of the widgets in the dropMenu
+         // draws each of the widgets in the downmenu
+         Widget currentWidget = widgetList[i];
          currentWidget.y=(dropMenu.y + (i+1)*dropMenu.height );
+         widgetEvent(currentWidget);
          currentWidget.draw();
        }  
      } else {
@@ -85,6 +76,7 @@ public void sort(ArrayList<String> locations, IntList amountOfFlights) {
    if (locations.size() != amountOfFlights.size()) {
         throw new IllegalArgumentException("Lists must have the same size");
     }
+
     // Bubble sort algorithm to sort the locations based on the amount of flights in descending order
     for (int currentLocationIndex = 0; currentLocationIndex < amountOfFlights.size() - 1; currentLocationIndex++) {
         for (int nextLocationIndex = 0; nextLocationIndex < amountOfFlights.size() - currentLocationIndex - 1; nextLocationIndex++) {
@@ -93,6 +85,7 @@ public void sort(ArrayList<String> locations, IntList amountOfFlights) {
                 String tempLocation = locations.get(nextLocationIndex);
                 locations.set(nextLocationIndex, locations.get(nextLocationIndex + 1));
                 locations.set(nextLocationIndex + 1, tempLocation);
+
                 // Swap amountOfFlights
                 int tempAmount = amountOfFlights.get(nextLocationIndex);
                 amountOfFlights.set(nextLocationIndex, amountOfFlights.get(nextLocationIndex + 1));
@@ -110,20 +103,20 @@ public void sort(ArrayList<String> locations, IntList amountOfFlights) {
       String label = dataList.get(i);  
       int count = frequency.get(i); // get data and corresponding frequency
       
-        float scale = (float) count / frequency.get(0); // calculate color/size scale
-        int redComponent = (int) (scale * 225);
-        int blueComponent = 225 - redComponent;
-        fill(redComponent, 0, blueComponent);
+      float scale = (float) count / frequency.get(0); // calculate color/size scale
+      int redComponent = (int) (scale * 225);
+      int blueComponent = 225 - redComponent;
+      fill(redComponent, 0, blueComponent);
 
       // Drawing the bar
       rect(xpos, ypos + actualIndex * BAR_HEIGHT, scale*230, 20);
+      
       // Drawing labels
       fill(0);
       int characterOffset;
       if (label.length() > 18) {characterOffset = (label.length() -18)*5+5;} else {characterOffset = 0;}
       text(label, xpos-100-characterOffset, 205 + actualIndex * BAR_HEIGHT);
       text(count, xpos+275, 210 + actualIndex * BAR_HEIGHT);
-      text("Frequency", xpos+275, ypos-30);
       text(title, xpos-100, ypos - 30);
       actualIndex += 1;
     } 
@@ -170,68 +163,67 @@ public void sort(ArrayList<String> locations, IntList amountOfFlights) {
   public void setData(int dataType)
   {
     this.dataType = dataType;
-     /* Creates an ArrayList of the data type */
-    dataList = new ArrayList<String>();    
-    /* Creates an ArrayList of the frequency of each data type */
-    frequency = new IntList();   
+        /* Creates an ArrayList of the data type */
+    dataList = new ArrayList<String>();            
     for (int i = 0; i < allFlightData.length; i++) {
       boolean found = false;
       Flights currentFlight = allFlightData[i];
       String data = getData(currentFlight); // gets the required data for the flight(e.g origin city, destination)
       
-      for (int j = 0;  j < dataList.size();j++) { //finding locations
-        String temp = dataList.get(j);
-        if (data.equals(temp) && !found) 
-        {
-          found = true;
-          frequency.add(j,1);
-        } // if data is already in the dataList, found = true
+      for (String temp: dataList) { //finding locations
+        if (data.equals(temp)) found = true; // if data is already in the dataList, found = true
       }
-      if (!found) 
-      {
-        
-        dataList.add(data); 
-        frequency.append(1);
-      }
-      // only adds data to the data list if the dataList does not have the data already.
+      if (!found) dataList.add(data); // only adds data to the data list if the dataList does not have the data already.
     }                                 // (e.g if t "Dublin" is added to dataList once, it will not be added again.)
     
+    /* Creates an ArrayList of the frequency of each data type */
+    frequency = new IntList();         
+    for (int i = 0; i < dataList.size(); i++) {
+      int count = 0;
+      String currentString = dataList.get(i); 
+      for (Flights currentFlight: allFlightData) { // itterates through each flight in the allFlightData array
+        String data = getData(currentFlight);
+        if (data.equals(currentString)) count += 1; //  counts how many times the data in dataList appears in the allFlightData array
+      }
+      frequency.append(count); // the total count is stored in the frequency arrayList
+    }
     
- 
     sort(dataList, frequency);
   }
   
-  
-  public void displayWidgets()
+  public void widgetEvent(Widget widget)
   {
-    if(mouseX > dropMenu.x && mouseX < dropMenu.x + dropMenu.width && mouseY > dropMenu.y && mouseY < dropMenu.y +dropMenu.height) displayDropMenu = !displayDropMenu;
-  }
-  
-  
-  
-  public void activateWidgets()
-  {
-    for(Widget  widget: widgetList)
-     {
-        if(displayDropMenu && mouseX > widget.x && mouseX < widget.x + widget.width && mouseY > widget.y && mouseY < widget.y +widget.height)
-        {
+    if(mouseX > widget.x && mouseX < widget.x + widget.width && mouseY > widget.y && mouseY < widget.y +widget.height)
+    { 
+     // if mouse hovers over the widget, the widget turns grey
+      widget.widgetColor = color(200);
+      if(mousePressed)
+      {
         dataType = widget.event; //
-        switch(dataType) {  
+  
+        switch(dataType) {
+          case SELECT_GRAPH:
+          if(!widgetClicked)  widgetClicked = true;
+            break;   
           case FLIGHT_DATE:
             title = "Flight Date";
             dropMenu.label = title;
+            widgetClicked = false;
             break;
           case AIRLINE_CODE:
             title = "Airline Code";
             dropMenu.label = title;
+            widgetClicked = false;
             break;
           case FLIGHT_NUMBER:
             title = "Flight Number";
             dropMenu.label = title;
+            widgetClicked = false;
              break;
           case ORIGIN:
             title = "Origin";
             dropMenu.label = title;
+            widgetClicked = false;
              break;
           case ORIGIN_CITY_NAME:
             title = "Origin City Name";
@@ -240,24 +232,23 @@ public void sort(ArrayList<String> locations, IntList amountOfFlights) {
           case ORIGIN_STATE:
             title = "Origin State";
             dropMenu.label = title;
+            widgetClicked = false;
             break;
           case ORIGIN_WAC:
             title = "Origin WAC";
             dropMenu.label = title;
+            widgetClicked = false;
             break;
           case DESTINATION:
             title = "Destination";
             dropMenu.label = title;
+            widgetClicked = false;
             break;     
         }
-        setData(dataType);  
-        }
+        if(dataType != SELECT_GRAPH) setData(dataType);       
+      }
     }
+    else widget.widgetColor = widgetColor;
+    if    (widget == dropMenu) widget.widgetColor = dropMenuColor;   
   }
-  
-  
-  
-  
-  
-  
 }

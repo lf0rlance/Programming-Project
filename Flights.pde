@@ -88,10 +88,8 @@ class Flights
   
   public int getArrTime()
   {
-    
     if(singleFlightData[16] == "") return 0;
     else return Integer.parseInt(singleFlightData[16]);
-    
   }  
   
   public int getCancelled()

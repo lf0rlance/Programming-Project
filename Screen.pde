@@ -79,6 +79,7 @@ class Screen {
     // Check if the mouse clicks on the back button
     if (mouseOverBackButton && mousePressed) {
       audio1.play();
+      audio2.play();
       // Switch to the main screen
       currentScreen = menuScreen;
     }
