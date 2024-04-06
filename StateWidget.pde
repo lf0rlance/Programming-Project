@@ -55,7 +55,7 @@ class StateWidget //<>//
   {
     if(mouseOver()) tint(#FFFFFF); // highlights the state if the mouse is over(unfinshed: highlights multiple states at a time)
     else tint(heatColor);
-    image(image,x,y+20);
+    image(image,x,y);
         noTint(); //prevents other images from being affected by tint()
   }
   

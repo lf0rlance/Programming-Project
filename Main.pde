@@ -4,7 +4,7 @@ import processing.sound.*;
 Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen;
 PFont stdFont;
-SoundFile audio1, audio2, audio3;
+//SoundFile audio1, audio2, audio3;
 final int EVENT_NULL = 0;
 final int AIRPORT_LOCATOR_BUTTON = -1;
 final int DATE_BUTTON = -2;
@@ -32,7 +32,8 @@ Calender theCalender;
 HeatMap heatmap;
 
  void settings() {
-  size(800, 550);
+  
+   size(800, 550);
   audio1 = new SoundFile(this, "backButtonClicked.mp3");
   audio2 = new SoundFile(this, "menuScreenBackgroundMusic.mp3");
   audio3 = new SoundFile(this, "searchCompleted.mp3");
@@ -111,7 +112,7 @@ public void setup() {
   theCalender = new Calender(dateScreen, stdFont);
   airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
   scrollAnimation = new Animation("scrollAnimation", "Layer ", 65, 2);
-  heatmap = new HeatMap();
+  heatmap = new HeatMap(100,70);
   
 }
 
@@ -227,7 +228,7 @@ public void mousePressed() {
   }
   
   if (currentScreen != menuScreen){
-    audio2.pause();
+    //audio2.pause();
   }
 }
 
@@ -269,9 +270,12 @@ void mouseWheel(MouseEvent event) {
 
 void mouseClicked()
 {
-  
+  if(currentScreen == graphsScreen)
+  {
+    barChart.widgetEvent();
+    barChart.displayWidgets();  
+  }
 }
-
 void searchCompleted(String airportCode) {
   // Call updateDepartureBoard() with the airport code
   println("search completed");
