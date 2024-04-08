@@ -30,6 +30,9 @@ DepartureBoard departureBoard; // Declare the DepartureBoard object
 ArrivalsBoard arrivalBoard;
 Calender theCalender;
 HeatMap heatmap;
+SoundFile audio1;
+SoundFile audio2;
+SoundFile audio3;
 
  void settings() {
   
