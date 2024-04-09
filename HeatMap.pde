@@ -18,15 +18,14 @@ class HeatMap
    stateWidgets = new StateWidget[51];
    setStateWidgets(); // made it its own method to make the constructor look more tidy
    flightInfo = new Widget(600, 200, 150, 300, "State:\n"+stateLabel + "\n  Avg Lateness:", color(255), stdFont, EVENT_NULL);
-   
-
+  
   }
   
+  // function that draws each of the statesWudgets, and updates the info on the flight info tab when the mouse hovers over it 
   public void draw()
   {
    image(border,xpos,ypos);
-   flightInfo.label = "State:\n"+stateLabel + "\n  Avg Lateness:\n" + lateness;
-   flightInfo.draw();
+ 
    for(StateWidget state: stateWidgets)
    {    
      state.draw();
@@ -36,15 +35,16 @@ class HeatMap
        lateness = state.averageLateness;
        stateHighlighted = true;
      }
-
    }
+   flightInfo.label = "State:\n"+stateLabel + "\n  Avg Lateness:\n" + lateness;
+   flightInfo.draw();
   }
   
 
 
   public void setStateWidgets()
   {
-    /* Creates a stateWidget object for ever state ,includes Washington DC for no good reason :)  */
+    /* Creates a stateWidget object for every state ,(includes Washington DC)  */
 
    stateWidgets[0] = new StateWidget(xpos + 5, ypos + 182,loadImage("Alaska.png"),"AK");
    stateWidgets[1] = new StateWidget(xpos + 238, ypos + 278,loadImage("Hawaii.png"),"HI");
@@ -94,9 +94,8 @@ class HeatMap
    stateWidgets[45] = new StateWidget(xpos + 424,ypos + 70,loadImage("Rhode Island.png"),"RI");
    stateWidgets[46] = new StateWidget(xpos + 413,ypos + 70,loadImage("Connecticut.png"),"CT");
    stateWidgets[47] = new StateWidget(xpos + 396,ypos + 76,loadImage("New Jersey.png"),"NJ");
-   stateWidgets[48] = new StateWidget(xpos + 394, ypos + 89,loadImage("Delaware.png"),"Delaware");
+   stateWidgets[48] = new StateWidget(xpos + 394, ypos + 89,loadImage("Delaware.png"),"DE");
    stateWidgets[49] = new StateWidget(xpos + 368,ypos + 90,loadImage("Maryland.png"),"MD");
-   
    stateWidgets[50] = new StateWidget(xpos + 380,ypos + 98,loadImage("Washington DC.png"),"DC");
    
   }

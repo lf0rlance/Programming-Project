@@ -24,46 +24,46 @@ class StateWidget //<>// //<>//
       
       if(flight.getDestState().equals(stateCode)) flightList.add(flight);
     }
-    System.out.println(stateCode +": " + flightList.size());
+    System.out.println(stateCode +": " + flightList.size()); // used for debugging
     heat();
   }
   
-  
-  public void heat() // chaging the 'heat' depending on the lateness. Maybe adjust so it uses average lateness? Color changing needs to be improved.
+  // changing the 'heat' of the state depending on the average lateness of flights in the zone. 
+  public void heat() 
   {
     int totalLateness = 0;
 
     float redness = 0;
-    //int blueness = 255;
     for(Flights flight:flightList)
     {
-      // old way of calculating lateness( good colors but incorrect data)
-      if(flight.getArrTime() >= flight.getCrsArrTime()) totalLateness += (flight.getArrTime() - flight.getCrsArrTime()); //<>// //<>//
-      else totalLateness -= (flight.getArrTime() - flight.getCrsArrTime());
+ //<>//
       
        //New improved way of calculating lateness
-     // int arrival = (flight.getArrTime()/100) + (flight.getArrTime()%100);
-   //   int actualArrival = (flight.getCrsArrTime()/100) + (flight.getCrsArrTime()%100);
+      int arrival = (flight.getArrTime()/100*60) + (flight.getArrTime()%100); // converts time into minutes
+      int actualArrival = (flight.getCrsArrTime()/100*60) + (flight.getCrsArrTime()%100); 
       
-     // if(arrival >= actualArrival) totalLateness += (arrival - actualArrival);
-   //   else totalLateness -= (arrival - actualArrival);
+      if(arrival >= actualArrival) totalLateness += (arrival - actualArrival);
+      //else totalLateness -= (arrival - actualArrival);
       
  
     }
-    
-    
     if(flightList.size() >0)
     {
     averageLateness = totalLateness/ flightList.size();
     System.out.println("Average Lateness: "+ averageLateness);
-    //
-    redness += averageLateness;
-    redness = redness/320.0;
+
+    redness += averageLateness ;
+    redness /= 30;
+
     }
+   // heatColor = color(redness*5,0,260-(redness*7));
     heatColor = color(redness*225,0,260-(redness*225));
+
+
     
   }
-  
+
+  // draws the states
   public void draw()
   {
     if(mouseOver() && contains(mouseX,mouseY)) tint(#FFFFFF); // highlights the state if the mouse is over(unfinshed: highlights multiple states at a time)
@@ -71,7 +71,7 @@ class StateWidget //<>// //<>//
     image(image,x,y);
         noTint(); //prevents other images from being affected by tint()
   }
-  
+  // determines if ithe mouse hovers over the state
   public boolean mouseOver(){
     
     if(mouseX > x  && mouseX < x+image.width && mouseY> y && mouseY<y+image.height) return true;
@@ -80,26 +80,24 @@ class StateWidget //<>// //<>//
     
   }
   
-  
-    boolean contains(int nx, int ny)
+  // Determines if the state contains the coordinates x,y
+  // only returns true if a non transparent part of the state contains the coordinates passed into the parameters.
+ // used to prevent multiple states from highlighting at the same time(due to overlapping boundaries but not overlapping images) in the draw function
+
+   boolean contains(int x, int y )
   {
-    
     if(mouseOver())
     {
-      int imgX = nx - x;
-      int imgY = ny - y;
-        
+      int pixelX = x - this.x;
+      int pixelY = y - this.y;
      // Get the color of the pixel at (x, y)
-     int loc = imgX + imgY * image.width;
-     
-     color pixelColor = image.pixels[loc]; // the color of the pixel at 
+     int loc = pixelX + pixelY * image.width;
+     color pixelColor = image.pixels[loc]; // the color of the pixel at  x,y
      if( alpha(pixelColor) > 0) // if the x,y coordinate is at a non transparent part of the image(if the mouse is within the actual state)
      {
        return true;
-     }
-      
+     }  
     }
-    
     return false;
   }
   

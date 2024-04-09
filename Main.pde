@@ -4,7 +4,7 @@ import processing.sound.*;
 Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen;
 PFont stdFont;
-//SoundFile audio1, audio2, audio3;
+SoundFile audio1, audio2, audio3;
 final int EVENT_NULL = 0;
 final int AIRPORT_LOCATOR_BUTTON = -1;
 final int DATE_BUTTON = -2;
@@ -30,9 +30,7 @@ DepartureBoard departureBoard; // Declare the DepartureBoard object
 ArrivalsBoard arrivalBoard;
 Calender theCalender;
 HeatMap heatmap;
-SoundFile audio1;
-SoundFile audio2;
-SoundFile audio3;
+
 
  void settings() {
   
@@ -98,7 +96,7 @@ public void setup() {
   graphsScreen.add(new Widget(width - 550, height - 525, 300, 40, "Graphs Screen", color(168,213,229), stdFont, EVENT_NULL));
   
   currentScreen = menuScreen;
-  barChart = new BarChart(200,200,5);
+  barChart = new BarChart(200,200,4);
   
   // Loading images
   microscopeIcon = loadImage("microscope.png");
