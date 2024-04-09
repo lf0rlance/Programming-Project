@@ -45,7 +45,6 @@ class HeatMap
   public void setStateWidgets()
   {
     /* Creates a stateWidget object for ever state ,includes Washington DC for no good reason :)  */
-    
 
    stateWidgets[0] = new StateWidget(xpos + 5, ypos + 182,loadImage("Alaska.png"),"AK");
    stateWidgets[1] = new StateWidget(xpos + 238, ypos + 278,loadImage("Hawaii.png"),"HI");

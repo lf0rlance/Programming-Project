@@ -1,4 +1,4 @@
-class StateWidget //<>//
+class StateWidget //<>// //<>//
 {
   int x,y;
   PImage image;
@@ -21,6 +21,7 @@ class StateWidget //<>//
   
     for(Flights flight: allFlightData)
     {
+      
       if(flight.getDestState().equals(stateCode)) flightList.add(flight);
     }
     System.out.println(stateCode +": " + flightList.size());
@@ -36,10 +37,22 @@ class StateWidget //<>//
     //int blueness = 255;
     for(Flights flight:flightList)
     {
-      if(flight.getArrTime() >= flight.getCrsArrTime()) totalLateness += (flight.getArrTime() - flight.getCrsArrTime()); //<>//
+      // old way of calculating lateness( good colors but incorrect data)
+      if(flight.getArrTime() >= flight.getCrsArrTime()) totalLateness += (flight.getArrTime() - flight.getCrsArrTime()); //<>// //<>//
       else totalLateness -= (flight.getArrTime() - flight.getCrsArrTime());
+      
+       //New improved way of calculating lateness
+     // int arrival = (flight.getArrTime()/100) + (flight.getArrTime()%100);
+   //   int actualArrival = (flight.getCrsArrTime()/100) + (flight.getCrsArrTime()%100);
+      
+     // if(arrival >= actualArrival) totalLateness += (arrival - actualArrival);
+   //   else totalLateness -= (arrival - actualArrival);
+      
+ 
     }
-        if(flightList.size() >0)
+    
+    
+    if(flightList.size() >0)
     {
     averageLateness = totalLateness/ flightList.size();
     System.out.println("Average Lateness: "+ averageLateness);
@@ -53,7 +66,7 @@ class StateWidget //<>//
   
   public void draw()
   {
-    if(mouseOver()) tint(#FFFFFF); // highlights the state if the mouse is over(unfinshed: highlights multiple states at a time)
+    if(mouseOver() && contains(mouseX,mouseY)) tint(#FFFFFF); // highlights the state if the mouse is over(unfinshed: highlights multiple states at a time)
     else tint(heatColor);
     image(image,x,y);
         noTint(); //prevents other images from being affected by tint()
@@ -65,6 +78,29 @@ class StateWidget //<>//
     else return false;
    
     
+  }
+  
+  
+    boolean contains(int nx, int ny)
+  {
+    
+    if(mouseOver())
+    {
+      int imgX = nx - x;
+      int imgY = ny - y;
+        
+     // Get the color of the pixel at (x, y)
+     int loc = imgX + imgY * image.width;
+     
+     color pixelColor = image.pixels[loc]; // the color of the pixel at 
+     if( alpha(pixelColor) > 0) // if the x,y coordinate is at a non transparent part of the image(if the mouse is within the actual state)
+     {
+       return true;
+     }
+      
+    }
+    
+    return false;
   }
   
   

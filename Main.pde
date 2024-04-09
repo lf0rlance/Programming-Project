@@ -231,7 +231,7 @@ public void mousePressed() {
   }
   
   if (currentScreen != menuScreen){
-    //audio2.pause();
+    audio2.pause();
   }
 }
 
