@@ -2,7 +2,7 @@ import processing.sound.*;
 
 // main class
 Flights allFlightData[];
-Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen;
+Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen, dateDataScreen;
 PFont stdFont;
 SoundFile audio1, audio2, audio3;
 final int EVENT_NULL = 0;
@@ -19,6 +19,7 @@ PImage destinationTableImage;
 PImage arrivalBoardImage;
 PImage airportScreenGIF;
 PImage legendMap;
+PImage calendarCloud;
 boolean scrolledWithinSeconds = true; // Variable to track scrolling within our specified seconds
 int searchCompletionTime = 0; // Time when the search is completed
 Boolean showArrivals = false;
@@ -87,7 +88,7 @@ public void setup() {
   airportScreen = new Screen(color(37, 150, 190));
   airportScreen.add(new Widget(width - 550, height - 525, 300, 40, "Airport Locator Screen", color(168,213,229), stdFont, EVENT_NULL));
   
-  dateScreen = new Screen(color(37, 150, 190));
+  dateScreen = new Screen(color(205, 234, 248));
   dateScreen.add(new Widget(width - 550, height - 525, 300, 40, "Date Screen", color(168,213,229), stdFont, EVENT_NULL));
   
   latenessScreen = new Screen(color(37, 150, 190));
@@ -95,6 +96,8 @@ public void setup() {
   
   graphsScreen = new Screen(color(37, 150, 190));
   graphsScreen.add(new Widget(width - 550, height - 525, 300, 40, "Graphs Screen", color(168,213,229), stdFont, EVENT_NULL));
+  
+  dateDataScreen = new Screen(color(205,234,248)); //make new screen to display data as widgets
   
   currentScreen = menuScreen;
   barChart = new BarChart(200,200,4);
@@ -174,6 +177,10 @@ void draw() {
   if(currentScreen == latenessScreen)
   {
     heatmap.draw();
+  }
+  
+  if(currentScreen == dateDataScreen) {
+    image(calendarCloud, 0, 0);
   }
   
     // Check for mouse movement and update widget appearance

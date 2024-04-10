@@ -57,9 +57,9 @@ class Screen {
   
     // Change button color based on mouse interaction
     if (mouseOverBackButton) {
-      fill(0, 122, 210); // Light blue when mouse is over
+      fill(161, 227, 240); // Light blue when mouse is over
     } else {
-      fill(3, 145, 200);    // Darker blue otherwise
+      fill(88, 183, 219);    // Darker blue otherwise
     }
     ellipse(backButtonX + backButtonSize / 2, backButtonY + backButtonSize / 2, backButtonSize, backButtonSize);
   

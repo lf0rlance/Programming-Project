@@ -60,6 +60,7 @@ class Calender
         int averageFlightDistance = 0;
         int i = 0;
         boolean quickDataExtract = true;
+        calendarCloud = loadImage("calendarCloud.png");
         while(quickDataExtract && i != 563737) //retriving data
         {
           int numTempDate;
@@ -85,7 +86,6 @@ class Calender
         percentOfLateDepartFlights = (percentOfLateDepartFlights / numOfFlights) * 100;
         percentOfLateArrFlights = (percentOfLateArrFlights / numOfFlights) * 100;
         averageFlightDistance = averageFlightDistance / numOfFlights;
-        Screen dateDataScreen = new Screen(color(37, 150, 190)); //make new screen to display data as widgets
         dateDataScreen.add(new Widget(200, 25, 400, 50, "Flight Information " + event + "/01/2022", color(255), theFont, EVENT_NULL));
         dateDataScreen.add(new Widget(100, 150, 600, 50, "Amount of flights: " + numOfFlights, color(255), theFont, EVENT_NULL));
         dateDataScreen.add(new Widget(100, 200, 600, 50, "Percent of flights departed late: " + (int) percentOfLateDepartFlights + "%", color(255), theFont, EVENT_NULL));
