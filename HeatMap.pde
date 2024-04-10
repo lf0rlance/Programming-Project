@@ -25,6 +25,7 @@ class HeatMap
   public void draw()
   {
    image(border,xpos,ypos);
+   image(legendMap, 10, 65);
  
    for(StateWidget state: stateWidgets)
    {    

@@ -18,6 +18,7 @@ PImage microscopeIcon;
 PImage destinationTableImage;
 PImage arrivalBoardImage;
 PImage airportScreenGIF;
+PImage legendMap;
 boolean scrolledWithinSeconds = true; // Variable to track scrolling within our specified seconds
 int searchCompletionTime = 0; // Time when the search is completed
 Boolean showArrivals = false;
@@ -104,6 +105,7 @@ public void setup() {
   arrivalBoardImage = loadImage("arrivalsBoard.png");
   cloudImage = loadImage("cloud.png");
   programName = loadImage("programName.png");
+  legendMap = loadImage("legendMap.png");
   
   // Initializing objects
   searchBar = new SearchBar();
