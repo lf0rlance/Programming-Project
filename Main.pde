@@ -157,6 +157,7 @@ void draw() {
     airportScreenBackground.update();
 
     // Draw other elements only airport screen
+    // Draw the search bar on the airport screen 
     searchBar.draw();
 
     if (showArrivals) {
@@ -250,7 +251,7 @@ public void mousePressed() {
 // Key press event handler
 void keyPressed() {
   if (currentScreen == airportScreen) {
-    searchBar.keyPressed();
+    searchBar.keyPressed(); // search bar typing fuction 
     typing = true;
     
     // Check if Enter key is pressed and the search is completed
@@ -261,6 +262,7 @@ void keyPressed() {
     }
   }
 }
+
 
 // Key release event handler
 void keyReleased() {
