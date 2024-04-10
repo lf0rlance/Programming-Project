@@ -1,4 +1,5 @@
-class Flights
+//Author: Lance
+class Flights //organises data from csv file into string array that can access any piece of data through relevent functions
 {
   String[] singleFlightData;
   

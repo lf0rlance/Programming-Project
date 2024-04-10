@@ -1,50 +1,63 @@
-class Screen {
+//Authors: Lance & Adam
+class Screen 
+{
   ArrayList<Widget> screenWidgets;
   color screenColor;
   int cloudX = 0; // Initial x-coordinate of the cloud
  
-  Screen(color screenColor) {
+  Screen(color screenColor) //creates screen
+  {
     screenWidgets = new ArrayList<>();
     this.screenColor = screenColor;
   }
   
-  public void add(Widget theWidget) {
+  public void add(Widget theWidget) //adds widget to screen
+  {
     screenWidgets.add(theWidget);
   }
   
-  void draw() {
+  void draw() 
+  {
     background(screenColor);
-    for (Widget aWidget : screenWidgets) {
+    for (Widget aWidget : screenWidgets) 
+    {
       aWidget.draw();
     }
-    if (this != menuScreen) {
+    if (this != menuScreen) 
+    {
       drawBackButton(); // Draw the back button only if not on the menu screen
     }
   }
   
-  public int getEvent(int mX, int mY) {
-    for (Widget aWidget : screenWidgets) {
+  public int getEvent(int mX, int mY) //gets event for corrordinates passed in (eg. if over a widget)
+  {
+    for (Widget aWidget : screenWidgets) 
+    {
       int event = aWidget.getEvent(mX, mY);
       if (event != EVENT_NULL) return event;
     }
     return EVENT_NULL;
   }
   
-  public ArrayList<Widget> getWidgets() {
+  public ArrayList<Widget> getWidgets() //returns an arraylist of all widgets in screen
+  {
     return screenWidgets; 
   }
   
-  void updateCloudPosition() {
+  void updateCloudPosition() 
+  {
     // Adjust the speed of cloud movement by changing the value of cloudSpeed
     float cloudSpeed = 1;
     cloudX = (int)((cloudX + cloudSpeed) % width); // Update the cloud's x position with wrapping
   }
 
-  int getCloudX() {
+  int getCloudX() 
+  {
     return cloudX;
   }
 
-  void drawBackButton() {
+  void drawBackButton() 
+  {
     // Define position and size of the back button
     int backButtonSize = 40;
     int backButtonPadding = 500;
@@ -77,14 +90,15 @@ class Screen {
     
   
     // Check if the mouse clicks on the back button
-    if (mouseOverBackButton && mousePressed) {
+    if (mouseOverBackButton && mousePressed) 
+    {
       audio1.play();
       // Switch to the main screen
       currentScreen = menuScreen;
     }
   }
   
-  public void overWidgetCheck(Screen theScreen)
+  public void overWidgetCheck(Screen theScreen) //checks if mouse is currently over a widget
   {
     ArrayList widgets = theScreen.getWidgets();
     for(int i = 0; i < widgets.size(); i++)

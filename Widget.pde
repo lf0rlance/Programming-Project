@@ -1,6 +1,7 @@
-
-class Widget
+//Author: Lance
+class Widget //makes a clickable widget
 {
+  
   int x, y, width, height;
   String label; int event;
   color widgetColor, labelColor, lineColor, hoverOverColor;
@@ -18,7 +19,7 @@ class Widget
   }
   
   Widget(int x, int y, int width, int height, String label, color widgetColor, PFont widgetFont, 
-  int event, color hoverOverColor, boolean useFillColor)
+  int event, color hoverOverColor, boolean useFillColor) //mutated constructor to change backround color when hovering over widget
   {
     this.x = x; this.y = y; this.width = width; this.height = height;
     this.label = label; this.event = event;
@@ -29,7 +30,7 @@ class Widget
   }
   
   Widget(int x, int y, int width, int height, String label, color widgetColor, PFont widgetFont, 
-  String event)
+  String event) //muatoed constructor to have a String type event instead of an int type event
   {
     this.x = x; this.y = y; this.width = width; this.height = height;
     this.label = label; this.eventString = event;
@@ -37,7 +38,8 @@ class Widget
     labelColor = color(0); lineColor = color(0);
   }
   
-void draw() {
+void draw() 
+{
   fill(widgetColor);
   stroke(lineColor);
   rect(x, y, width, height);

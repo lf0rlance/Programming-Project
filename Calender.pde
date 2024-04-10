@@ -1,7 +1,9 @@
-class Calender
+//Author: Lance
+class Calender //class that makes a clickable array of calender dates 
 {
   Screen currentScreen;
   PFont theFont;
+  
   Calender(Screen currentScreen, PFont theFont) //takes in screen (date screen) and makes the calender
   {
     this.theFont = theFont;
@@ -47,11 +49,14 @@ class Calender
     }
   }
   
-  public Screen mousePressed(Screen currentScreen, Flights data[]) {
-    int event = currentScreen.getEvent(mouseX, mouseY);
-    if (event != EVENT_NULL) {
+  public Screen mousePressed(Screen currentScreen, Flights data[]) //Returns Relevent Screen with relevant data for date pressed
+  {
+    int event = currentScreen.getEvent(mouseX, mouseY); //gets event associated with a date widget
+    if (event != EVENT_NULL) 
+    {
       println("Button clicked CALENDAR: " + event);
-      if (event >= 1 && event <= 31) {
+      if (event >= 1 && event <= 31) 
+      {
         //data to calculate
         int numOfFlights = 0;
         float percentOfLateDepartFlights = 0;
@@ -86,6 +91,7 @@ class Calender
         percentOfLateDepartFlights = (percentOfLateDepartFlights / numOfFlights) * 100;
         percentOfLateArrFlights = (percentOfLateArrFlights / numOfFlights) * 100;
         averageFlightDistance = averageFlightDistance / numOfFlights;
+        //add the final calculated data to the right screen
         dateDataScreen.add(new Widget(200, 25, 400, 50, "Flight Information " + event + "/01/2022", color(255), theFont, EVENT_NULL));
         dateDataScreen.add(new Widget(100, 150, 600, 50, "Amount of flights: " + numOfFlights, color(255), theFont, EVENT_NULL));
         dateDataScreen.add(new Widget(100, 200, 600, 50, "Percent of flights departed late: " + (int) percentOfLateDepartFlights + "%", color(255), theFont, EVENT_NULL));
@@ -103,5 +109,3 @@ class Calender
   }
   
 }
-
-//array index 13-43 relevent
