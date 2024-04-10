@@ -32,7 +32,7 @@ class BarChart {
     setData(dataType);
     setTitle();
     displayDropMenu = false;
-    dropMenu = new Widget(545, 150, 250, 40,title, dropMenuColor, stdFont,EVENT_NULL);     // the event of each button is the same as the dataType
+    dropMenu = new Widget(545, 150, 250, 40,"Select Graph", dropMenuColor, stdFont,EVENT_NULL);     // the event of each button is the same as the dataType
     widgetList[0] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Flight Date",color(255),stdFont,FLIGHT_DATE);
     widgetList[1] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Airline Code",color(255),stdFont,AIRLINE_CODE);
     widgetList[2] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Origin",color(255),stdFont,ORIGIN);
@@ -120,7 +120,7 @@ class BarChart {
         title = "Origin";
         break;
       case ORIGIN_CITY_NAME:
-        title = "Origin City Name";
+        title = "Origin City";
         break;
       case ORIGIN_STATE:
         title = "Origin State";
@@ -132,7 +132,7 @@ class BarChart {
         title = "Destination";
         break;
       case DEST_CITY_NAME:
-        title = "Destination City Name";
+        title = "Destination City";
         break;
 
     }
@@ -156,6 +156,13 @@ class BarChart {
       int redComponent = (int) (scale * 225);
       int blueComponent = 225 - redComponent;
       fill(redComponent, 0, blueComponent);
+      
+      // removing alternate names
+      if(label.contains("/") && dataType != FLIGHT_DATE)
+      {
+        int slashIndex = label.indexOf("/");
+        label = label.substring(0,slashIndex); // only use the first name begfore the slash
+      }
 
       // Drawing the bar
       rect(xpos, ypos + actualIndex * BAR_HEIGHT, scale*230, 20);
@@ -165,6 +172,8 @@ class BarChart {
       if (label.length() > 18) {characterOffset = (label.length() -18)*5+5;} 
       else {characterOffset = 0;}
       
+ 
+
       
       text(label, xpos-100-characterOffset, 205 + actualIndex * BAR_HEIGHT);
       text(count, xpos+275, 210 + actualIndex * BAR_HEIGHT);
@@ -259,8 +268,8 @@ class BarChart {
         {
         dataType = widget.event; 
         setTitle();
-        dropMenu.label = title;
         setData(dataType); 
+        System.out.print(dataList.size());
       } 
     }
 }
