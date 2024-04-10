@@ -6,7 +6,6 @@ class HeatMap
   Widget flightInfo;  // the tab on the right
   
   String stateLabel;
-  boolean stateHighlighted = false;
  
   StateWidget[] stateWidgets;
   HeatMap(int xpos, int ypos)
@@ -34,10 +33,9 @@ class HeatMap
      {
        stateLabel = state.stateCode;
        lateness = state.averageLateness;
-       stateHighlighted = true;
      }
    }
-   flightInfo.label = "State:\n"+stateLabel + "\n  Avg Lateness:\n" + lateness + " mins";
+   flightInfo.label = "State:\n"+stateLabel + "\n  Avg Lateness:\n" + lateness  + " mins";
    flightInfo.draw();
   }
   
