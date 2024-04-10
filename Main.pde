@@ -43,7 +43,7 @@ HeatMap heatmap;
   audio3 = new SoundFile(this, "searchCompleted.mp3");
   audio4 = new SoundFile(this, "huh cat.mp3");
   audio2.play();
-  audio2.amp(0.5);
+  audio2.amp(0.3);
  }
 
 public void setup() { 
@@ -317,5 +317,6 @@ void updateDepartureAndArrivalBoard(String airportCode) {
   if (departures.isEmpty() && arrivals.isEmpty()) {
     // Play audio feedback for search failure
     audio4.play();
+    audio4.amp(2);
   }
 }
