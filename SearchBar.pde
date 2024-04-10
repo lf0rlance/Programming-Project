@@ -1,3 +1,5 @@
+// author: Johnston 
+
 class SearchBar {
   ArrayList<Widget> widgetDropdown = new ArrayList<>();
   String searchText = "";

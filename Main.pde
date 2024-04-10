@@ -4,7 +4,7 @@ import processing.sound.*;
 Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen, dateDataScreen;
 PFont stdFont;
-SoundFile audio1, audio2, audio3;
+SoundFile audio1, audio2, audio3, audio4;
 final int EVENT_NULL = 0;
 final int AIRPORT_LOCATOR_BUTTON = -1;
 final int DATE_BUTTON = -2;
@@ -41,7 +41,9 @@ HeatMap heatmap;
   audio1 = new SoundFile(this, "backButtonClicked.mp3");
   audio2 = new SoundFile(this, "menuScreenBackgroundMusic.mp3");
   audio3 = new SoundFile(this, "searchCompleted.mp3");
+  audio4 = new SoundFile(this, "huh cat.mp3");
   audio2.play();
+  audio2.amp(0.5);
  }
 
 public void setup() { 
@@ -238,10 +240,6 @@ public void mousePressed() {
       }
     }
   }
-  
-  if (currentScreen != menuScreen){
-    audio2.pause();
-  }
 }
 
 void keyPressed() {
@@ -315,4 +313,9 @@ void updateDepartureAndArrivalBoard(String airportCode) {
   
   departureBoard.update(departures); 
   arrivalBoard.update(arrivals);
+  
+  if (departures.isEmpty() && arrivals.isEmpty()) {
+    // Play audio feedback for search failure
+    audio4.play();
+  }
 }
