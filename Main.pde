@@ -1,4 +1,4 @@
-// Importing necessary libraries
+// Importing necessary libraries- make sure to download sound library, more details at the end of the overview video
 import processing.sound.*;
 
 // Main class
