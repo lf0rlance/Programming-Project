@@ -1,4 +1,11 @@
-class StateWidget  //<>//
+  /** Author: Joshua //<>//
+  *  
+  *  
+  *   Contributers:
+  *      Can
+  */
+
+class StateWidget 
 {
   int x,y;
   PImage image;
@@ -28,14 +35,14 @@ class StateWidget  //<>//
     for(Flights flight: allFlightData)
     {
       
-      if(flight.getDestState().equals(stateCode)) flightList.add(flight);
+      if(flight.getDestState().equals(stateCode)) flightList.add(flight); //<>//
     }
     System.out.println(stateCode +": " + flightList.size()); // used for debugging
     heat();
   }
   
   
-    /** scaling the colour of the state depending on the average lateness of flights arriving at the state  //<>//
+    /** scaling the colour of the state depending on the average lateness of flights arriving at the state 
     *  states with a relatively high average lateness will be colored red, while states with a low average lateness will be colored blue
     *  history:
     *

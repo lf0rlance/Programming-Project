@@ -1,3 +1,9 @@
+  /** Author: Joshua
+  *  
+  *  
+  *   Contributers:
+  *      Adam, Can, Lance
+  */
 class BarChart {
   String title;    // title of the bar chart
   int dataType;    // data being displayed on the barchart
@@ -25,6 +31,17 @@ class BarChart {
   Widget dropMenu;
   Widget[] widgetList = new Widget[8];
  
+  /** Bar Chart Constructor Class
+  * Creates a bar chart that graphically showcases the frequency that a data type appears in the data set
+  *  (e.g the amount of flights coming from each city)
+  * the function intitialises the bar chart to whatever is passed into the dataType parameter by calling the setData() function
+  *  
+  *  The constructor also creates a drop down menu as well as the different widgets that are apart of the drop down menu
+  * Parameters:
+  *    @param x,y - coordinates of the bar chart
+  *    @param dataType - the data type to be illustrated by the bar Chart
+  *                      A constant integer is used to represent each dataType that can be shown. 
+  */
   BarChart(int xpos, int ypos, int dataType) {
     startingIndex = 0;
     this.xpos = xpos;
@@ -43,9 +60,18 @@ class BarChart {
     widgetList[7] = new Widget(dropMenu.x, dropMenu.y ,dropMenu.width ,dropMenu.height ,"Destination City Name",color(255),stdFont,DEST_CITY_NAME);   
 
   }
-  
-    // function for setting the data in the bar chart. Iterates through the allFlightsData array and puts all the flights with the label being inspected into its own array. 
-    // makes a second array of the frequency of each flight with the label 
+    /** Function for setting the data in the bar chart.
+    * Iterates through the allFlightsData array and puts all the flights with the data being inspected into its own array. 
+    * makes a second array of the frequency, where the number at each index of the array is the frequency of the dataType at the
+    * corresponding index
+    * Paramaters:
+    *    @param dataType - the dataType being displayed represented by a constant number. A list of the constants are defined in the class
+    * History:
+    *   Efficiency:
+    *      Old- two seperate nested for-loops were used to create the dataList and frequency array. Caused performance issues
+    *      New - combined the two nested for-loops into one which improved the efficiency(Joshua)
+    */
+   
     public void setData(int dataType)
   {
     this.dataType = dataType;
@@ -81,8 +107,12 @@ class BarChart {
     sort(dataList, frequency);
   }
   
-    // a function used to get the data from each flight being analysed based on the current dataType of the graph. 
-    //Used within the setData() function frequently
+    /**A function used to get the data from each flight being analysed based on the current dataType of the graph. 
+    * Used within the setData() function frequently
+    * History:
+    *     old - the same function also set the title for the graph
+    *     new - created an individual  void setTitle function which allowed it to be used by other methods without having to return a string.
+    */
     public String getData(Flights flight) {
     switch(dataType) {
       case FLIGHT_DATE:
@@ -105,8 +135,8 @@ class BarChart {
         return "";
       }
   }
-  
-  // a function that sets the title of the graph depending on the datatype currently being displayed 
+
+  /* a function that sets the title of the graph depending on the datatype currently being displayed */
   public void setTitle()
   {
       switch(dataType) {
@@ -138,9 +168,20 @@ class BarChart {
     }
   }
   
-  
+    /** a function that draws the bar chart, drop menu, widgets, and  all the titles and labels.
+    * 
+    *  History:
+    *    Colors
+    *      old - colors go from grey to red (Joshua)
+    *      new - colors range from blue to red and are scaled based on the size of the list(Can)
+    *
+    *    Text:
+     *      old - large texts did not fit on screen. Text were ill centered. Dates were incorrectly shown
+     *      new - texted were centered by calulating a character offset based off size(Lance).
+     *            Incorrect dates were formatted using a method from the departure Board class, and longer
+     *            names were shortened(Joshua)     
+    */
 
-  // a function that draws the bar chart, drop menu and all the titles and labels.
   public void draw() {
     drawWidgets();
     int displayCount = Math.min(MAX_DISPLAY, dataList.size() - startingIndex);
@@ -185,7 +226,7 @@ class BarChart {
   }
   
   
-  // a function for drawing the widgets
+  /* a function for drawing the widgets*/
   public void drawWidgets()
   {
      dropMenu.draw(); // draws the dropMenu widget
@@ -222,7 +263,13 @@ class BarChart {
      }
   }
   
-  // Function that allows the user to scroll through the bar chart. Changes the starting index of the bar chart that is displayed.
+       /** Function that allows the user to scroll through the bar chart. Changes the starting index of the bar chart that is displayed.
+       *  History
+       *       old - scroll function was just a prototype. User scrolled simply by pressing a button. No way to scroll back,
+       *             error if user scrolled too far(Joshua)
+       *       new - scroll function called by mouseWheel() function in main. Issues fixed (Adam)
+       */
+  
   public void scroll(int increment) {
     int maxIndex = Math.max(0, dataList.size() - MAX_DISPLAY); // Maximum starting index to prevent scrolling past the last data
     startingIndex = constrain(startingIndex + increment, 0, maxIndex);
@@ -231,7 +278,7 @@ class BarChart {
 
   
 
-  // Function that sorts the frequency list in order descending order, and then orders the corresponding values in the data list 
+  /* Function that sorts the frequency list in order descending order, and then orders the corresponding values in the data list */
   public void sort(ArrayList<String> locations, IntList amountOfFlights) {
     // Check if both lists have the same size
    if (locations.size() != amountOfFlights.size()) {
@@ -253,13 +300,26 @@ class BarChart {
         }
     }
 }  
-  // function that displays the widgets. Called by the mouseClicked() function in main
+
+    /** A function that opens the drop menu(or closes it if already open)
+    *   Activated by the mouseClicked() function in main.
+    *   Onlu opens if the mouse is clicked and the cursor is in the specified boundary
+    */
   public void displayWidgets()
   {
     if(mouseX > dropMenu.x && mouseX < dropMenu.x + dropMenu.width && mouseY > dropMenu.y && mouseY < dropMenu.y +dropMenu.height) displayDropMenu = !displayDropMenu;
   }
   
-  // function that changes the data being displayed on the bar chart depending on which widget is pressed.
+  
+    /** function that changes the data being displayed on the bar chart depending on which widget is pressed.
+    *   changes the dataType depending on which widget is pressed and calls the setData() function and setTitle() function to update the bar chart
+    *   History
+    *     old - Function used a mousePressed method to activate each widget, including the drop menu.
+    *            Because the mousePressed function occurs continously until the mouse is unpressed,(even if pressed for a seemingly small amount of time)
+    *            , it caused to dropMenu to flicker and open and close multiple times.
+    *     new - Created a seperate function for displaying the drop menu. Used mouseClicked function in main instead of mousePressed functino(Joshua)
+    */
+  
   public void widgetEvent()
   {
     for(Widget  widget: widgetList)

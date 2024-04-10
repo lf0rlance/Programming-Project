@@ -1,3 +1,7 @@
+ /*Author: Joshua */
+  
+  
+
 class HeatMap
 {
   PImage border;
@@ -8,6 +12,12 @@ class HeatMap
   String stateLabel;
  
   StateWidget[] stateWidgets;
+  
+   /** Heat Map Constructor Class
+  *   Creates a  a heat map at the coordinates entered
+  *   Uses the setStateWidgets to create an object of all the states in the US map
+  *    @param x,y - coordinates of the state of the heat map
+  */
   HeatMap(int xpos, int ypos)
   {
     this.xpos = xpos;
@@ -19,8 +29,9 @@ class HeatMap
    flightInfo = new Widget(600, 200, 150, 300, "State:\n"+stateLabel + "\n  Avg Lateness:", color(255), stdFont, EVENT_NULL);
   
   }
-  
-  // function that draws each of the statesWudgets, and updates the info on the flight info tab when the mouse hovers over it 
+    /** Draws each of the statesWidgets, and updates the info on the flight info tab when the mouse hovers over it 
+    * 
+   */    
   public void draw()
   {
    image(border,xpos,ypos);
@@ -40,10 +51,10 @@ class HeatMap
   }
   
 
-
+   /* Creates a stateWidget object for every state ,(includes Washington DC)  */
   public void setStateWidgets()
   {
-    /* Creates a stateWidget object for every state ,(includes Washington DC)  */
+   
 
    stateWidgets[0] = new StateWidget(xpos + 5, ypos + 182,loadImage("Alaska.png"),"AK");
    stateWidgets[1] = new StateWidget(xpos + 238, ypos + 278,loadImage("Hawaii.png"),"HI");
