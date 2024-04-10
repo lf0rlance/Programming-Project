@@ -46,33 +46,38 @@ class SearchBar {
      }
   }
 
- void mousePressed() {
+   void mousePressed() {
     for (int i = 0; i < widgetDropdown.size(); i++) {
-        Widget temp = widgetDropdown.get(i);
-        if (temp.getEventString(mouseX, mouseY) != null) {
-            searchText = temp.getEventString(mouseX, mouseY);
-            stopTyping();
-            return; // Exit the method after setting searchText
-        }
+      Widget temp = widgetDropdown.get(i);
+      if (temp.getEventString(mouseX, mouseY) != null) {
+        searchText = temp.getEventString(mouseX, mouseY);
+        // Call searchCompleted method when a suggestion is clicked
+        searchCompleted(searchText);
+        audio3.play(); // Play search completed sound
+        return; // Exit the method after setting searchText
+      }
     }
     if (typing) {
-        // Check if the mouse is over the suggestion list
-        if (mouseOverSuggestionList()) {
-            // Determine the index of the clicked suggestion
-            int index = (mouseY - (searchBarY + 40)) / 32; // Height of each suggestion item is 32
-            // Check if the index is valid
-            if (index >= 0 && index < suggestionList.size()) {
-                // Set the searchText to the selected suggestion
-                searchText = suggestionList.get(index);
-                // Perform the action associated with pressing Enter
-                performEnterAction();
-            }
-        } else if (searchText.isEmpty()) {
-            stopTyping();
+      // Check if the mouse is over the suggestion list
+      if (mouseOverSuggestionList()) {
+        // Determine the index of the clicked suggestion
+        int index = (mouseY - (searchBarY + 40)) / 32; // Height of each suggestion item is 32
+        // Check if the index is valid
+        if (index >= 0 && index < suggestionList.size()) {
+          // Set the searchText to the selected suggestion
+          searchText = suggestionList.get(index);
+          // Perform the action associated with pressing Enter
+          performEnterAction();
+          // Call searchCompleted method when a suggestion is clicked
+          searchCompleted(searchText);
+          audio3.play(); // Play search completed sound
         }
+      } else if (searchText.isEmpty()) {
+        stopTyping();
+      }
     }
-}
- 
+  }
+
  boolean mouseOverSuggestionList() {
         float suggestionX = searchBarX;
         float suggestionY = searchBarY + 60;
