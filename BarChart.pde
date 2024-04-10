@@ -19,7 +19,7 @@ class BarChart {
   boolean displayDropMenu;
   ArrayList<String> dataList;
   IntList frequency; 
-  color dropMenuColor = color(#f5a201);
+  color dropMenuColor = color(205, 234, 248);
   color widgetColor = color(255);
   
   Widget dropMenu;
@@ -145,6 +145,7 @@ class BarChart {
     drawWidgets();
     int displayCount = Math.min(MAX_DISPLAY, dataList.size() - startingIndex);
     int actualIndex = 0; // the positioning of each bar( 0 = first bar, 1 = second bar etc);
+    image(barChartBackground, 6, 150);
     for (int i = startingIndex; i < startingIndex + displayCount; i++) {
       // Extracting label and count data
       String label = dataList.get(i);  
