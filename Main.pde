@@ -20,6 +20,7 @@ PImage arrivalBoardImage;
 PImage airportScreenGIF;
 PImage legendMap;
 PImage calendarCloud;
+PImage barChartBackground;
 boolean scrolledWithinSeconds = true; // Variable to track scrolling within our specified seconds
 int searchCompletionTime = 0; // Time when the search is completed
 Boolean showArrivals = false;
@@ -109,6 +110,7 @@ public void setup() {
   cloudImage = loadImage("cloud.png");
   programName = loadImage("programName.png");
   legendMap = loadImage("legendMap.png");
+  barChartBackground = loadImage("barChartBackground.png");
   
   // Initializing objects
   searchBar = new SearchBar();
