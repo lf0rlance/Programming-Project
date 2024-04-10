@@ -28,7 +28,7 @@ class StateWidget //<>// //<>//
     heat();
   }
   
-  // changing the 'heat' of the state depending on the average lateness of flights in the zone. 
+  // scaling the colour of the state depending on the average lateness of flights in the zone
   public void heat() 
   {
     int totalLateness = 0;
@@ -41,7 +41,7 @@ class StateWidget //<>// //<>//
       int actualArrival = (flight.getCrsArrTime()/100*60) + (flight.getCrsArrTime()%100); 
       
       if(arrival >= actualArrival) totalLateness += (arrival - actualArrival); // if the flight is late, add the amount to total lateness
-      //else totalLateness -= (arrival - actualArrival);
+      
       
  
     }
@@ -54,11 +54,7 @@ class StateWidget //<>// //<>//
     redness /= 30;
 
     }
-   // heatColor = color(redness*5,0,260-(redness*7));
-    heatColor = color(redness*225,0,260-(redness*225));
-
-
-    
+    heatColor = color(redness*225,0,260-(redness*225)); //way in which colour can be expressed based on the value: low (punctual) = blue (cold); high (late) = red (hot)
   }
 
   // draws the states

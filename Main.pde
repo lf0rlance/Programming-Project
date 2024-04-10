@@ -1,6 +1,7 @@
 import processing.sound.*;
 
-// main class
+// Main class,
+// innitialise arrays, screens, fonts, sound files, and constants
 Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen, dateDataScreen;
 PFont stdFont;
@@ -21,22 +22,23 @@ PImage airportScreenGIF;
 PImage legendMap;
 PImage calendarCloud;
 PImage barChartBackground;
-boolean scrolledWithinSeconds = true; // Variable to track scrolling within our specified seconds
-int searchCompletionTime = 0; // Time when the search is completed
+boolean scrolledWithinSeconds = true; // variable to track scrolling in specified seconds
+int searchCompletionTime = 0;
 Boolean showArrivals = false;
 Boolean typing = false;
+
+//defining objects here
 BarChart barChart;
-SearchBar searchBar; // Declare the SearchBar object
+SearchBar searchBar;
 Animation airportScreenBackground;
 Animation scrollAnimation;
-DepartureBoard departureBoard; // Declare the DepartureBoard object
+DepartureBoard departureBoard;
 ArrivalsBoard arrivalBoard;
 Calender theCalender;
 HeatMap heatmap;
 
-
- void settings() {
-  
+// Set canvas size and load sound files
+void settings() {
    size(800, 550);
   audio1 = new SoundFile(this, "backButtonClicked.mp3");
   audio2 = new SoundFile(this, "menuScreenBackgroundMusic.mp3");
@@ -44,11 +46,12 @@ HeatMap heatmap;
   audio4 = new SoundFile(this, "huh cat.mp3");
   audio2.play();
   audio2.amp(0.3);
- }
+}
 
+// initialise partz of program
 public void setup() { 
   
-  //reading data from file and organising into object array for usage
+  //read data from file & organise into object array for usage
   ArrayList<String> rawDataInArrayForm = new ArrayList<String>();
   try {
     BufferedReader flights = createReader("flights_full.csv");
@@ -69,6 +72,7 @@ public void setup() {
     allFlightData[i] = new Flights(rawDataInArrayForm.get(i));
   }
 
+
   //placeholder code for screen/widget
   Widget widget1, widget2, widget3, widget4;
   stdFont = loadFont("AgencyFB-Bold-30.vlw");
@@ -76,7 +80,7 @@ public void setup() {
   int menuWidth = 300; // Width of each menu widget
   int menuX = (width - menuWidth) / 2; // Centering the menu horizontally
 
-  // Adjusted positions and labels based on the order you specified
+  // adjusted positions and labels based on the order you specified
   widget1 = new Widget(menuX, 225, menuWidth, 40, "Airport Locator", color(255), stdFont, AIRPORT_LOCATOR_BUTTON);
   widget2 = new Widget(menuX, 275, menuWidth, 40, "Date", color(255), stdFont, DATE_BUTTON);
   widget3 = new Widget(menuX, 325, menuWidth, 40, "Lateness", color(255), stdFont, LATENESS_BUTTON);
@@ -105,7 +109,7 @@ public void setup() {
   currentScreen = menuScreen;
   barChart = new BarChart(200,200,4);
   
-  // Loading images
+  // load several images...
   microscopeIcon = loadImage("microscope.png");
   destinationTableImage = loadImage("departuresBoard.png");
   arrivalBoardImage = loadImage("arrivalsBoard.png");
@@ -114,7 +118,7 @@ public void setup() {
   legendMap = loadImage("legendMap.png");
   barChartBackground = loadImage("barChartBackground.png");
   
-  // Initializing objects
+  // initialis more necessary objects
   searchBar = new SearchBar();
   theCalender = new Calender(dateScreen, stdFont);
   departureBoard = new DepartureBoard();
@@ -126,6 +130,7 @@ public void setup() {
   
 }
 
+
 void draw() {
   background(currentScreen.screenColor);
   
@@ -135,7 +140,6 @@ void draw() {
     image(cloudImage, currentScreen.getCloudX(), 0);
     image(cloudImage, currentScreen.getCloudX() - width, 0); 
     image(programName, 225, 140);
-    
   }
   
   // Draws a specific elements based on the current screen
@@ -199,6 +203,7 @@ void draw() {
   }
 }
 
+// mouse press event handler
 public void mousePressed() {
   if (currentScreen == airportScreen) {
     searchBar.mousePressed();
@@ -242,6 +247,7 @@ public void mousePressed() {
   }
 }
 
+// Key press event handler
 void keyPressed() {
   if (currentScreen == airportScreen) {
     searchBar.keyPressed();
@@ -256,6 +262,7 @@ void keyPressed() {
   }
 }
 
+// Key release event handler
 void keyReleased() {
   if (currentScreen == airportScreen && key == ENTER) {
     searchBar.stopTyping();
@@ -263,6 +270,7 @@ void keyReleased() {
   }
 }
 
+// Mouse wheel event handler
 void mouseWheel(MouseEvent event) {
   int increment = event.getCount(); // Fixed reverse scroll
   
@@ -278,6 +286,7 @@ void mouseWheel(MouseEvent event) {
   }
 }
 
+// Mouse click event handler
 void mouseClicked()
 {
   if(currentScreen == graphsScreen)
@@ -294,6 +303,7 @@ void searchCompleted(String airportCode) {
   scrolledWithinSeconds = false; // Reset the scrolled flag
 }
 
+// update departure and arrival board based on search
 void updateDepartureAndArrivalBoard(String airportCode) {
   ArrayList<Flights> departures = new ArrayList<Flights>();
   ArrayList<Flights> arrivals = new ArrayList<Flights>();

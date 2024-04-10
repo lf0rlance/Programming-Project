@@ -155,7 +155,7 @@ class BarChart {
       float scale = (float) count / frequency.get(0); 
       int redComponent = (int) (scale * 225);
       int blueComponent = 225 - redComponent;
-      fill(redComponent, 0, blueComponent);
+      fill(redComponent, 0, blueComponent); //way in which colour can be expressed based on the value: low (scarce) = blue; high (frequent) = red
       
       // removing alternate names
       if(label.contains("/") && dataType != FLIGHT_DATE)
@@ -231,7 +231,7 @@ class BarChart {
 
   
 
-  // Function that sorts the frequency list in order descending order, and then orders the corresponding values in the data list.
+  // Function that sorts the frequency list in order descending order, and then orders the corresponding values in the data list 
   public void sort(ArrayList<String> locations, IntList amountOfFlights) {
     // Check if both lists have the same size
    if (locations.size() != amountOfFlights.size()) {
