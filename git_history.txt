@@ -1,0 +1,902 @@
+commit 8bf9cccc25000d54dcd208abc4b55bded0bb0ff0 (HEAD -> main, origin/main, origin/HEAD)
+Merge: 4f43a06 9627037
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Wed Apr 10 21:03:00 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 9627037b29750d63d3a9165305c6a310753167ed
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Wed Apr 10 21:01:41 2024 +0100
+
+    Comments on search bar
+
+commit 4f43a06a6f6a09e90a4cb59814bc4364672246d7
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Wed Apr 10 21:01:25 2024 +0100
+
+    Finished my comments
+
+commit 96ac4cb607dea6b9a9e3e92efc3ddb996e12559a
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Wed Apr 10 19:52:42 2024 +0100
+
+    Added comments
+
+commit a111477ad706ccc1614649daf4c624e9cffbec70
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Wed Apr 10 18:27:21 2024 +0100
+
+:...skipping...
+commit 8bf9cccc25000d54dcd208abc4b55bded0bb0ff0 (HEAD -> main, origin/main, origin/HEAD)
+Merge: 4f43a06 9627037
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Wed Apr 10 21:03:00 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 9627037b29750d63d3a9165305c6a310753167ed
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Wed Apr 10 21:01:41 2024 +0100
+
+    Comments on search bar
+
+commit 4f43a06a6f6a09e90a4cb59814bc4364672246d7
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Wed Apr 10 21:01:25 2024 +0100
+
+    Finished my comments
+
+commit 96ac4cb607dea6b9a9e3e92efc3ddb996e12559a
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Wed Apr 10 19:52:42 2024 +0100
+
+    Added comments
+
+commit a111477ad706ccc1614649daf4c624e9cffbec70
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Wed Apr 10 18:27:21 2024 +0100
+
+    added some comments
+
+    mostly in the main
+
+commit a0631d443323cb4ab465fd8fbbe2e97bde49ca8b
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Wed Apr 10 13:01:16 2024 +0100
+
+    Text update
+
+    Fixed issues with text in bar chart class.
+    Centred heatmap
+
+commit 30569c3676f9a661ad7ae5198f89e2938ac85311
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Apr 10 12:52:38 2024 +0100
+
+    Fix Delayed Status Hitbox
+
+commit 6143beb1e6b69ffb65c61eddc4226866b6868d34
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Apr 10 12:43:44 2024 +0100
+
+    Fixed Suggestion List
+
+    Fixed suggestion list not updating upon click
+
+commit d91dc9cbeb8bf5c6820ea8c464f8f5cc9ee3a6b0
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Wed Apr 10 12:35:20 2024 +0100
+
+    Sound check
+
+commit 305b7e0cfa4ea922e0056abb92cc071591734442
+Merge: 6695131 ec72115
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Wed Apr 10 12:30:22 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 6695131df21c4f99947a9beb7dd70e13560de6e9
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Wed Apr 10 12:28:06 2024 +0100
+
+    Audio fix
+
+commit ec7211560bb93a995b03f4cb9818f199bfee2f11
+Merge: dd7c753 f916ff4
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Apr 10 12:26:57 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit dd7c753f979c82def88490cd16dd334307bc8cf3
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Apr 10 12:26:53 2024 +0100
+
+    Added comments
+
+commit f916ff411a11840e14fb6b3e6bb480bc171aecf5
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Wed Apr 10 12:17:17 2024 +0100
+
+    search fail audio added
+
+commit af2f4e43d9a186ca522a0ea2a02ead9bc6fa9eb7
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Apr 10 11:52:53 2024 +0100
+
+    Added Bar Chart Background
+
+    - Added Image
+
+commit 9e03d13d637ff75b7fad164a3b8f46bb1aef2bb5
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Apr 10 10:47:45 2024 +0100
+
+    Added Background to Calendar
+
+    - Added background to calendar
+    - Changed where dateDataScreen is declared
+
+commit 0ddecb446be025e979e63ffa68e99b7020359c97
+Merge: e2f1b0c f29836f
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Apr 10 10:05:59 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit e2f1b0c21356959f4ab4ce145a8653d5121f72ee
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Apr 10 10:04:39 2024 +0100
+
+    Added legend map
+
+    - Added legend map image
+    - Loading image in heat map draw
+
+commit f29836ff5fa771bd833c4e72d766e608cf1f9e8a
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Wed Apr 10 09:55:24 2024 +0100
+
+    Fixed Bar chart and heat map
+
+    Fixed issue with the dates on the bar chart not formatting properly. Fixed issue with the Delaware state not functioning correctly in the heat map class.
+
+commit 670213594d1be97579544a0ca33108c0b8811a9c
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Tue Apr 9 23:10:42 2024 +0100
+
+    Cleaned up bar chart and heat map
+
+    Made the code for bar chart more easy to understand and slighlty more efficient. Replaced one of the options for the drop menu that was not working correctly.
+    Heat map colors need to be changed again
+
+commit 1e3f39f6cc13946ad2c94ff6ff06142a4145f522
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Tue Apr 9 20:59:43 2024 +0100
+
+    Fixed heat map hit boxes
+
+    Heat map now only highlights one state at a time.
+
+commit 5c3a7a604e73162bcad231878c1a46beedbe1647
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Tue Apr 9 14:25:49 2024 +0100
+
+    Audio Fix
+
+commit e0f5fdaa1069684f0aee0050bcb78e0987c2f445
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Mon Apr 8 15:10:14 2024 +0100
+
+    fixed audio
+
+commit 4f69084046b43396b17c5d9f2b2f648484025d0c
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Sat Apr 6 23:45:23 2024 +0100
+
+    Re-added the updated bar chart, heat map,, drop menu and state widgets
+
+commit 3cda1359cc6c3485c2b15efcc659407c5a25dbb2
+Merge: 8ac5fa8 21ac9dd
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Sat Apr 6 21:21:47 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 8ac5fa8f34f183fd68d44a107986c61be46bdc4d
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Sat Apr 6 21:21:43 2024 +0100
+
+    Update Main.pde
+
+commit 21ac9dd56522a64e379bd1f6daee2928ed908505
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Sat Apr 6 12:17:29 2024 +0100
+
+    Revert "idk"
+
+    This reverts commit 21bd1dfb1714ad9dd68da7fb2ccb9b1bc5a43c61.
+
+commit 0431985465e638e351c39b19f8acf9de54b7c654
+Merge: 21bd1df f558d21
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Sat Apr 6 12:13:56 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 21bd1dfb1714ad9dd68da7fb2ccb9b1bc5a43c61
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Sat Apr 6 12:09:47 2024 +0100
+
+    idk
+
+commit f558d215350a22d05fbcee23f9333b1a204f8df7
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Fri Apr 5 20:37:12 2024 +0100
+
+    Updated Bar Chart, Drop Menu and Heat Map
+
+    Heatmap still has hitbox problem(working on a fix). Dropdown menu can be made even faster if needed.
+
+commit 42fca8e907dbccdaf99cc90976d00e1461772a22
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Fri Apr 5 17:51:10 2024 +0100
+
+    Search failed added
+
+commit 7170b44c2835fab01374a70fe5e9bae2e2163509
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Fri Apr 5 17:18:16 2024 +0100
+
+    Deleted Autosave Files
+
+commit 1668b2d57607a42cb0fcf2679b3c004872e03f51
+Merge: ee02479 b528f08
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Fri Apr 5 17:13:51 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit ee024796a689e4309693791ba0807d06fc274028
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Fri Apr 5 17:13:46 2024 +0100
+
+    Update Main.pde
+
+commit b528f08bf5e285fbe241b7aae73216d27ac20ff7
+Merge: 68918c2 b3d5e46
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Fri Apr 5 17:01:18 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 68918c2f656a68744729e67e4c59133f9a3df133
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Fri Apr 5 16:59:27 2024 +0100
+
+    Search Bar Suggestions Fix
+
+    - Fixed the first suggestion being associated with the last suggestion
+    - Changed the size of the delayed status hitbox in departure/arrival board classes
+
+commit b3d5e46631600a312bb70fe8dad703f72dbdaf64
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Fri Apr 5 16:41:58 2024 +0100
+
+    Audio Added
+
+commit 687cd4a5bf567016aee6e2738f8b06d9b302292b
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Fri Apr 5 13:52:12 2024 +0100
+
+    Suggestion List Fix
+
+commit 3eea9cc4330ba363054016e9bfa1ca51af7efd0e
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Fri Apr 5 10:10:16 2024 +0100
+
+    made lateness colours scale from blue to red
+
+commit f403d61f8b13eb2f2c5a932067f0c6635bef4877
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Apr 4 17:14:08 2024 +0100
+
+    Variable Fix
+
+commit 768d03774aec1e14a6b0d1ebd494ca50dfc6dbe2
+Merge: 0069c46 625756a
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Apr 4 17:13:42 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 0069c467268ec615777598634286497b771dd710
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Apr 4 17:05:19 2024 +0100
+
+    Scroll Tool Hint
+
+    - Added scroll hint. If the user completes a search and doesn't scroll for longer than 8 seconds, a scroll animation appears
+    - Added images for animation
+
+commit 625756a6a42decfec325862075777c1b33b84acd
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Thu Apr 4 10:45:31 2024 +0100
+
+    Suggestion List
+
+    Suggestion List updated
+
+commit fd0e2bf087128cb97b83ee5a4ace01df0780e426
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Thu Apr 4 09:43:02 2024 +0100
+
+    Create SearchBar16896501853542757989.autosave
+
+commit 84fe2146cf951742963818724ab634cce935fdee
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Thu Apr 4 09:24:54 2024 +0100
+
+    Revert "Search and Airplane icon"
+
+    This reverts commit 021243fd2d3d46b4cf57d39399e387a29b71c590.
+
+commit 61205cae428ac1087fe3d387c78ce82343325a27
+Merge: 021243f 5850fd8
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Thu Apr 4 08:55:39 2024 +0100
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 021243fd2d3d46b4cf57d39399e387a29b71c590
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Thu Apr 4 08:55:32 2024 +0100
+
+    Search and Airplane icon
+
+    Search Bar update and HeatMap airplane  icon added
+
+commit 5850fd8e7d8ca47e804ad96ebcfc77a01b60f57b
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Wed Apr 3 23:24:46 2024 +0100
+
+    heatmap colour revamp in progress
+
+commit 6f28f95c0a446722eb28f4c2fa75e9ef8cce466e
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Tue Apr 2 13:19:42 2024 +0100
+
+    Fixed case sensitivity bug
+
+    -It could detect and use capital characters fine.
+    -it was using shift key or caps lock key to get the capital character that broke it.
+    -added a keyCode check to do nothing if shift or caps lock is pressed
+
+commit 42f124a6c7c7dd44c922d873e99c6f6a4614b3f1
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Tue Apr 2 12:17:15 2024 +0100
+
+    Fixed Calender Bugs
+
+    -31st now works properly.
+
+    -spaced out each widget by one pixel so it looks right when hovering over it.
+
+    -added mutator constructor to widget class to enable different widget fill colors when hovering over dates.
+
+commit b48bf2d33f34a8384c4b8940d394b531dddc9cf4
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Sat Mar 30 14:55:29 2024 +0000
+
+    Fixed heatmap problem with displaying the wrong lateness
+
+commit a0f37827083960fbcc1b187ff590ea29ed71075a
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Sat Mar 30 13:27:02 2024 +0000
+
+    Added heatmap in main
+
+commit 1ae772ddb31228d0db6783dc66df00421449f452
+Merge: 5a2e4c0 2830ab1
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Sat Mar 30 13:20:00 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 5a2e4c0d5264c988777c12089c58fa709015f38d
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Sat Mar 30 12:58:30 2024 +0000
+
+    Updated heatmap
+
+    The Images need cleaning up, and I might put an outline behind the whole thing to make it look neater(might need Johnston or Adam to help with that)
+
+commit 2830ab134443673812d2fa01622dfe62d7e60be5
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Sat Mar 30 09:51:14 2024 +0000
+
+    Arrival Board Scroll Fix
+
+commit 83168db54e420816d90950e137142165e3ef1fd4
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Fri Mar 29 22:15:36 2024 +0000
+
+    Fixed Date Formatting
+
+    - Fixed date formatting in the departure and arrivals board:
+     -> added 0's if there was only 1 character representing the month
+     -> ensured only the date is extracted and not the time
+    - Renamed classes to appropriate names
+
+commit 40cd246b6cad5ac196eeb13900d5e77b1042b314
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Fri Mar 29 20:59:11 2024 +0000
+
+    Arrivals Board Added
+
+    - To switch between departures and arrivals simply click on the button//tab
+    - Also cleaned up the formatting and order of some code
+
+commit 22fb2a0420b839bed234377a8da0aa5467b0142c
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Fri Mar 29 12:45:26 2024 +0000
+
+    Animations Update
+
+    - Added animations class which brings images to life
+    - Added the first animation to the airport screen
+    - Added new folder in data called airportAnimation
+
+commit ab77bc51f7d9459646ef094a8d606e6113b10305
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Fri Mar 29 11:09:17 2024 +0000
+
+    Minor Back Ground Image Fix
+
+commit 3c9c889199dc34fc3b5fb06053edfbc844913b4f
+Merge: 770ee4a 47bf9ac
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Mar 28 12:33:58 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 47bf9ac098914d6374168db71c8bcac8e29ee568
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Thu Mar 28 12:12:19 2024 +0000
+
+    Started heatmap
+
+    Added some of the states for the heatmap. Will add the other states and the base code later.(the current images need some cleaning up though).
+
+commit 7a2d30df3bdb730470e070f5f4bd401ae8c3ad37
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Thu Mar 28 10:30:15 2024 +0000
+
+    Added Drop down Menu
+
+commit 770ee4ac7752a2c088fe62d111f88a6d5fde023e
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Mar 28 09:52:13 2024 +0000
+
+    Save
+
+commit 898e61555e57d19674c5de5bc085dbb7faad57c4
+Merge: d1a0951 366f9c7
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Thu Mar 28 09:47:15 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit d1a09518fe405c1d34bcb3d212a39249f5060d48
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Thu Mar 28 09:43:18 2024 +0000
+
+     Bar Chart Amended
+
+    colours and scale
+
+commit 366f9c73213964ab2d6d157da4ae344b9fd725fd
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Thu Mar 28 09:19:28 2024 +0000
+
+    Revert "Overwrite Commit"
+
+    This reverts commit b23e9288abb9dce0b0a8574969a5d58fb064bdd4.
+
+commit 91e5cedff46cf3b8405ea8dbbe2864a585dcf8d9
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Thu Mar 28 09:19:13 2024 +0000
+
+    Revert "Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project"
+
+    This reverts commit 2e4ac20d43f2721d825c929a1f7c9b85095755b7, reversing
+    changes made to b23e9288abb9dce0b0a8574969a5d58fb064bdd4.
+
+commit 2e4ac20d43f2721d825c929a1f7c9b85095755b7
+Merge: b23e928 cd75ebc
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Mar 28 09:18:06 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit b23e9288abb9dce0b0a8574969a5d58fb064bdd4
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Mar 28 09:18:00 2024 +0000
+
+    Overwrite Commit
+
+    - Fixed faulty merge
+
+commit cd75ebcca93fecc2cae7638a4c1992c9176aef01
+Merge: d27c171 249b62f
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Thu Mar 28 09:07:25 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit d27c1711d6161c9011dd04edfa4b73313aab80f1
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Thu Mar 28 09:01:49 2024 +0000
+
+    Added Drop Menu in Bar Chart Class
+
+    yeah
+
+commit 249b62f3736929213d72512b2a02dd838b2f9e7b
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 16:39:13 2024 +0000
+
+    Removed Main Autosave File
+
+commit 3414cfb7d47cf5cbec4546b77031dbe1e980b141
+Merge: a1490c6 f93ca99
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 16:36:47 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit a1490c657f9b0d71cb8845dd266263b81a6bf381
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 16:36:37 2024 +0000
+
+    Calendar Double Click Fix
+
+    Removed mouseClicked method and changed solely to mousePressed to fix this issue
+
+commit f93ca99ff6ebb348c72ed89410e5b9eb89f419b4
+Merge: 6c76d20 2673c4e
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Mar 27 15:11:27 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 6c76d202291dd23f88445f67dba2c7b5dd4aad27
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Mar 27 15:11:21 2024 +0000
+
+    recommitting
+
+commit 2673c4ee9bc32185c2373c2fab257f51133c568e
+Merge: dc6de41 013bc9f
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 14:52:24 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit dc6de4180d641262414579487e57cf64f35bb738
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 14:52:15 2024 +0000
+
+    Infinite Search Bar Added
+
+    - User input now doesn't spill if it exceeds the search bar size
+
+commit 013bc9f0d9e9302cc6a4bd3115f6f92f8fbc9c95
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Mar 27 14:39:04 2024 +0000
+
+    fixed int issue by casting
+
+commit 7e0f02cf09c407b79b01af14db59fdc9dd7035cf
+Merge: e922f1f fa5dd34
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Mar 27 14:32:36 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit e922f1fa43cfab8d98003b8d0406f04f82f94b03
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Mar 27 14:21:58 2024 +0000
+
+    Calender class now fully working.
+
+    tried to make faster but dates at the end like 31 take ages to load.
+
+    bug that registers click twice from home screen going straight to a date
+
+    other than that it works fine.
+
+commit fa5dd34e134e9129ca0059c8dc3e84db6a7088b0
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 13:00:39 2024 +0000
+
+    Major Airport Screen Update
+
+    - Added destination table to airport locator
+    - Added user queries utilizing the search bar
+    - Added scroll functionality to the destination table
+    - Added formatting methods to both time and date values for viewing purposes
+    - Added status column based on the current status of the flight
+    - Added HHMM to minutes only converter for delay purposes
+    - Added "hover-over" delayed status to find out the precise delay
+    - Added "destinationTableImage"
+    - Added DepartureBoard class
+
+commit ab1afed60b1cc04675d31e94a388c248cb44bf63
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 12:56:15 2024 +0000
+
+    Fixed Merge
+
+    - Files didn't save properly so I had to fix
+
+commit bd93caec7853a3572bb7be1d5824af9d9572c26a
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 12:38:33 2024 +0000
+
+    Departure Board Update
+
+    - Didn't save the newest version, this is part of the major airport locator update
+
+commit 9a35ba28121f9104747b904d671485809a0bf555
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 12:32:48 2024 +0000
+
+    Departure Board Fix
+
+commit 49b51ee079e442b33960a3b67c48247c9a0215e9
+Merge: b63d789 cb904e3
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 12:06:40 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit b63d78942b5a4322b65fbe8677265fa0408063d6
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Wed Mar 27 12:02:05 2024 +0000
+
+    Major Airport Locator Update
+
+    - Added destination table to airport locator
+    - Added user queries utilizing the search bar
+    - Added scroll functionality to the destination table
+    - Added formatting methods to both time and date values for viewing purposes
+    - Added status column based on the current status of the flight
+    - Added HHMM to minutes only converter for delay purposes
+    - Added "hover-over" delayed status to find out the precise delay
+    - Added "destinationTableImage"
+    - Added DepartureBoard class
+
+commit cb904e3bdd1957f2bff426ff0b64e7cb6e2eaa3e
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Tue Mar 26 19:09:10 2024 +0000
+
+    Started CAlender class, (Its VERY buggy + not done)
+
+commit 9ad77927bee1bd091f56763cc1567efa43f1f67c
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Tue Mar 26 16:05:13 2024 +0000
+
+    Search Bar Display Fix
+
+commit bbc10bf95482f2461a688d41fc774c34961df21a
+Merge: e18b72c da123af
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Tue Mar 26 15:47:22 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit e18b72caf92b5b9d3645f2913255b0f5563185ca
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Tue Mar 26 15:47:11 2024 +0000
+
+    fixed bar chart bugs except it going off screen
+
+commit da123af5e3f919283259ace3679ccc17514617ff
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Tue Mar 26 15:18:27 2024 +0000
+
+    Search Bar Fixes/Updates
+
+    - Added search bar to its own class
+    - Cleaned up the main class
+    - Added a blinking a typing cursor to the search bar
+
+commit 183476e903a21944f70d06a4f80744e8f88d8511
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Tue Mar 26 12:50:04 2024 +0000
+
+    SearchBar Added
+
+    Added a microscope.png and a search bar to airport screen
+
+commit f2530696da466a2987a7c26c901f9fd8a72bcff8
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Tue Mar 26 12:21:36 2024 +0000
+
+    moved files
+
+commit b15ede480e58c2bcfaaaf3761681ac9df4ab1a8b
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Tue Mar 26 12:03:25 2024 +0000
+
+    made changes done a week ago
+
+commit 8d5fa44734e18c28d9d16eac2a6c089cbfc55705
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Tue Mar 26 11:27:28 2024 +0000
+
+    FIxed Reverse Graph Scroll
+
+    - Changed incrementing to decrementing through data sets in order to fix this
+
+commit 4b3ce01e707833f661a0e1488a2ba94540eee169
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Tue Mar 26 11:15:47 2024 +0000
+
+    Added Graph Scroll Functionality
+
+    - Added a mouseWheel function to main - Ensured scroll only works if there is more data to display only
+
+commit d728320cfe53c7a57a6814b9aa0ba2b5afc3f3ff
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Mon Mar 25 15:04:21 2024 +0000
+
+    Centered Bar Chart
+
+    - Changed the position of bar chart
+
+commit aefa5a72d39446d63ee8f3d27968c969a608b3f9
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Mar 21 17:52:04 2024 +0000
+
+    Bar Chart Fix
+
+    - Fixed issue with screen and charts
+
+commit 3a9f4b8bc943eea5fa8829b712500ce281adce7b
+Merge: af01ca2 37108fc
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Mar 21 17:46:24 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit af01ca22f5ba5212297219bc3c03e1d5ab29ddf5
+Author: AskewCow <adambandyk06@gmail.com>
+Date:   Thu Mar 21 17:33:28 2024 +0000
+
+    Major GUI Update
+
+    - Added Main menu screen
+    - Added switch between screen functionality
+    - Added back to main menu button
+    - Added compatibility with previous version making graphs only appear in graphs screen
+    - Added multiple new screens and widgets
+
+commit 37108fc46e3dd4fd16063f49fb1ffb527f565d2a
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Thu Mar 21 12:38:09 2024 +0000
+
+    Update BarChart.pde
+
+commit 4390d596c7cdcfbb4898da96be87eef3701b6d99
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Thu Mar 21 10:36:29 2024 +0000
+
+    added scroll function
+
+commit 9b723bf0255c3806076e860042701a669d114b29
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Thu Mar 21 10:25:43 2024 +0000
+
+    Improved Bar chart
+
+commit 2d5b1dec2242bb6a032ba6fc557bd3decd537366
+Author: JoshuaFranceTCD <jfrance@tcd.ie>
+Date:   Wed Mar 20 23:45:03 2024 +0000
+
+    Added Bar chart
+
+    We can work on making the bar chart its own class and adding methods to change the ordering of the bar chart, information displayed etc
+
+commit 3b183a86c2e86b57ade700e009e76e20fbbcece6
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Wed Mar 20 15:46:48 2024 +0000
+
+    added missing getters & method for printing all attributes
+
+    print flight details by: allFlightData[x].printFlightDetails();
+
+commit 2514f99d1f135808960a0d6874523a33ae25b05c (origin/added-missing-getters-&-method-to-print-elements)
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Mar 20 15:08:42 2024 +0000
+
+    Added Button Margin changing when hovering over it
+
+commit 4ea979ac36b1506acd1aeaa0375baf6f013ef4b6
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Mar 20 13:30:00 2024 +0000
+
+    Added Screen and Widget Class
+
+    base code for screen and widget class. needs to be built on to display graphs etc.
+
+commit 3fe53ed40be6f737ed8bf471bb30d06cff914864
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Mar 20 12:11:05 2024 +0000
+
+    Made Flights Class More Efficient + Fixed Bugs
+
+    Data fully cleaned up for easier use.
+    missing data accounted for by filling with a zero.
+
+commit 063cf87a7842602d20d9e7745ea24082ccc8bd49
+Merge: 8715649 8df1733
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Thu Mar 14 10:43:03 2024 +0000
+
+    Merge branch 'main' of https://github.com/Johnstonjpg/Programming-Project
+
+commit 87156498167a8bafb6afc2bb780637ac9f93a449
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Thu Mar 14 10:41:22 2024 +0000
+
+    Replaced DataLoader with Flights class.
+
+    got rid of individual variables. Now flights class can be an array object  with functions to get data.
+
+commit 8df17337590b228573b57e25e32f3f7a5314f485
+Author: canyu3411 <canyu3411@gmail.com>
+Date:   Thu Mar 14 10:08:58 2024 +0000
+
+    ammended date/time parsing
+
+    (and added try/catch)
+
+commit a4a2c4d771cb22e1daaa08ed9d25f4580f8d9e64 (origin/fixed-date/time-parsing-and-added-try/catch-in-DataLoader)
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Wed Mar 13 22:00:33 2024 +0000
+
+    Added Functionality to DataLoader
+
+    DataLoader now takes the data from csv file and organises it into the relevent variables previously in the data class (now variables).
+
+commit 45fe67643ec8bfb58e1487d675b9ae38e6c0724f
+Author: AskewCow <75549931+AskewCow@users.noreply.github.com>
+Date:   Wed Mar 13 14:13:05 2024 +0000
+
+    Add files via upload
+
+commit e793e7cfe8f899ba588715a897146eebece14d2d
+Merge: 6819eb5 65b84fa
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Tue Mar 12 13:18:11 2024 +0000
+
+    Merge pull request #1 from Johnstonjpg/lf0rlance-patch-1
+
+    Update README.md
+
+commit 65b84fa6a8013b0fac95ef1d55406f25afa14eb5
+Author: lf0rlance <163134925+lf0rlance@users.noreply.github.com>
+Date:   Tue Mar 12 13:14:34 2024 +0000
+
+    Update README.md
+
+commit 6819eb5f0df2d5b285c576626222fb531d73a7b4
+Author: Johnstonjpg <73368287+Johnstonjpg@users.noreply.github.com>
+Date:   Tue Mar 12 13:01:20 2024 +0000
+
+    Initial commit
+(END)
