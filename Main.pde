@@ -1,7 +1,8 @@
+// Importing necessary libraries
 import processing.sound.*;
 
-// Main class,
-// innitialise arrays, screens, fonts, sound files, and constants
+// Main class
+// Initializing arrays, screens, fonts, sound files, and constants
 Flights allFlightData[];
 Screen currentScreen, menuScreen, airportScreen, dateScreen, latenessScreen, graphsScreen, dateDataScreen;
 PFont stdFont;
@@ -22,12 +23,12 @@ PImage airportScreenGIF;
 PImage legendMap;
 PImage calendarCloud;
 PImage barChartBackground;
-boolean scrolledWithinSeconds = true; // variable to track scrolling in specified seconds
-int searchCompletionTime = 0;
-Boolean showArrivals = false;
+boolean scrolledWithinSeconds = true; // Tracking scrolling
+int searchCompletionTime = 0;         // Tracking time from when enter clicked
+Boolean showArrivals = false;         // Tracking current departure/arrivals board
 Boolean typing = false;
 
-//defining objects here
+// Defining objects
 BarChart barChart;
 SearchBar searchBar;
 Animation airportScreenBackground;
@@ -37,9 +38,9 @@ ArrivalsBoard arrivalBoard;
 Calender theCalender;
 HeatMap heatmap;
 
-// Set canvas size and load sound files
+// Set screen size and load sound files
 void settings() {
-   size(800, 550);
+  size(800, 550);
   audio1 = new SoundFile(this, "backButtonClicked.mp3");
   audio2 = new SoundFile(this, "menuScreenBackgroundMusic.mp3");
   audio3 = new SoundFile(this, "searchCompleted.mp3");
@@ -48,10 +49,9 @@ void settings() {
   audio2.amp(0.3);
 }
 
-// initialise partz of program
-public void setup() { 
-  
-  //read data from file & organise into object array for usage
+// Initialize parts of the program
+public void setup() {
+  // Read data from file and organize into object array for usage
   ArrayList<String> rawDataInArrayForm = new ArrayList<String>();
   try {
     BufferedReader flights = createReader("flights_full.csv");
@@ -72,15 +72,14 @@ public void setup() {
     allFlightData[i] = new Flights(rawDataInArrayForm.get(i));
   }
 
-
-  //placeholder code for screen/widget
+  // Placeholder code for screen/widget
   Widget widget1, widget2, widget3, widget4;
   stdFont = loadFont("AgencyFB-Bold-30.vlw");
   textFont(stdFont);
   int menuWidth = 300; // Width of each menu widget
   int menuX = (width - menuWidth) / 2; // Centering the menu horizontally
 
-  // adjusted positions and labels based on the order you specified
+  // Adjusted positions and labels based on the order you specified
   widget1 = new Widget(menuX, 225, menuWidth, 40, "Airport Locator", color(255), stdFont, AIRPORT_LOCATOR_BUTTON);
   widget2 = new Widget(menuX, 275, menuWidth, 40, "Date", color(255), stdFont, DATE_BUTTON);
   widget3 = new Widget(menuX, 325, menuWidth, 40, "Lateness", color(255), stdFont, LATENESS_BUTTON);
@@ -90,26 +89,26 @@ public void setup() {
   menuScreen.add(widget2);
   menuScreen.add(widget3);
   menuScreen.add(widget4);
-  
+
   // Create screens for each functionality
   airportScreen = new Screen(color(37, 150, 190));
   airportScreen.add(new Widget(width - 550, height - 525, 300, 40, "Airport Locator Screen", color(168,213,229), stdFont, EVENT_NULL));
-  
+
   dateScreen = new Screen(color(205, 234, 248));
   dateScreen.add(new Widget(width - 550, height - 525, 300, 40, "Date Screen", color(168,213,229), stdFont, EVENT_NULL));
-  
+
   latenessScreen = new Screen(color(37, 150, 190));
   latenessScreen.add(new Widget(width - 550, height - 525, 300, 40, "Lateness Screen", color(168,213,229), stdFont, EVENT_NULL));
-  
+
   graphsScreen = new Screen(color(37, 150, 190));
   graphsScreen.add(new Widget(width - 550, height - 525, 300, 40, "Graphs Screen", color(168,213,229), stdFont, EVENT_NULL));
-  
-  dateDataScreen = new Screen(color(205,234,248)); //make new screen to display data as widgets
-  
+
+  dateDataScreen = new Screen(color(205,234,248)); // Make new screen to display data as widgets
+
   currentScreen = menuScreen;
   barChart = new BarChart(200,200,4);
-  
-  // load several images...
+
+  // Load several images
   microscopeIcon = loadImage("microscope.png");
   destinationTableImage = loadImage("departuresBoard.png");
   arrivalBoardImage = loadImage("arrivalsBoard.png");
@@ -117,8 +116,8 @@ public void setup() {
   programName = loadImage("programName.png");
   legendMap = loadImage("legendMap.png");
   barChartBackground = loadImage("barChartBackground.png");
-  
-  // initialis more necessary objects
+
+  // Initialize necessary objects
   searchBar = new SearchBar();
   theCalender = new Calender(dateScreen, stdFont);
   departureBoard = new DepartureBoard();
@@ -127,13 +126,11 @@ public void setup() {
   airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
   scrollAnimation = new Animation("scrollAnimation", "Layer ", 65, 2);
   heatmap = new HeatMap(100,120);
-  
 }
-
 
 void draw() {
   background(currentScreen.screenColor);
-  
+
   // Draw the cloud background only if the current screen is the menu screen
   if (currentScreen == menuScreen) {
     currentScreen.updateCloudPosition();
@@ -141,12 +138,12 @@ void draw() {
     image(cloudImage, currentScreen.getCloudX() - width, 0); 
     image(programName, 225, 140);
   }
-  
-  // Draws a specific elements based on the current screen
+
+  // Draws specific elements based on the current screen
   if (currentScreen == graphsScreen) {
     barChart.draw();
   }
-  
+
   if (currentScreen == airportScreen) {
     background(airportScreen.screenColor); // Draw the background color of the airport screen
 
@@ -156,55 +153,53 @@ void draw() {
     // Update the animation to display the next frame
     airportScreenBackground.update();
 
-    // Draw other elements only airport screen
+    // Draw other elements only on airport screen
     // Draw the search bar on the airport screen 
     searchBar.draw();
 
     if (showArrivals) {
-        arrivalBoard.draw(); 
+      arrivalBoard.draw(); 
     } else {
-        departureBoard.draw(); 
+      departureBoard.draw(); 
     }
-    if (!scrolledWithinSeconds && millis() - searchCompletionTime > 8000) {   // change this value to increase/decrease time for hint to pop up
+    if (!scrolledWithinSeconds && millis() - searchCompletionTime > 8000) {   // Change this value to increase/decrease time for hint to pop up
       if (scrollAnimation != null) { // Ensure scrollAnimation is not null
         scrollAnimation.display(610, 230);
         scrollAnimation.update();
       }
     }
-     
-     if(typing){
-       searchBar.draw();
-     }
+
+    if(typing){
+      searchBar.draw();
+    }
 
   }
-  
-  if(currentScreen == dateScreen)
-  {
+
+  if(currentScreen == dateScreen) {
     theCalender.draw();
   }
-  
-  if(currentScreen == latenessScreen)
-  {
+
+  if(currentScreen == latenessScreen) {
     heatmap.draw();
   }
-  
+
   if(currentScreen == dateDataScreen) {
     image(calendarCloud, 0, 0);
   }
-  
-    // Check for mouse movement and update widget appearance
+
+  // Check for mouse movement and update widget appearance
   currentScreen.overWidgetCheck(currentScreen);
   if (currentScreen != menuScreen) {
     currentScreen.drawBackButton(); // Draw the back button only if not on the menu screen
   }
-  
-    // Draw the widgets
+
+  // Draw the widgets
   for (Widget temp : currentScreen.getWidgets()) {
     temp.draw(); // Draw each widget
   }
 }
 
-// mouse press event handler
+// Mouse press event handler
 public void mousePressed() {
   if (currentScreen == airportScreen) {
     searchBar.mousePressed();
@@ -214,7 +209,7 @@ public void mousePressed() {
     } else {
       searchBar.stopTyping();
     }
-    
+
     // Check if the mouse is clicked within the hitbox to switch between departures and arrivals
     if (mouseX > 225 && mouseX < 313 && mouseY > 193 && mouseY < 214 && showArrivals == false) {
       showArrivals = true; // Switch to arrivals board only if currently on departures board
@@ -222,8 +217,8 @@ public void mousePressed() {
       showArrivals = false; // Switch to departures board only if currently on arrivals board
     }
   }
-  
-  
+
+
   if (currentScreen == dateScreen) {
     currentScreen = theCalender.mousePressed(currentScreen, allFlightData);
   } else {
@@ -251,9 +246,9 @@ public void mousePressed() {
 // Key press event handler
 void keyPressed() {
   if (currentScreen == airportScreen) {
-    searchBar.keyPressed(); // search bar typing fuction 
+    searchBar.keyPressed(); // Search bar typing function
     typing = true;
-    
+
     // Check if Enter key is pressed and the search is completed
     if (key == ENTER) {
       searchCompleted(searchBar.getSearchText()); // Assuming getSearchText() returns the airport code
@@ -262,7 +257,6 @@ void keyPressed() {
     }
   }
 }
-
 
 // Key release event handler
 void keyReleased() {
@@ -275,7 +269,7 @@ void keyReleased() {
 // Mouse wheel event handler
 void mouseWheel(MouseEvent event) {
   int increment = event.getCount(); // Fixed reverse scroll
-  
+
   if (currentScreen == graphsScreen) {
     barChart.scroll(increment);
   } else if (currentScreen == airportScreen) {
@@ -289,14 +283,14 @@ void mouseWheel(MouseEvent event) {
 }
 
 // Mouse click event handler
-void mouseClicked()
-{
-  if(currentScreen == graphsScreen)
-  {
+void mouseClicked() {
+  if(currentScreen == graphsScreen) {
     barChart.widgetEvent();
     barChart.displayWidgets();  
   }
 }
+
+// Function called when search is completed
 void searchCompleted(String airportCode) {
   // Call updateDepartureBoard() with the airport code
   println("search completed");
@@ -305,27 +299,27 @@ void searchCompleted(String airportCode) {
   scrolledWithinSeconds = false; // Reset the scrolled flag
 }
 
-// update departure and arrival board based on search
+// Update departure and arrival board based on search
 void updateDepartureAndArrivalBoard(String airportCode) {
   ArrayList<Flights> departures = new ArrayList<Flights>();
   ArrayList<Flights> arrivals = new ArrayList<Flights>();
   String lowercaseAirportCode = airportCode.toLowerCase(); // Convert the user input to lowercase
-  
+
   for (Flights flight : allFlightData) {
     String origin = flight.getOrigin().toLowerCase(); 
     if (origin.equals(lowercaseAirportCode)) { 
       departures.add(flight); 
     }
-    
+
     String destination = flight.getDestination().toLowerCase(); // Add condition for arrivals
     if (destination.equals(lowercaseAirportCode)) { 
       arrivals.add(flight); 
     }
   }
-  
+
   departureBoard.update(departures); 
   arrivalBoard.update(arrivals);
-  
+
   if (departures.isEmpty() && arrivals.isEmpty()) {
     // Play audio feedback for search failure
     audio4.play();

@@ -1,3 +1,14 @@
+  /** Author: Adam
+  *  
+  *  References:
+  *  https://www.youtube.com/watch?v=_6_zAtrWl8o
+  *  https://youtu.be/4JzDttgdILQ?si=ilPK2c0ncet8fhIw
+  *  Processing- A programing handbook for visual designers and artists Casey Reas & Bean Fry
+  *
+  *   Contributers:
+  *      Can
+  */
+  
 class DepartureBoard {
   ArrayList<Flights> departures; 
   int startIndex; // Index of the first element to display
@@ -103,8 +114,6 @@ void draw() {
 
   textSize(30);
 }
-
-
   
   // Method to format date as MM/DD/YY
   String formatDate(String flightDate) {

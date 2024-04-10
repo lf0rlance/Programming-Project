@@ -1,3 +1,14 @@
+  /** Author: Adam
+  *  
+  *  References:
+  *  https://www.youtube.com/watch?v=_6_zAtrWl8o
+  *  https://youtu.be/4JzDttgdILQ?si=ilPK2c0ncet8fhIw
+  *  Processing- A programing handbook for visual designers and artists Casey Reas & Bean Fry
+  *
+  *   Contributers:
+  *      Can
+  */
+  
 class ArrivalsBoard {
   ArrayList<Flights> arrivals;
   int startIndex; // Index of the first element to display
