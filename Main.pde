@@ -115,7 +115,7 @@ public void setup() {
   theCalender = new Calender(dateScreen, stdFont);
   airportScreenBackground = new Animation("airportAnimation", "Layer ", 221, 2);
   scrollAnimation = new Animation("scrollAnimation", "Layer ", 65, 2);
-  heatmap = new HeatMap(100,70);
+  heatmap = new HeatMap(100,80);
   
 }
 
