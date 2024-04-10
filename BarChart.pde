@@ -52,13 +52,19 @@ class BarChart {
      /* Creates an ArrayList of the data type */
     dataList = new ArrayList<String>();    
     /* Creates an ArrayList of the frequency of each data type */
-    frequency = new IntList();   
+    frequency = new IntList(); 
+    
     for (int i = 0; i < allFlightData.length; i++) {
-      boolean found = false;
       Flights currentFlight = allFlightData[i];
       String data = getData(currentFlight); // gets the required data for the flight(e.g origin city, destination)
-      
-      for (int j = 0;  j < dataList.size();j++) { //finding locations
+      if(dataType == FLIGHT_DATE) 
+      {
+        // uses the format data method from the departure board class to format incorrect dates
+        DepartureBoard dateFormatter = new DepartureBoard();
+        data = dateFormatter.formatDate(data);
+      }
+      boolean found = false;
+      for (int j = 0;  j < dataList.size();j++) { //itterates through the dataList to ensure there are no duplicates
         String temp = dataList.get(j);
         if (data.equals(temp) && !found) 
         {

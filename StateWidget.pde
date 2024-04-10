@@ -35,14 +35,12 @@ class StateWidget //<>// //<>//
 
     float redness = 0;
     for(Flights flight:flightList)
-    {
- //<>//
-      
+    { //<>//
        //New improved way of calculating lateness
       int arrival = (flight.getArrTime()/100*60) + (flight.getArrTime()%100); // converts time into minutes
       int actualArrival = (flight.getCrsArrTime()/100*60) + (flight.getCrsArrTime()%100); 
       
-      if(arrival >= actualArrival) totalLateness += (arrival - actualArrival);
+      if(arrival >= actualArrival) totalLateness += (arrival - actualArrival); // if the flight is late, add the amount to total lateness
       //else totalLateness -= (arrival - actualArrival);
       
  

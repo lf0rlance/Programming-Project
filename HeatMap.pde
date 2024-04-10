@@ -29,14 +29,14 @@ class HeatMap
    for(StateWidget state: stateWidgets)
    {    
      state.draw();
-     if(state.mouseOver()  ) 
+     if(state.mouseOver() && state.contains(mouseX,mouseY) )
      {
        stateLabel = state.stateCode;
        lateness = state.averageLateness;
        stateHighlighted = true;
      }
    }
-   flightInfo.label = "State:\n"+stateLabel + "\n  Avg Lateness:\n" + lateness;
+   flightInfo.label = "State:\n"+stateLabel + "\n  Avg Lateness:\n" + lateness + " mins";
    flightInfo.draw();
   }
   
