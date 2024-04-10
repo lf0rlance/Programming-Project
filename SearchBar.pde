@@ -1,10 +1,10 @@
-// author: Johnston 
+// Author: Johnston 
 
 class SearchBar {
-  ArrayList<Widget> widgetDropdown = new ArrayList<>();
+  ArrayList<Widget> widgetDropdown = new ArrayList<>();  // search Suggestion List 
   String searchText = "";
   boolean typing = false;
-  boolean cursorVisible = false;
+  boolean cursorVisible = false;   // Blinking line appearence 
   int lastCursorToggle = 0;
   int cursorToggleInterval = 500; // Blinking interval in milliseconds
   int searchBarWidth = 300;
@@ -46,7 +46,9 @@ class SearchBar {
      }
   }
 
-   void mousePressed() {
+
+ // when mouse pressed, start typping and display suggestions accordingly
+ void mousePressed() {
     for (int i = 0; i < widgetDropdown.size(); i++) {
       Widget temp = widgetDropdown.get(i);
       if (temp.getEventString(mouseX, mouseY) != null) {
@@ -94,9 +96,9 @@ class SearchBar {
 
   void stopTyping() {
     typing = false;
-    cursorVisible = false;
+    cursorVisible = false;   // blinking line disappears
   }
-
+ 
   void keyPressed() {
     if (key != ENTER && key != BACKSPACE && key != DELETE && key != TAB && key != ESC) {
       if (key >= 'A' && key <= 'Z' && !keyPressed) {
